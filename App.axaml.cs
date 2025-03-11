@@ -3,8 +3,11 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using Avalonia.Metadata;
 using CommunityWithLegends.ViewModels;
 using CommunityWithLegends.Views;
+
+[assembly: XmlnsDefinition("https://github.com/avaloniaui", "CommunityWithLegends.Controls")]
 
 namespace CommunityWithLegends;
 

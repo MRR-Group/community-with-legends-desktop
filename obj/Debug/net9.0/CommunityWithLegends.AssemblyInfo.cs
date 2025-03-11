@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CommunityWithLegends")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b833c7f43b7903c6d7c0850b0b157d91cb8c940b")]
 [assembly: System.Reflection.AssemblyProductAttribute("CommunityWithLegends")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CommunityWithLegends")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

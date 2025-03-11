@@ -3,18 +3,45 @@
         xmlns:vm="using:CommunityWithLegends.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
         x:Class="CommunityWithLegends.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="CommunityWithLegends">
+        Title="CE(E)L">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    
+    <Grid>
+        <Image
+            Stretch="UniformToFill"
+            RenderTransformOrigin="0.5,0.5"
+            Source="../Assets/Images/background.png"
+        />
+        
+        <Panel Width="378" Height="430">
+            <Border 
+                BorderBrush="{ DynamicResource SecondaryColor}" 
+                BorderThickness="2" 
+                Background="{ DynamicResource BackgroundColor}" 
+                CornerRadius="8"
+            />
+            
+            <StackPanel>
+                <TextBlock Classes="title" TextAlignment="Center">Log in</TextBlock>
+                <FormInput Title="Enter your email" Watermark="Email" UnderText="You don't have account?" LinkText="to login" />
+                
+                <StackPanel Margin="0 20">
+                    <FormInput Title="Enter your password" Watermark="Password" UnderText="You don't remember?" LinkText="to reset" Password="true" />
+                </StackPanel>
+                
+                <StackPanel HorizontalAlignment="Center">
+                    <Button FontSize="25" HorizontalContentAlignment="Center" Width="150">Log in</Button>
+                </StackPanel>
+            </StackPanel>
+        </Panel>
+    </Grid>
 
 </Window>

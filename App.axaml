@@ -3,7 +3,6 @@
              x:Class="CommunityWithLegends.App"
              xmlns:local="using:CommunityWithLegends"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
     <Application.DataTemplates>
         <local:ViewLocator/>
@@ -11,5 +10,25 @@
   
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="Styles/AppDefaultStyles.axaml"></StyleInclude>
     </Application.Styles>
+             
+     <Application.Resources>
+         <FontFamily x:Key="Jaro">avares://CommunityWithLegends/Assets/Fonts/Jaro.ttf#Jaro</FontFamily>
+         <ImageBrush x:Key="Background" Source="Assets/Images/background.png"></ImageBrush>
+         <SolidColorBrush x:Key="BackgroundColor">#FF181719</SolidColorBrush>
+         <SolidColorBrush x:Key="BackgroundLightColor">#FF212023</SolidColorBrush>
+         <SolidColorBrush x:Key="TextColor">#FFFDFEFE</SolidColorBrush>
+         <SolidColorBrush x:Key="TextHoverColor">#FFFFFFFF</SolidColorBrush>
+         <SolidColorBrush x:Key="TextDisabledColor">#FFB9B9BA</SolidColorBrush>
+         <SolidColorBrush x:Key="PrimaryColor">#FF8E2CFE</SolidColorBrush>
+         <SolidColorBrush x:Key="PrimaryHoverColor">#FF5300B0</SolidColorBrush>
+         <SolidColorBrush x:Key="SecondaryColor">#FFA4C1C9</SolidColorBrush>
+         <SolidColorBrush x:Key="SecondaryDarkColor">#FF9C9C9C</SolidColorBrush>
+         <LinearGradientBrush x:Key="PrimaryGradient" StartPoint="0% 0%" EndPoint="100% 0%">
+             <GradientStop Offset="0" Color="#FF9C44FF"></GradientStop>
+             <GradientStop Offset="0.5" Color="#FF8418FF"></GradientStop>
+             <GradientStop Offset="1" Color="#FF8E2CFE"></GradientStop>
+         </LinearGradientBrush>
+     </Application.Resources> 
 </Application>
