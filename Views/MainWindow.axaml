@@ -23,7 +23,7 @@
         
         <Panel Width="378" Height="430">
             <Border 
-                BorderBrush="{ DynamicResource SecondaryColor}" 
+                BorderBrush="{ DynamicResource SecondaryGradient}" 
                 BorderThickness="2" 
                 Background="{ DynamicResource BackgroundColor}" 
                 CornerRadius="8"
