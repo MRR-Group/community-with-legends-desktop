@@ -1,5 +1,10 @@
+using System;
+using System.Diagnostics;
+using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 
 namespace CommunityWithLegends.Controls;
 
@@ -19,6 +24,18 @@ public partial class FormInput : UserControl
 
     public static readonly StyledProperty<bool> PasswordProperty = AvaloniaProperty.Register<FormInput, bool>(
         nameof(Password));
+
+    public static readonly StyledProperty<bool> HideUnderTextProperty = AvaloniaProperty.Register<FormInput, bool>(
+        nameof(Password));
+
+    public static readonly RoutedEvent<RoutedEventArgs> LinkClickEvent =
+        RoutedEvent.Register<FormInput, RoutedEventArgs>(nameof(LinkClick), RoutingStrategies.Direct);
+
+    public event EventHandler<RoutedEventArgs> LinkClick
+    {
+        add => this.AddHandler(LinkClickEvent, value);
+        remove => this.RemoveHandler(LinkClickEvent, value);
+    }
 
     public FormInput() => this.InitializeComponent();
 
@@ -50,5 +67,17 @@ public partial class FormInput : UserControl
     {
         get => this.GetValue(TitleProperty);
         set => this.SetValue(TitleProperty, value);
+    }
+
+    public bool HideUnderText
+    {
+        get => this.GetValue(HideUnderTextProperty);
+        set => this.SetValue(HideUnderTextProperty, value);
+    }
+
+    private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        RoutedEventArgs args = new RoutedEventArgs(LinkClickEvent);
+        this.RaiseEvent(args);
     }
 }

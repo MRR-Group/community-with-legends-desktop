@@ -7,6 +7,8 @@
                 <TextBlock Classes="title">Title</TextBlock>
                 <TextBlock Classes="md">Medium</TextBlock>
                 <TextBlock Classes="xs">Extra small</TextBlock>
+                <TextBlock Classes="xs link">Extra small link</TextBlock>
+
                 <TextBox Watermark="Watermark"></TextBox>
             </StackPanel>
         </Border>
@@ -37,14 +39,27 @@
         <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
     </Style>
     
-    <Style Selector="TextBlock.primary">
+    
+    <Style Selector="TextBlock.link">
         <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"></Setter>
+        <Setter Property="Cursor" Value="Hand" />
+        
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Foreground" Duration="0:0:0.1"></BrushTransition>
+            </Transitions>
+        </Setter>
+    </Style>
+    
+    <Style Selector="TextBlock.link:pointerover">
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryHoverColor}"></Setter>
     </Style>
     
     <Style Selector=":is(Button)">
         <Setter Property="Background" Value="{DynamicResource PrimaryGradient}"></Setter>
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
         <Setter Property="CornerRadius" Value="8"></Setter>
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontSize" Value="15"></Setter>
     </Style>
     

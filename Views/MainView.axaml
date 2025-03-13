@@ -1,0 +1,23 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:CommunityWithLegends.ViewModels"
+        xmlns:view="clr-namespace:CommunityWithLegends.Views"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+        x:Class="CommunityWithLegends.Views.MainView"
+        x:DataType="vm:MainViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Community With Legends">
+    
+    <Grid>
+        <Image
+            Stretch="UniformToFill"
+            RenderTransformOrigin="0.5,0.5"
+            Source="../Assets/Images/background.png"
+        />
+        
+        <ContentControl Content="{Binding Content }" />
+    </Grid>
+
+</Window>

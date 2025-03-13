@@ -33,7 +33,7 @@
                 >
                 </TextBox>
 
-                <DockPanel>
+                <DockPanel IsVisible="{Binding !HideUnderText}">
                     <StackPanel DockPanel.Dock="Left">
                         <TextBlock
                             Classes="xs"
@@ -46,10 +46,11 @@
 
                     <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Right">
                         <TextBlock
-                            Classes="xs primary"
+                            Classes="xs link"
                             TextAlignment="Center"
                             Margin="0 5 20 0"
-                            Text="Click here" 
+                            Text="Click here"
+                            PointerPressed="InputElement_OnPointerPressed"
                         />
 
                         <TextBlock
