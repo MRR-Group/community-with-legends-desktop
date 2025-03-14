@@ -1,0 +1,113 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Background="{ DynamicResource BackgroundColor}" Padding="50">
+            <StackPanel>
+                <Button Content="Hello World"></Button>
+                <TextBlock Classes="title">Title</TextBlock>
+                <TextBlock Classes="md">Medium</TextBlock>
+                <TextBlock Classes="xs">Extra small</TextBlock>
+                <TextBlock Classes="xs link">Extra small link</TextBlock>
+
+                <TextBox Watermark="Watermark"></TextBox>
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+    
+    <Style Selector="Window">
+        <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
+    </Style>
+    
+    <Style Selector="TextBlock.title">
+        <Setter Property="FontSize" Value="50"></Setter>
+        <Setter Property="Height" Value="100"></Setter>
+        <Setter Property="LineHeight" Value="100"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
+        <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
+    </Style>
+    
+    <Style Selector="TextBlock.md">
+        <Setter Property="FontSize" Value="20"></Setter>
+        <Setter Property="LineHeight" Value="25"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
+        <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
+    </Style>
+    
+    <Style Selector="TextBlock.xs">
+        <Setter Property="FontSize" Value="14"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
+        <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
+    </Style>
+    
+    
+    <Style Selector="TextBlock.link">
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"></Setter>
+        <Setter Property="Cursor" Value="Hand" />
+        
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Foreground" Duration="0:0:0.1"></BrushTransition>
+            </Transitions>
+        </Setter>
+    </Style>
+    
+    <Style Selector="TextBlock.link:pointerover">
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryHoverColor}"></Setter>
+    </Style>
+    
+    <Style Selector=":is(Button)">
+        <Setter Property="Background" Value="{DynamicResource PrimaryGradient}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
+        <Setter Property="CornerRadius" Value="8"></Setter>
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FontSize" Value="15"></Setter>
+    </Style>
+    
+    <Style Selector=":is(Button) /template/ ContentPresenter">
+        <Setter Property="RenderTransform" Value="scale(1)"></Setter>
+        
+        <Setter Property="Transitions">
+            <Transitions>
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.05"></TransformOperationsTransition>
+                <BrushTransition Property="Background" Duration="0:0:0.1"></BrushTransition>
+                <BrushTransition Property="Foreground" Duration="0:0:0.1"></BrushTransition>
+            </Transitions>
+        </Setter>
+    </Style>
+    
+    <Style Selector=":is(Button):pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PrimaryHoverColor}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TextHoverColor}"></Setter>
+    </Style>
+    
+    <Style Selector=":is(Button):pressed /template/ ContentPresenter">
+        <Setter Property="RenderTransform" Value="scale(0.95)"></Setter>
+    </Style>
+    
+    <Style Selector="TextBox">
+        <Setter Property="CornerRadius" Value="4"></Setter>
+        <Setter Property="Background" Value="{DynamicResource BackgroundLightColor}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
+        <Setter Property="BorderThickness" Value="0"></Setter>
+    </Style>
+    
+    <Style Selector="TextBox:focus-within /template/ Border">
+        <Setter Property="Background" Value="{DynamicResource BackgroundLightColor}"></Setter>
+        <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="CornerRadius" Value="4"></Setter>
+    </Style>
+    
+    <Style Selector="TextBox:focus-within">
+        <Setter Property="Foreground" Value="#ffFDFEFE"></Setter>
+    </Style>
+
+    <Style Selector="TextBox:pointerover">
+        <Setter Property="Foreground" Value="#ffFDFEFE"></Setter>
+    </Style>
+    
+    <Style Selector="TextBox:pointerover /template/ Border">
+        <Setter Property="Background" Value="#ff212023" />
+        <Setter Property="BorderThickness" Value="0"></Setter>
+        <Setter Property="CornerRadius" Value="4"></Setter>
+    </Style>
+</Styles>

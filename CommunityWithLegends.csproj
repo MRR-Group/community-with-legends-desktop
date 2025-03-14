@@ -9,13 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Assets\Fonts\" />
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
+    <Folder Include="obj\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.2.1" />
     <PackageReference Include="Avalonia.Desktop" Version="11.2.1" />
+    <PackageReference Include="Avalonia.Svg.Skia" Version="11.2.0.2" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.1" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.1" />
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
@@ -23,10 +26,31 @@
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
+    <PackageReference Include="Sandreas.Avalonia.SimpleRouter" Version="0.0.5" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Assets\Fonts\static\Jaro-Regular.ttf" />
+    <UpToDateCheckInput Remove="Assets\Fonts\static\Jaro_24pt-Regular.ttf" />
+    <UpToDateCheckInput Remove="Assets\Fonts\static\Jaro_36pt-Regular.ttf" />
+    <UpToDateCheckInput Remove="Assets\Fonts\static\Jaro_60pt-Regular.ttf" />
+    <UpToDateCheckInput Remove="Assets\Fonts\static\Jaro_9pt-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\RegisterPageView.axaml.cs">
+      <DependentUpon>RegisterPageView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="obj\.gitignore" />
   </ItemGroup>
 </Project>
