@@ -32,4 +32,10 @@
       <UpToDateCheckInput Remove="Styles\AppDefaultStyles.axaml" />
       <UpToDateCheckInput Remove="Controls\FormInput.axaml" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Core\Application\Application.csproj" />
+      <ProjectReference Include="..\..\Core\Domain\Domain.csproj" />
+      <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    </ItemGroup>
 </Project>

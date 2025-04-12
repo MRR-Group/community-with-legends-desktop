@@ -7,10 +7,14 @@
 
             <Design.PreviewWith>
                 <Border Background="{ DynamicResource BackgroundColor}" Padding="50">
-                    <FormInput Title="Title" Watermark="Watermark" UnderText="Under text" LinkText="Link Text" />
+                    <FormInput 
+                        Title="Title" 
+                        Watermark="Watermark" 
+                        UnderText="Under text" 
+                        LinkText="Link Text" 
+                    />
                 </Border>
             </Design.PreviewWith>
-
     
             <UserControl.Styles>
                 <Style Selector="TextBox.IsPassword">
@@ -30,6 +34,7 @@
                     FontFamily="{StaticResource Jaro}"
                     Watermark="{Binding Watermark}"
                     Classes.IsPassword="{Binding Password}"
+                    Text="{Binding Text, Mode=TwoWay}"
                 >
                 </TextBox>
 

@@ -21,7 +21,7 @@
                 Title="Enter your email" 
                 Watermark="Email" 
                 UnderText="You don't have account?" 
-                LinkText="to login" 
+                LinkText="to register" 
                 LinkClick="FormInput_OnLinkClick"
             />
                 

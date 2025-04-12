@@ -3,9 +3,67 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:Presentation.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="850"
              x:Class="Presentation.Views.RegisterPageView"
              x:DataType="vm:RegisterPageViewModel">
 
-    <TextBlock Text="{Binding Test}"></TextBlock>
+    <Panel Width="378" Height="560">
+        <Border 
+            BorderBrush="{ DynamicResource SecondaryGradient}" 
+            BorderThickness="2" 
+            Background="{ DynamicResource BackgroundColor}" 
+            CornerRadius="8"
+        />
+
+        <StackPanel>
+            <TextBlock Classes="title" TextAlignment="Center">Register</TextBlock>
+            
+            <FormInput 
+                Title="Enter your name" 
+                Watermark="Name" 
+                HideUnderText="True"
+                Text="{Binding Name, Mode=TwoWay}"
+            />
+            
+            <FormInput 
+                Title="Enter your email" 
+                Watermark="Email" 
+                UnderText="Do you have an account?" 
+                LinkText="to login" 
+                LinkClick="HandleLoginLinkClick"
+                Text="{Binding Email, Mode=TwoWay}"
+            />
+            
+            <StackPanel Margin="0 20">
+                <FormInput 
+                    Title="Enter your password" 
+                    Watermark="Password" 
+                    Password="True"
+                    HideUnderText="True"
+                    Text="{Binding Password, Mode=TwoWay}"
+                />
+            </StackPanel>
+            
+            <StackPanel Margin="0 20">
+                <FormInput 
+                    Title="Repeat your password" 
+                    Watermark="Password"
+                    Password="True"
+                    HideUnderText="True"
+                    Text="{Binding ConfirmPassword, Mode=TwoWay}"
+                />
+            </StackPanel>
+                
+            <StackPanel HorizontalAlignment="Center">
+                <Button 
+                    FontSize="25" 
+                    HorizontalContentAlignment="Center" 
+                    Width="150"
+                    Click="HandleRegisterButtonClick"
+                >
+                    Register
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Panel>
 </UserControl>

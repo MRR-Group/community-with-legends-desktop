@@ -1,11 +1,13 @@
 using System;
 using System.Linq;
-using Avalonia;
+using Application.UseCases;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Avalonia.Metadata;
 using Avalonia.SimpleRouter;
+using Flurl;
+using Infrastructure.Services;
 using Presentation.ViewModels;
 using Presentation.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Presentation;
 
-public partial class App : Application
+public partial class App : Avalonia.Application
 {
     public override void Initialize()
     {
@@ -27,10 +29,9 @@ public partial class App : Application
         var mainViewModel = services.GetRequiredService<MainViewModel>();
 
         if (this.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-        {
-            // Avoid duplicate validations from both Avalonia and the CommunityToolkit.
-            // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
+        { 
             this.DisableAvaloniaDataAnnotationValidation();
+            
             desktop.MainWindow = new MainView
             {
                 DataContext = mainViewModel,
@@ -43,8 +44,11 @@ public partial class App : Application
     private static IServiceProvider ConfigureServices()
     {
         var services = new ServiceCollection();
+        
         services.AddSingleton<HistoryRouter<ViewModelBase>>(s => new HistoryRouter<ViewModelBase>(t => (ViewModelBase)s.GetRequiredService(t)));
-
+        services.AddSingleton<AuthService> (s => new AuthService(new Url("https://cwl.purgal.xyz/api/")));
+        services.AddSingleton<SignUpInteractor>(s => new SignUpInteractor(s.GetService<AuthService>()!));
+        
         services.AddSingleton<MainViewModel>();
         services.AddTransient<LoginPageViewModel>();
         services.AddTransient<RegisterPageViewModel>();
@@ -55,11 +59,9 @@ public partial class App : Application
 
     private void DisableAvaloniaDataAnnotationValidation()
     {
-        // Get an array of plugins to remove
         var dataValidationPluginsToRemove =
             BindingPlugins.DataValidators.OfType<DataAnnotationsValidationPlugin>().ToArray();
 
-        // remove each entry found
         foreach (var plugin in dataValidationPluginsToRemove)
         {
             BindingPlugins.DataValidators.Remove(plugin);

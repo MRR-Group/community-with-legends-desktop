@@ -10,35 +10,38 @@ namespace Presentation.Controls;
 
 public partial class FormInput : UserControl
 {
-    public static readonly StyledProperty<string> TitleProperty = AvaloniaProperty.Register<FormInput, string>(
-        nameof(Title));
+    public static readonly StyledProperty<string> TitleProperty = 
+        AvaloniaProperty.Register<FormInput, string>(nameof(Title));
 
-    public static readonly StyledProperty<string> WatermarkProperty = AvaloniaProperty.Register<FormInput, string>(
-        nameof(Watermark));
+    public static readonly StyledProperty<string> WatermarkProperty = 
+        AvaloniaProperty.Register<FormInput, string>(nameof(Watermark));
 
-    public static readonly StyledProperty<string> UnderTextProperty = AvaloniaProperty.Register<FormInput, string>(
-        nameof(UnderText));
+    public static readonly StyledProperty<string> UnderTextProperty = 
+        AvaloniaProperty.Register<FormInput, string>(nameof(UnderText));
 
-    public static readonly StyledProperty<string> LinkTextProperty = AvaloniaProperty.Register<FormInput, string>(
-        nameof(LinkText));
+    public static readonly StyledProperty<string> LinkTextProperty = 
+        AvaloniaProperty.Register<FormInput, string>(nameof(LinkText));
 
-    public static readonly StyledProperty<bool> PasswordProperty = AvaloniaProperty.Register<FormInput, bool>(
-        nameof(Password));
+    public static readonly StyledProperty<bool> PasswordProperty = 
+        AvaloniaProperty.Register<FormInput, bool>(nameof(Password));
 
-    public static readonly StyledProperty<bool> HideUnderTextProperty = AvaloniaProperty.Register<FormInput, bool>(
-        nameof(Password));
+    public static readonly StyledProperty<bool> HideUnderTextProperty = 
+        AvaloniaProperty.Register<FormInput, bool>(nameof(Password));
+    
+    public static readonly StyledProperty<string> TextProperty = 
+        AvaloniaProperty.Register<FormInput, string>(nameof(Text));
 
-    public static readonly RoutedEvent<RoutedEventArgs> LinkClickEvent =
+    public static readonly RoutedEvent<RoutedEventArgs> LinkClickEvent = 
         RoutedEvent.Register<FormInput, RoutedEventArgs>(nameof(LinkClick), RoutingStrategies.Direct);
+    
+    public FormInput() => this.InitializeComponent();
 
     public event EventHandler<RoutedEventArgs> LinkClick
     {
         add => this.AddHandler(LinkClickEvent, value);
         remove => this.RemoveHandler(LinkClickEvent, value);
     }
-
-    public FormInput() => this.InitializeComponent();
-
+    
     public bool Password
     {
         get => this.GetValue(PasswordProperty);
@@ -73,6 +76,12 @@ public partial class FormInput : UserControl
     {
         get => this.GetValue(HideUnderTextProperty);
         set => this.SetValue(HideUnderTextProperty, value);
+    }
+    
+    public string Text
+    {
+        get => GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
     }
 
     private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
