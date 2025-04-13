@@ -16,83 +16,37 @@ using Presentation.Utils;
 
 namespace Presentation.ViewModels;
 
-public partial class RegisterPageViewModel : ViewModelBase
+public partial class RegisterPageViewModel : AuthPageViewModel
 {
-    private HistoryRouter<ViewModelBase> router;
     private RegisterInteractor _registerInteractor;
     
     public string Email { get; set; }
     public string Name { get; set; }
     public string Password { get; set; }
     public string ConfirmPassword { get; set; }
-
-    [ObservableProperty]
-    private bool processing;
     
-    private FormExceptions formExceptions = new ();
-
-    public event EventHandler<OnFormExceptionArguments> OnFormException;
-
-    public class OnFormExceptionArguments : EventArgs
+    public RegisterPageViewModel(HistoryRouter<ViewModelBase> router, RegisterInteractor registerInteractor) : base(router)
     {
-        public Dictionary<string, string> Exceptions;
-    }
+        _registerInteractor = registerInteractor;
 
-    public RegisterPageViewModel(HistoryRouter<ViewModelBase> router, RegisterInteractor registerInteractor)
-    {
-        this.router = router;
-        this._registerInteractor = registerInteractor;
-        this.Processing = false;
-
-        this.Email = "";
-        this.Name = "";
-        this.Password = "";
-        this.ConfirmPassword = "";
+        Email = "";
+        Name = "";
+        Password = "";
+        ConfirmPassword = "";
     }
 
     [RelayCommand]
     private void Register()
     {
-        TryRegister();
-    }
-
-    private async Task TryRegister()
-    {
-        try
-        {
-            Processing = true;
-            formExceptions.Clear();
-            
+        SendForm(async () => {
             await _registerInteractor.Register(Name, Email, Password, ConfirmPassword);
-            
-            router.GoTo<LoginPageViewModel>();
-        }
-        catch (PasswordsDoNotMatchException e)
-        {
-            formExceptions.Add("password", e.Message);
-        }
-        catch (InvalidPasswordException e)
-        {
-            formExceptions.Add("password", e.Message);
-        }
-        catch (InvalidEmailException e)
-        {
-            formExceptions.Add("email", e.Message);
-        }
-        catch (FormValidationException e)
-        {
-            formExceptions.AddRange(e.Fields);
-        }
-        finally
-        {
-            OnFormException?.Invoke(this, new OnFormExceptionArguments { Exceptions = formExceptions.LimitToFirst() });
-            Processing = false;
-        }
+            _router.GoTo<LoginPageViewModel>();
+        });
     }
-
+    
     [RelayCommand]
     private void GoToLoginPage()
     {
-        router.GoTo<LoginPageViewModel>();
+        _router.GoTo<LoginPageViewModel>();
     }
 }

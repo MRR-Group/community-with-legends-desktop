@@ -48,7 +48,8 @@ public partial class App : Avalonia.Application
         services.AddSingleton<HistoryRouter<ViewModelBase>>(s => new HistoryRouter<ViewModelBase>(t => (ViewModelBase)s.GetRequiredService(t)));
         services.AddSingleton<AuthService> (s => new AuthService(new Url("https://cwl.purgal.xyz/api/")));
         services.AddSingleton<RegisterInteractor>(s => new RegisterInteractor(s.GetService<AuthService>()!));
-        
+        services.AddSingleton<LogInInteractor>(s => new LogInInteractor(s.GetService<AuthService>()!));
+
         services.AddSingleton<MainViewModel>();
         services.AddTransient<LoginPageViewModel>();
         services.AddTransient<RegisterPageViewModel>();

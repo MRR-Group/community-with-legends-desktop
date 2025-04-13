@@ -2,9 +2,12 @@ using Avalonia.SimpleRouter;
 
 namespace Presentation.ViewModels;
 
-public partial class AdminsPageViewModel(HistoryRouter<ViewModelBase> router) : ViewModelBase
+public partial class AdminsPageViewModel : ViewModelBase
 {
     public string Test { get; set; } = "Admins ";
 
-    private HistoryRouter<ViewModelBase> _router = router;
+    public AdminsPageViewModel(HistoryRouter<ViewModelBase> router) : base(router)
+    {
+        
+    }
 }

@@ -1,8 +1,6 @@
-﻿using Avalonia.Controls;
+﻿using Application.UseCases;
 using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Presentation.Views;
 
 namespace Presentation.ViewModels;
 
@@ -11,10 +9,10 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty]
     private ViewModelBase _content;
 
-    public MainViewModel(HistoryRouter<ViewModelBase> router)
+    public MainViewModel(HistoryRouter<ViewModelBase> router,LogInInteractor logInInteractor): base(router)
     {
-        this.Content = new LoginPageViewModel(router);
-        router.CurrentViewModelChanged += viewModel => this.Content = viewModel;
+        Content = new LoginPageViewModel(router, logInInteractor);
+        router.CurrentViewModelChanged += viewModel => Content = viewModel;
         router.GoTo<LoginPageViewModel>();
     }
 }
