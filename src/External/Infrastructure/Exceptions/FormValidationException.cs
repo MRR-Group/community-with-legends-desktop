@@ -2,10 +2,10 @@ namespace Infrastructure.Exceptions;
 
 public class FormValidationException : Exception
 {
-    public string Field { get; }     
+    public Dictionary<string, List<string>> Fields { get; }     
 
-    public FormValidationException(string field, string errorMessage) : base(errorMessage)
+    public FormValidationException(Dictionary<string, List<string>> fields) : base("Validation error")
     {
-        Field = field;        
+        Fields = fields;
     }
 }

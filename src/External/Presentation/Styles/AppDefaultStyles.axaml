@@ -8,6 +8,7 @@
                 <TextBlock Classes="md">Medium</TextBlock>
                 <TextBlock Classes="xs">Extra small</TextBlock>
                 <TextBlock Classes="xs link">Extra small link</TextBlock>
+                <TextBlock Classes="xs error">Extra small error</TextBlock>
 
                 <TextBox Watermark="Watermark"></TextBox>
             </StackPanel>
@@ -39,6 +40,9 @@
         <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
     </Style>
     
+    <Style Selector="TextBlock.error">
+        <Setter Property="Foreground" Value="{DynamicResource ErrorColor}"></Setter>
+    </Style>
     
     <Style Selector="TextBlock.link">
         <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"></Setter>

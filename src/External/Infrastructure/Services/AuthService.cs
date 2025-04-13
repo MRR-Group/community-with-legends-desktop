@@ -24,37 +24,35 @@ public class AuthService : ISignInService
 
     public async Task SignIn(string name, Email email, Password password)
     {
-        var response = await api
-            .AppendPathSegment("auth/register")
-            .WithAutoRedirect(true)
-            .PostJsonAsync(new { name, email, password });
         
-        if (response.StatusCode != 422)
+        try
         {
-            await HandleValidationErrors(response);
+            var response = await new Url(api)
+                .AppendPathSegment("auth/register")
+                .WithAutoRedirect(true)
+                .WithHeader("Accept", "application/json")
+                .PostJsonAsync(new { name, email = email.Value, password = password.Value });
         }
-        
-        if (response.StatusCode != 201)
+        catch (FlurlHttpException e)
         {
-            throw new Exception("Failed to sign in, please try again later.");
+            if (e.StatusCode == 422)
+            {
+                await HandleValidationErrors(e);
+            }
+            else
+            {
+                throw;
+            }
         }
-
-        var res = response;
     }
 
-    private async Task HandleValidationErrors(IFlurlResponse response)
+    private async Task HandleValidationErrors(FlurlHttpException e)
     {
-        var validation = await response.GetJsonAsync<ValidationErrorsDto>();
+        var validation = await e.GetResponseJsonAsync<ValidationErrorsDto>();
         
         if (validation?.Errors != null)
         {
-            foreach (var error in validation.Errors)
-            {
-                foreach (var errorMessage in error.Value)
-                {
-                    throw new FormValidationException(error.Key, errorMessage);
-                }
-            }
+            throw new FormValidationException(validation.Errors);
         }
     }
 }

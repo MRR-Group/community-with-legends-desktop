@@ -1,6 +1,4 @@
 using System;
-using System.Diagnostics;
-using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -30,11 +28,17 @@ public partial class FormInput : UserControl
     
     public static readonly StyledProperty<string> TextProperty = 
         AvaloniaProperty.Register<FormInput, string>(nameof(Text));
-
+    
+    public static readonly StyledProperty<string?> ErrorProperty =
+        AvaloniaProperty.Register<FormInput, string?>(nameof(Error));
+        
     public static readonly RoutedEvent<RoutedEventArgs> LinkClickEvent = 
         RoutedEvent.Register<FormInput, RoutedEventArgs>(nameof(LinkClick), RoutingStrategies.Direct);
-    
-    public FormInput() => this.InitializeComponent();
+
+    public FormInput()
+    { 
+        this.InitializeComponent();
+    }
 
     public event EventHandler<RoutedEventArgs> LinkClick
     {
@@ -84,6 +88,12 @@ public partial class FormInput : UserControl
         set => SetValue(TextProperty, value);
     }
 
+    public string? Error
+    {
+        get => GetValue(ErrorProperty);
+        set => SetValue(ErrorProperty, value);
+    }
+    
     private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         RoutedEventArgs args = new RoutedEventArgs(LinkClickEvent);

@@ -22,6 +22,7 @@
          <SolidColorBrush x:Key="TextHoverColor">#FFFFFFFF</SolidColorBrush>
          <SolidColorBrush x:Key="TextDisabledColor">#FFB9B9BA</SolidColorBrush>
          <SolidColorBrush x:Key="PrimaryColor">#FF8E2CFE</SolidColorBrush>
+         <SolidColorBrush x:Key="ErrorColor">#FFFF0000</SolidColorBrush>
          <SolidColorBrush x:Key="PrimaryHoverColor">#FF5300B0</SolidColorBrush>
          <SolidColorBrush x:Key="SecondaryColor">#FFA4C1C9</SolidColorBrush>
          <SolidColorBrush x:Key="SecondaryDarkColor">#FF9C9C9C</SolidColorBrush>

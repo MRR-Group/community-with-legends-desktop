@@ -1,11 +1,18 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Application.Exceptions;
 using Application.UseCases;
 using Avalonia.SimpleRouter;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Domain.Exceptions;
+using Infrastructure.Exceptions;
 using Infrastructure.Services;
+using Presentation.Utils;
 
 namespace Presentation.ViewModels;
 
@@ -18,13 +25,29 @@ public partial class RegisterPageViewModel : ViewModelBase
     public string Name { get; set; }
     public string Password { get; set; }
     public string ConfirmPassword { get; set; }
+
+    [ObservableProperty]
+    private bool processing;
     
-    public bool Processing { get; set; }
-        
+    private FormExceptions formExceptions = new ();
+
+    public event EventHandler<OnFormExceptionArguments> OnFormException;
+
+    public class OnFormExceptionArguments : EventArgs
+    {
+        public Dictionary<string, string> Exceptions;
+    }
+
     public RegisterPageViewModel(HistoryRouter<ViewModelBase> router, SignUpInteractor signUpInteractor)
     {
         this.router = router;
         this.signUpInteractor = signUpInteractor;
+        this.Processing = false;
+
+        this.Email = "";
+        this.Name = "";
+        this.Password = "";
+        this.ConfirmPassword = "";
     }
 
     [RelayCommand]
@@ -35,11 +58,36 @@ public partial class RegisterPageViewModel : ViewModelBase
 
     private async Task TryRegister()
     {
-        Processing = true;
-        await signUpInteractor.SignUp(Name, Email, Password, ConfirmPassword);
-        Processing = false;
-        
-        router.GoTo<LoginPageViewModel>();
+        try
+        {
+            Processing = true;
+            formExceptions.Clear();
+            
+            await signUpInteractor.SignUp(Name, Email, Password, ConfirmPassword);
+            
+            router.GoTo<LoginPageViewModel>();
+        }
+        catch (PasswordsDoNotMatchException e)
+        {
+            formExceptions.Add("password", e.Message);
+        }
+        catch (InvalidPasswordException e)
+        {
+            formExceptions.Add("password", e.Message);
+        }
+        catch (InvalidEmailException e)
+        {
+            formExceptions.Add("email", e.Message);
+        }
+        catch (FormValidationException e)
+        {
+            formExceptions.AddRange(e.Fields);
+        }
+        finally
+        {
+            OnFormException?.Invoke(this, new OnFormExceptionArguments { Exceptions = formExceptions.LimitToFirst() });
+            Processing = false;
+        }
     }
 
     [RelayCommand]
