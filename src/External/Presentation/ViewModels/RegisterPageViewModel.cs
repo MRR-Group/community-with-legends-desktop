@@ -19,7 +19,7 @@ namespace Presentation.ViewModels;
 public partial class RegisterPageViewModel : ViewModelBase
 {
     private HistoryRouter<ViewModelBase> router;
-    private SignUpInteractor signUpInteractor;
+    private RegisterInteractor _registerInteractor;
     
     public string Email { get; set; }
     public string Name { get; set; }
@@ -38,10 +38,10 @@ public partial class RegisterPageViewModel : ViewModelBase
         public Dictionary<string, string> Exceptions;
     }
 
-    public RegisterPageViewModel(HistoryRouter<ViewModelBase> router, SignUpInteractor signUpInteractor)
+    public RegisterPageViewModel(HistoryRouter<ViewModelBase> router, RegisterInteractor registerInteractor)
     {
         this.router = router;
-        this.signUpInteractor = signUpInteractor;
+        this._registerInteractor = registerInteractor;
         this.Processing = false;
 
         this.Email = "";
@@ -63,7 +63,7 @@ public partial class RegisterPageViewModel : ViewModelBase
             Processing = true;
             formExceptions.Clear();
             
-            await signUpInteractor.SignUp(Name, Email, Password, ConfirmPassword);
+            await _registerInteractor.Register(Name, Email, Password, ConfirmPassword);
             
             router.GoTo<LoginPageViewModel>();
         }

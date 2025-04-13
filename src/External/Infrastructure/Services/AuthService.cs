@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Application.Abstractions;
+using Domain.Entities;
 using Domain.ValueObjects;
 using Flurl;
 using Flurl.Http;
@@ -13,21 +14,20 @@ public record Message
     public string? message;
 }
 
-public class AuthService : ISignInService
+public class AuthService : ILogInService, IRegisterService
 {
-    private Url api;
+    private Url _api;
 
     public AuthService(Url api)
     {
-        this.api = api;
+        this._api = api;
     }
 
-    public async Task SignIn(string name, Email email, Password password)
+    public async Task Register(string name, Email email, Password password)
     {
-        
         try
         {
-            var response = await new Url(api)
+            await new Url(_api)
                 .AppendPathSegment("auth/register")
                 .WithAutoRedirect(true)
                 .WithHeader("Accept", "application/json")
@@ -37,22 +37,45 @@ public class AuthService : ISignInService
         {
             if (e.StatusCode == 422)
             {
-                await HandleValidationErrors(e);
+                var validation = await e.GetResponseJsonAsync<ValidationErrorsDto>();
+
+                if (validation?.Errors != null)
+                {
+                    throw new FormValidationException(validation.Errors);
+                }
             }
-            else
-            {
-                throw;
-            }
+
+            throw;
         }
     }
 
-    private async Task HandleValidationErrors(FlurlHttpException e)
+    public async Task<User> LogIn(Email email, Password password)
     {
-        var validation = await e.GetResponseJsonAsync<ValidationErrorsDto>();
-        
-        if (validation?.Errors != null)
+        try
         {
-            throw new FormValidationException(validation.Errors);
+            var response = await new Url(_api)
+                .AppendPathSegment("auth/login")
+                .WithAutoRedirect(true)
+                .WithHeader("Accept", "application/json")
+                .PostJsonAsync(new { email = email.Value, password = password.Value });
+            
+            var json = await response.GetJsonAsync<LoginResponseDto>();
+
+            return json.User;
+        }
+        catch (FlurlHttpException e)
+        {
+            if (e.StatusCode == 422)
+            {
+                var validation = await e.GetResponseJsonAsync<ValidationErrorsDto>();
+
+                if (validation?.Errors != null)
+                {
+                    throw new FormValidationException(validation.Errors);
+                }
+            }
+
+            throw;
         }
     }
 }
