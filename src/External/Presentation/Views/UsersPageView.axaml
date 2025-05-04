@@ -19,15 +19,15 @@
                         BorderBrush="{DynamicResource SecondaryColor}"
                         BorderThickness="0 0 0 2"
                         CornerRadius="0"
-                        Padding="10 2"
+                        Padding="0 2"
                         Margin="0 0"
                     >
-                        <Grid ColumnDefinitions="1*,2*,2*,2*,1*" Margin="0,0,0,5">
-                            <TextBlock Text="ID" FontWeight="Bold"/>
-                            <TextBlock Text="Email" TextAlignment="Center" Grid.Column="1" FontWeight="Bold"/>
-                            <TextBlock Text="Name" Grid.Column="2" FontWeight="Bold"/>
-                            <TextBlock Text="Modification date" Grid.Column="3" FontWeight="Bold"/>
-                            <TextBlock Text="Options" Grid.Column="4" FontWeight="Bold" HorizontalAlignment="Right" Margin="0 0 5 0"/>
+                        <Grid ColumnDefinitions="1*,2*,2*,3*,2*,1*">
+                            <TextBlock TextAlignment="Center"  Text="ID" Classes="md"/>
+                            <TextBlock Text="Email" TextAlignment="Center" Grid.Column="1" Classes="md" />
+                            <TextBlock Text="Name"  TextAlignment="Center"  Grid.Column="2" Classes="md" />
+                            <TextBlock Text="Modification date"  TextAlignment="Center"  Grid.Column="4" Classes="md" />
+                            <TextBlock Text="Options" Grid.Column="5" Classes="md" TextAlignment="Center" />
                         </Grid>
                     </Border>
 
@@ -38,7 +38,7 @@
                                     BorderBrush="{DynamicResource SecondaryColor}"
                                     BorderThickness="0 0 0 2"
                                     CornerRadius="0"
-                                    Padding="10 2"
+                                    Padding="0 2"
                                     Margin="0 0"
                                 >
                                     <Border.Styles>
@@ -47,12 +47,15 @@
                                         </Style>
                                     </Border.Styles>
                                     
-                                    <Grid ColumnDefinitions="1*,2*,2*,2*,1*" Margin="0,2" VerticalAlignment="Center">
-                                        <TextBlock Text="{Binding Id, Mode=OneWay}" VerticalAlignment="Center" />
-                                        <TextBlock Text="{Binding Email.Value, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="1" />
-                                        <TextBlock Text="{Binding Name, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="2" />
-                                        <TextBlock Text="{Binding ModificationDate, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="3" />
-                                        <Button Content="Edit" Grid.Column="4" HorizontalAlignment="Right" Margin="0 0 5 0" />
+                                    <Grid ColumnDefinitions="1*,2*,2*, 3*, 2*,1*" Margin="0,2" VerticalAlignment="Center">
+                                        <TextBlock  TextAlignment="Center"  Text="{Binding Id, Mode=OneWay}" VerticalAlignment="Center" />
+                                        <TextBlock TextAlignment="Center"  Text="{Binding Email.Value, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="1" />
+                                        <TextBlock TextAlignment="Center"  Text="{Binding Name, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="2" />
+                                        <TextBlock TextAlignment="Center"  Text="{Binding ModificationDate, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="4" />
+                                        <Button Grid.Column="5" Classes="icon" HorizontalAlignment="Center">
+                                            <Svg Path="/Assets/Icons/Gear.svg" />
+                                        </Button>
+                                        <!-- <Button Content="Edit" Grid.Column="5" HorizontalAlignment="Center" /> -->
                                     </Grid>
                                 </Border>
                             </DataTemplate>
