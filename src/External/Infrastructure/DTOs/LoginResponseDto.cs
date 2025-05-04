@@ -1,13 +1,12 @@
+using System.Text.Json.Serialization;
 using Domain.Entities;
 
 namespace Infrastructure.DTOs;
 
-public class LoginResponseDto
+public record LoginResponseDto
 {
-    public User User { get; }
-
-    public LoginResponseDto(User user)
-    {
-        User = user;
-    }
+    public string Message { get; set; }
+    
+    [property: JsonPropertyName("user_id")]
+    public uint UserId { get; set; }
 }

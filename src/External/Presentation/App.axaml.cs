@@ -7,6 +7,8 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Metadata;
 using Avalonia.SimpleRouter;
 using Flurl;
+using Flurl.Http;
+using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Presentation.ViewModels;
 using Presentation.Views;
@@ -40,13 +42,18 @@ public partial class App : Avalonia.Application
 
         base.OnFrameworkInitializationCompleted();
     }
-
+    
     private static IServiceProvider ConfigureServices()
     {
         var services = new ServiceCollection();
+        var session = new CookieSession("https://cwl.purgal.xyz/api/");
         
         services.AddSingleton<HistoryRouter<ViewModelBase>>(s => new HistoryRouter<ViewModelBase>(t => (ViewModelBase)s.GetRequiredService(t)));
-        services.AddSingleton<AuthService> (s => new AuthService(new Url("https://cwl.purgal.xyz/api/")));
+        services.AddSingleton<CookieSession> (s => session);
+        
+        services.AddSingleton<PermissionRepository> (s => new PermissionRepository());
+        services.AddSingleton<UserRepository> (s => new UserRepository(s.GetService<CookieSession>()!));
+        services.AddSingleton<AuthService> (s => new AuthService(s.GetService<CookieSession>()!, s.GetService<UserRepository>()!));
         services.AddSingleton<RegisterInteractor>(s => new RegisterInteractor(s.GetService<AuthService>()!));
         services.AddSingleton<LogInInteractor>(s => new LogInInteractor(s.GetService<AuthService>()!));
 
@@ -54,6 +61,7 @@ public partial class App : Avalonia.Application
         services.AddTransient<LoginPageViewModel>();
         services.AddTransient<RegisterPageViewModel>();
         services.AddTransient<AdminsPageViewModel>();
+        services.AddTransient<UsersPageViewModel>();
         
         return services.BuildServiceProvider();
     }

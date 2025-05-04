@@ -9,7 +9,6 @@
                 <TextBlock Classes="xs">Extra small</TextBlock>
                 <TextBlock Classes="xs link">Extra small link</TextBlock>
                 <TextBlock Classes="xs error">Extra small error</TextBlock>
-
                 <TextBox Watermark="Watermark"></TextBox>
             </StackPanel>
         </Border>

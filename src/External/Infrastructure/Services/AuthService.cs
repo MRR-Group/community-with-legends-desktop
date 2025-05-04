@@ -6,29 +6,26 @@ using Flurl;
 using Flurl.Http;
 using Infrastructure.DTOs;
 using Infrastructure.Exceptions;
+using Infrastructure.Repositories;
 
 namespace Infrastructure.Services;
 
-public record Message
-{
-    public string? message;
-}
-
 public class AuthService : ILogInService, IRegisterService
 {
-    private Url _api;
-
-    public AuthService(Url api)
+    private CookieSession _session;
+    private UserRepository _repository;
+    
+    public AuthService(CookieSession session, UserRepository repository)
     {
-        this._api = api;
+        _session = session;
+        _repository = repository;
     }
 
     public async Task Register(string name, Email email, Password password)
     {
         try
         {
-            await new Url(_api)
-                .AppendPathSegment("auth/register")
+            await _session.Request("auth/register")
                 .WithAutoRedirect(true)
                 .WithHeader("Accept", "application/json")
                 .PostJsonAsync(new { name, email = email.Value, password = password.Value });
@@ -52,16 +49,14 @@ public class AuthService : ILogInService, IRegisterService
     public async Task<User> LogIn(Email email, Password password)
     {
         try
-        {
-            var response = await new Url(_api)
-                .AppendPathSegment("auth/login")
+        { 
+            var response = await _session.Request("auth/login")
                 .WithAutoRedirect(true)
                 .WithHeader("Accept", "application/json")
                 .PostJsonAsync(new { email = email.Value, password = password.Value });
-            
-            var json = await response.GetJsonAsync<LoginResponseDto>();
 
-            return json.User;
+            var json = await response.GetJsonAsync<LoginResponseDto>();
+            return await _repository.ById(json.UserId);
         }
         catch (FlurlHttpException e)
         {

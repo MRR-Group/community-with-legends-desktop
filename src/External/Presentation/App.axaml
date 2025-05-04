@@ -10,6 +10,8 @@
   
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+        <StyleInclude Source="avares://Avalonia.Controls.TreeDataGrid/Themes/Fluent.axaml"/>
         <StyleInclude Source="Styles/AppDefaultStyles.axaml"></StyleInclude>
     </Application.Styles>
              
@@ -26,11 +28,13 @@
          <SolidColorBrush x:Key="PrimaryHoverColor">#FF5300B0</SolidColorBrush>
          <SolidColorBrush x:Key="SecondaryColor">#FFA4C1C9</SolidColorBrush>
          <SolidColorBrush x:Key="SecondaryDarkColor">#FF9C9C9C</SolidColorBrush>
+         
          <LinearGradientBrush x:Key="PrimaryGradient" StartPoint="0% 0%" EndPoint="100% 0%">
              <GradientStop Offset="0" Color="#FF9C44FF"></GradientStop>
              <GradientStop Offset="0.5" Color="#FF8418FF"></GradientStop>
              <GradientStop Offset="1" Color="#FF8E2CFE"></GradientStop>
          </LinearGradientBrush>
+         
          <LinearGradientBrush x:Key="SecondaryGradient" StartPoint="0% 0%" EndPoint="100% 0%">
              <GradientStop Offset="0" Color="#FF1E9AC8"></GradientStop>
              <GradientStop Offset="1" Color="#FF8E2CFE"></GradientStop>
