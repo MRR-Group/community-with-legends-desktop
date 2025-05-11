@@ -1,4 +1,3 @@
-using Domain.Enums;
 using Domain.Primitives;
 using Domain.ValueObjects;
 
@@ -11,15 +10,20 @@ public class User : Entity
     public Email Email { get; private set; }
     public Roles Roles { get; private set; }
     public Permissions Permissions { get; private set; }
-    public Date ModificationDate { get; private set; }
+    public Date CreationDate { get; private set; }
 
-    public User(uint id, string name, string avatar, Email email, Roles roles, Permissions permissions, Date modificationDate) : base(id)
+    public bool IsBanned
+    {
+        get => Permissions.HasNone();
+    }
+
+    public User(uint id, string name, string avatar, Email email, Roles roles, Permissions permissions, Date creationDate) : base(id)
     {
         Name = name;
         Avatar = avatar;
         Email = email;
         Roles = roles;
         Permissions = permissions;
-        ModificationDate = modificationDate;
+        CreationDate = creationDate;
     }
 }

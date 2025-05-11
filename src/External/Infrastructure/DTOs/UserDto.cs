@@ -7,7 +7,7 @@ namespace Infrastructure.DTOs;
 
 public sealed record UserDto
 {
-    public uint Id { get; private set; }
+    public uint Id { get; set; }
     
     public string[] Roles { get; set; }
     
@@ -19,20 +19,26 @@ public sealed record UserDto
     
     public string[] Permissions { get; set; }
     
-    public uint ModificationDate { get; set; }
+    [property: JsonPropertyName("created_at")]
+    public string CreationDate { get; set; }
 
     public User ToEntity()
     {
-        return new User(Id, Name, Avatar, new Email(Email), ConvertRoles(), ConvertPermissions(), new Date(ModificationDate));
+        return new User(Id, Name, Avatar, new Email(Email), ConvertRoles(), ConvertPermissions(), new Date(CreationDate));
     }
 
     private Roles ConvertRoles()
     {
-        return new Roles(Roles.Select(Enum.Parse<Role>).ToArray());
+        return new Roles(Roles.Select(FirstCharToUpper).Select(Enum.Parse<Role>).ToArray());
     }
     
     private Permissions ConvertPermissions()
     {
-        return new Permissions(Permissions.Select(Enum.Parse<Permission>).ToArray());
+        return new Permissions(Permissions.Select(FirstCharToUpper).Select(Enum.Parse<Permission>).ToArray());
+    }
+    
+    private string FirstCharToUpper(string input)
+    {
+        return string.IsNullOrEmpty(input) ? string.Empty : $"{char.ToUpper(input[0])}{input[1..]}";
     }
 }

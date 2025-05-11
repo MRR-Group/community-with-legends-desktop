@@ -13,6 +13,8 @@ public sealed record Permissions
     public static implicit operator Permission[] (Permissions permissions) => permissions.Value;
         
     public static implicit operator Permissions(Permission[] value) => new Permissions(value);
+
+    public bool HasNone() => Value.Length == 0;
     
     public bool Can(Permission permission) => Value.Contains(permission);
     public bool Cannot(Permission permission) => !Can(permission);

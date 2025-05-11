@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Infrastructure.Exceptions;
 using Presentation.Events;
 using Presentation.Utils;
+using Ursa.Controls;
 
 namespace Presentation.ViewModels;
 
@@ -15,7 +16,7 @@ public partial class FormPageViewModel : ViewModelBase
     
     protected FormExceptions _exceptions = new ();
 
-    public event EventHandler<FormExceptionEventArgs> OnFormException;
+    public event EventHandler<FormExceptionEventArgs>? OnFormException;
     
     public FormPageViewModel(HistoryRouter<ViewModelBase> router) : base(router)
     {

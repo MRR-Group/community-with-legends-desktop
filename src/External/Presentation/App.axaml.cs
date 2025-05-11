@@ -13,6 +13,7 @@ using Infrastructure.Services;
 using Presentation.ViewModels;
 using Presentation.Views;
 using Microsoft.Extensions.DependencyInjection;
+using Ursa.Controls;
 
 [assembly: XmlnsDefinition("https://github.com/avaloniaui", "Presentation.Controls")]
 
@@ -50,13 +51,18 @@ public partial class App : Avalonia.Application
         
         services.AddSingleton<HistoryRouter<ViewModelBase>>(s => new HistoryRouter<ViewModelBase>(t => (ViewModelBase)s.GetRequiredService(t)));
         services.AddSingleton<CookieSession> (s => session);
-        
+
         services.AddSingleton<PermissionRepository> (s => new PermissionRepository());
         services.AddSingleton<UserRepository> (s => new UserRepository(s.GetService<CookieSession>()!));
         services.AddSingleton<AuthService> (s => new AuthService(s.GetService<CookieSession>()!, s.GetService<UserRepository>()!));
+        services.AddSingleton<BanService> (s => new BanService(s.GetService<CookieSession>()!));
+        services.AddSingleton<AnonymizeService> (s => new AnonymizeService(s.GetService<CookieSession>()!));
         services.AddSingleton<RegisterInteractor>(s => new RegisterInteractor(s.GetService<AuthService>()!));
         services.AddSingleton<LogInInteractor>(s => new LogInInteractor(s.GetService<AuthService>()!));
-
+        services.AddSingleton<BanUserInteractor>(s => new BanUserInteractor(s.GetService<BanService>()!));
+        services.AddSingleton<UnbanUserInteractor>(s => new UnbanUserInteractor(s.GetService<BanService>()!));
+        services.AddSingleton<AnonymizeUserInteractor>(s => new AnonymizeUserInteractor(s.GetService<AnonymizeService>()!));
+        
         services.AddSingleton<MainViewModel>();
         services.AddTransient<LoginPageViewModel>();
         services.AddTransient<RegisterPageViewModel>();

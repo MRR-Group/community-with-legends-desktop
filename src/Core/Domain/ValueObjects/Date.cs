@@ -4,9 +4,9 @@ public record Date
 {
     private DateTime _date;
     
-    public Date(uint timestamp)
+    public Date(string isoDate)
     {
-        _date = DateTimeOffset.FromUnixTimeSeconds(timestamp).DateTime;
+        _date = DateTime.Parse(isoDate, null, System.Globalization.DateTimeStyles.AdjustToUniversal);
     }
     
     public override string ToString()

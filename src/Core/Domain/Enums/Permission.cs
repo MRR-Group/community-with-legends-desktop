@@ -6,6 +6,7 @@ public enum Permission
     MakeComment,
     ReactToPost,
     BanUsers,
+    AnonymizeUsers,
     ViewUsers,
     DeletePosts,
     ManageAdministrators,

@@ -7,6 +7,7 @@ using Domain.Exceptions;
 using Infrastructure.Exceptions;
 using Presentation.Events;
 using Presentation.Utils;
+using Ursa.Controls;
 
 namespace Presentation.ViewModels;
 

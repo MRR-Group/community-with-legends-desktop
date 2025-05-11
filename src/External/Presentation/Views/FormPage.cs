@@ -8,7 +8,7 @@ using Presentation.ViewModels;
 
 namespace Presentation.Views;
 
-public class FormPage : UserControl
+public class FormPage : ViewBase
 {
     protected override void OnLoaded(RoutedEventArgs e)
     {

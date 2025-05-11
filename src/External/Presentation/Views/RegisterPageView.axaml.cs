@@ -7,7 +7,7 @@ using Presentation.Controls;
 
 namespace Presentation.Views;
 
-public partial class RegisterPageView : UserControl
+public partial class RegisterPageView : FormPage
 {
     public RegisterPageView()
     {

@@ -1,5 +1,4 @@
 using Domain.Entities;
-using Flurl;
 using Flurl.Http;
 using Infrastructure.DTOs;
 namespace Infrastructure.Repositories;

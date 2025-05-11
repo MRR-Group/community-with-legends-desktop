@@ -2,8 +2,8 @@ namespace Domain.Enums;
 
 public enum Role
 {
-    SuperAdmin,
-    Admin,
+    SuperAdministrator,
+    Administrator,
     Moderator,
     User,
 }
