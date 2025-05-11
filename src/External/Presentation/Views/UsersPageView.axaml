@@ -2,10 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:u="https://irihi.tech/ursa"
              xmlns:vm="using:Presentation.ViewModels"
+             xmlns:v="using:Presentation.Views"
              xmlns:domain="clr-namespace:Domain.Entities;assembly=Domain"
-             xmlns:i="using:Avalonia.Xaml.Interactivity"
-             xmlns:iac="using:Avalonia.Xaml.Interactions.Custom"
              mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="Presentation.Views.UsersPageView"
              x:DataType="vm:UsersPageViewModel">
@@ -26,12 +26,12 @@
                             <TextBlock TextAlignment="Center"  Text="ID" Classes="md"/>
                             <TextBlock Text="Email" TextAlignment="Center" Grid.Column="1" Classes="md" />
                             <TextBlock Text="Name"  TextAlignment="Center"  Grid.Column="2" Classes="md" />
-                            <TextBlock Text="Modification date"  TextAlignment="Center"  Grid.Column="4" Classes="md" />
+                            <TextBlock Text="Creation date"  TextAlignment="Center"  Grid.Column="4" Classes="md" />
                             <TextBlock Text="Options" Grid.Column="5" Classes="md" TextAlignment="Center" />
                         </Grid>
                     </Border>
 
-                    <ItemsControl ItemsSource="{Binding Users}">
+                    <ItemsControl x:Name="List" ItemsSource="{Binding Users}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="domain:User">
                                 <Border
@@ -51,11 +51,41 @@
                                         <TextBlock  TextAlignment="Center"  Text="{Binding Id, Mode=OneWay}" VerticalAlignment="Center" />
                                         <TextBlock TextAlignment="Center"  Text="{Binding Email.Value, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="1" />
                                         <TextBlock TextAlignment="Center"  Text="{Binding Name, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="2" />
-                                        <TextBlock TextAlignment="Center"  Text="{Binding ModificationDate, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="4" />
+                                        <TextBlock TextAlignment="Center"  Text="{Binding CreationDate, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="4" />
                                         <Button Grid.Column="5" Classes="icon" HorizontalAlignment="Center">
                                             <Svg Path="/Assets/Icons/Gear.svg" />
+                                          <Button.Flyout >
+                                            <Flyout>
+                                                <StackPanel>
+                                                    <u:PopConfirm 
+                                                        PopupHeader="Are you sure you want to ban this user?" 
+                                                        ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).BanCommand}"
+                                                        ConfirmCommandParameter="{Binding .}"
+                                                        IsVisible="{Binding !IsBanned }"
+                                                    >
+                                                        <Button Classes="text">Ban</Button>
+                                                    </u:PopConfirm>
+                                                    
+                                                    <u:PopConfirm
+                                                        PopupHeader="Are you sure you want to unban this user?" 
+                                                        ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).UnbanCommand}"
+                                                        ConfirmCommandParameter="{Binding .}"
+                                                        IsVisible="{Binding IsBanned }"
+                                                    >
+                                                        <Button Classes="text">Unban</Button>
+                                                    </u:PopConfirm>
+                                                    
+                                                    <u:PopConfirm 
+                                                        PopupHeader="Are you sure you want to anonymize this user? This action cannot be undone."
+                                                        ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).AnonymizeCommand}"
+                                                        ConfirmCommandParameter="{Binding .}"
+                                                    >
+                                                        <Button Classes="text">Anonymize</Button>
+                                                    </u:PopConfirm>
+                                                </StackPanel>
+                                            </Flyout>
+                                          </Button.Flyout>
                                         </Button>
-                                        <!-- <Button Content="Edit" Grid.Column="5" HorizontalAlignment="Center" /> -->
                                     </Grid>
                                 </Border>
                             </DataTemplate>

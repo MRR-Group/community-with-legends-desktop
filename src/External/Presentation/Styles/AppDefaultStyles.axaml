@@ -1,5 +1,8 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:u="https://irihi.tech/ursa"
+        xmlns:helpers="clr-namespace:Irihi.Avalonia.Shared.Helpers;assembly=Irihi.Avalonia.Shared"
+    >
     <Design.PreviewWith>
         <Border Background="{ DynamicResource BackgroundColor}" Padding="50">
             <StackPanel>
@@ -64,6 +67,7 @@
         <Setter Property="CornerRadius" Value="8"></Setter>
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontSize" Value="15"></Setter>
+        <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
     </Style>
     
     <Style Selector=":is(Button) /template/ ContentPresenter">
@@ -130,5 +134,80 @@
     
     <Style Selector=":is(Button).icon:pressed /template/ ContentPresenter">
         <Setter Property="RenderTransform" Value="scale(0.9)"></Setter>
+    </Style>
+    
+    <Style Selector="FlyoutPresenter">
+        <Setter Property="BorderBrush" Value="{ DynamicResource PrimaryGradient}"></Setter>
+        <Setter Property="Background" Value="{ DynamicResource BackgroundColor}"></Setter>
+        <Setter Property="CornerRadius" Value="4"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+    </Style>
+    
+    <Style Selector="Button.text /template/ ContentPresenter">
+        <Setter Property="FontSize" Value="20"></Setter>
+        <Setter Property="LineHeight" Value="25"></Setter>
+        <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
+        <Setter Property="Cursor" Value="Hand" />
+        
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Foreground" Duration="0:0:0.1"></BrushTransition>
+                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.05"></TransformOperationsTransition>
+            </Transitions>
+        </Setter>
+    </Style>
+    
+    <Style Selector="Button.text:pointerover /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource TextHoverColor}"></Setter>
+        <Setter Property="RenderTransform" Value="scale(1.1)"></Setter>
+    </Style>
+    
+    <Style Selector="Button.text:pressed /template/ ContentPresenter">
+        <Setter Property="RenderTransform" Value="scale(0.9)"></Setter>
+    </Style>
+    
+    <Style Selector="u|PopConfirm">
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="Placement" Value="AnchorAndGravity"></Setter>
+    </Style>
+    
+    <Style Selector="u|PopConfirm /template/ ContentPresenter">
+        <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
+    </Style>
+    
+    <Style Selector="u|PopConfirm /template/ Button#PART_CancelButton">
+        <Setter Property="helpers:ClassHelper.Classes" Value="PopCancel" />
+    </Style>
+
+    <Style Selector="u|PopConfirm /template/ Button#PART_ConfirmButton">
+        <Setter Property="helpers:ClassHelper.Classes" Value="PopConfirm" />
+    </Style>
+
+    <Style Selector="Button.PopCancel">
+        <Setter Property="Background" Value="{DynamicResource TertiaryColor}"></Setter>
+        <Setter Property="BorderThickness">0</Setter>
+    </Style>
+    
+    <Style Selector="Button.PopConfirm">
+        <Setter Property="Background" Value="{DynamicResource PrimaryColor}"></Setter>
+        <Setter Property="BorderThickness">0</Setter>
+    </Style>
+    
+    <Style Selector="Button.PopConfirm:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PrimaryHoverColor}"></Setter>
+    </Style>
+    
+    <Style Selector="Button.PopConfirm:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PrimaryHoverColor}"></Setter>
+    </Style>
+
+    <Style Selector="Button.PopCancel:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource TertiaryHoverColor}"></Setter>
+    </Style>
+    
+    <Style Selector="Button.PopCancel:pressed /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource TertiaryHoverColor}"></Setter>
     </Style>
 </Styles>

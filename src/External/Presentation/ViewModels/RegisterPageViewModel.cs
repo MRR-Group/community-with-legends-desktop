@@ -1,18 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using Application.Exceptions;
 using Application.UseCases;
 using Avalonia.SimpleRouter;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Domain.Exceptions;
-using Infrastructure.Exceptions;
-using Infrastructure.Services;
-using Presentation.Utils;
+
 
 namespace Presentation.ViewModels;
 

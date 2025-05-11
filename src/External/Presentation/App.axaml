@@ -2,6 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Presentation.App"
              xmlns:local="clr-namespace:Presentation"
+             xmlns:semi="https://irihi.tech/semi"
+             xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              RequestedThemeVariant="Default">
 
     <Application.DataTemplates>
@@ -11,6 +14,8 @@
     <Application.Styles>
         <FluentTheme />
         <StyleInclude Source="Styles/AppDefaultStyles.axaml"></StyleInclude>
+        <semi:SemiTheme Locale="en-US" />
+        <u-semi:SemiTheme Locale="en-US"/>
     </Application.Styles>
              
      <Application.Resources>
@@ -19,13 +24,15 @@
          <SolidColorBrush x:Key="BackgroundColor">#FF181719</SolidColorBrush>
          <SolidColorBrush x:Key="BackgroundLightColor">#FF212023</SolidColorBrush>
          <SolidColorBrush x:Key="TextColor">#FFFDFEFE</SolidColorBrush>
-         <SolidColorBrush x:Key="TextHoverColor">#FFFFFFFF</SolidColorBrush>
+         <SolidColorBrush x:Key="TextHoverColor">#FFE6E6FA</SolidColorBrush>
          <SolidColorBrush x:Key="TextDisabledColor">#FFB9B9BA</SolidColorBrush>
          <SolidColorBrush x:Key="PrimaryColor">#FF8E2CFE</SolidColorBrush>
          <SolidColorBrush x:Key="ErrorColor">#FFFF0000</SolidColorBrush>
          <SolidColorBrush x:Key="PrimaryHoverColor">#FF5300B0</SolidColorBrush>
          <SolidColorBrush x:Key="SecondaryColor">#FFA4C1C9</SolidColorBrush>
          <SolidColorBrush x:Key="SecondaryDarkColor">#FF9C9C9C</SolidColorBrush>
+         <SolidColorBrush x:Key="TertiaryColor">#FF1E9AC8</SolidColorBrush>
+         <SolidColorBrush x:Key="TertiaryHoverColor">#FF17789b</SolidColorBrush>
          
          <LinearGradientBrush x:Key="PrimaryGradient" StartPoint="0% 0%" EndPoint="100% 0%">
              <GradientStop Offset="0" Color="#FF9C44FF"></GradientStop>
@@ -37,5 +44,18 @@
              <GradientStop Offset="0" Color="#FF1E9AC8"></GradientStop>
              <GradientStop Offset="1" Color="#FF8E2CFE"></GradientStop>
          </LinearGradientBrush>
+         
+         <LinearGradientBrush x:Key="SecondaryGradientZero" StartPoint="0% 0%" EndPoint="0% 0%">
+             <GradientStop Offset="0" Color="#FF1E9AC8"></GradientStop>
+             <GradientStop Offset="1" Color="#008E2CFE"></GradientStop>
+         </LinearGradientBrush>
+         
+         <SolidColorBrush x:Key="PopConfirmBackground">#FF181719</SolidColorBrush>
+         <LinearGradientBrush x:Key="PopConfirmBorderBrush" StartPoint="0% 0%" EndPoint="100% 0%">
+             <GradientStop Offset="0" Color="#FF1E9AC8"></GradientStop>
+             <GradientStop Offset="1" Color="#FF8E2CFE"></GradientStop>
+         </LinearGradientBrush>
+         
+         <x:Double x:Key="PopConfirmBorderMaxWidth">800</x:Double>
      </Application.Resources> 
 </Application>
