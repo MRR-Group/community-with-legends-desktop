@@ -1,7 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Application.Exceptions;
 using Application.UseCases;
 using Avalonia.SimpleRouter;
@@ -19,23 +18,28 @@ public partial class UsersPageViewModel : ViewModelBase
     private BanUserInteractor _banUserInteractor;
     private UnbanUserInteractor _unbanUserInteractor;
     private AnonymizeUserInteractor _anonymizeUserInteractor;
-
-    public ICommand HandleBanClick => new RelayCommand<User>(Ban);
-    public ICommand HandleUnBanClick => new RelayCommand<User>(Unban);
-    public ICommand HandleAnonymizeClick => new RelayCommand<User>(Anonymize);
-
+    private GiveModeratorRoleInteractor _giveModeratorRoleInteractor;
+    private RevokeModeratorRoleInteractor _revokeModeratorRoleInteractor;
+    private RevokeAdministratorRoleInteractor _revokeAdministratorRoleInteractor;
+    
     public UsersPageViewModel(
         HistoryRouter<ViewModelBase> router, 
         UserRepository userRepository, 
         BanUserInteractor banUserInteractor, 
         UnbanUserInteractor unbanUserInteractor, 
-        AnonymizeUserInteractor anonymizeUserInteractor
+        AnonymizeUserInteractor anonymizeUserInteractor,
+        GiveModeratorRoleInteractor giveModeratorRoleInteractor,
+        RevokeAdministratorRoleInteractor revokeAdministratorRoleInteractor,
+        RevokeModeratorRoleInteractor revokeModeratorRoleInteractor
     ) : base(router)
     {
         _userRepository = userRepository;
         _banUserInteractor = banUserInteractor;
         _unbanUserInteractor = unbanUserInteractor;
         _anonymizeUserInteractor = anonymizeUserInteractor;
+        _giveModeratorRoleInteractor = giveModeratorRoleInteractor;
+        _revokeModeratorRoleInteractor = revokeModeratorRoleInteractor;
+        _revokeAdministratorRoleInteractor = revokeAdministratorRoleInteractor;
         
         Users = [];
         RefreshUsers();
@@ -80,6 +84,36 @@ public partial class UsersPageViewModel : ViewModelBase
         {
             await _banUserInteractor.Ban(user);
             ShowNotification("Success", $"{user.Name} banned successfully");
+        });
+    }
+        
+    [RelayCommand]
+    private void GrantModeratorRole(User? target)
+    {
+        SendAction(target, async (user) =>
+        {
+            await _giveModeratorRoleInteractor.GiveRole(user);
+            ShowNotification("Success", $"Moderator privileges granted to {user.Name}");
+        });
+    }
+    
+    [RelayCommand]
+    private void RevokeModeratorRole(User? target)
+    {
+        SendAction(target, async (user) =>
+        {
+            await _revokeModeratorRoleInteractor.RevokeRole(user);
+            ShowNotification("Success", $"Moderator revoke from {user.Name}");
+        });
+    }
+    
+    [RelayCommand]
+    private void RevokeAdministratorRole(User? target)
+    {
+        SendAction(target, async (user) =>
+        {
+            await _revokeAdministratorRoleInteractor.RevokeRole(user);
+            ShowNotification("Success", $"Administrator revoke from {user.Name}");
         });
     }
     
