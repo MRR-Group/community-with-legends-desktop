@@ -82,6 +82,33 @@
                                                     >
                                                         <Button Classes="text">Anonymize</Button>
                                                     </u:PopConfirm>
+                                                    
+                                                    <u:PopConfirm 
+                                                        PopupHeader="Are you sure you want to grant the moderator role to this user?"
+                                                        ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).GrantModeratorRoleCommand}"
+                                                        ConfirmCommandParameter="{Binding .}"
+                                                        IsVisible="{Binding !Roles.IsModerator }"
+                                                    >
+                                                        <Button Classes="text">Grant Moderator Role</Button>
+                                                    </u:PopConfirm>
+                                                    
+                                                    <u:PopConfirm 
+                                                        PopupHeader="Are you sure you want to remove this user's moderator role?"
+                                                        ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).RevokeModeratorRoleCommand}"
+                                                        ConfirmCommandParameter="{Binding .}"
+                                                        IsVisible="{Binding Roles.IsModerator }"
+                                                    >
+                                                        <Button Classes="text">Revoke Moderator Role</Button>
+                                                    </u:PopConfirm>
+                                                    
+                                                    <u:PopConfirm 
+                                                        PopupHeader="Are you sure you want to remove this user's administrator role?"
+                                                        ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).RevokeAdministratorRoleCommand}"
+                                                        ConfirmCommandParameter="{Binding .}"
+                                                        IsVisible="{Binding Roles.IsAdministrator }"
+                                                    >
+                                                        <Button Classes="text">Revoke Administrator Role</Button>
+                                                    </u:PopConfirm>
                                                 </StackPanel>
                                             </Flyout>
                                           </Button.Flyout>
