@@ -21,7 +21,7 @@ public class BanUserInteractor
             throw new CannotBanNonUserException();
         }
 
-        if (user.IsBanned)
+        if (user.Permissions.HasNone())
         {
             throw new UserAlreadyBannedException();
         }

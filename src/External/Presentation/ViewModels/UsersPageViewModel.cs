@@ -14,6 +14,7 @@ namespace Presentation.ViewModels;
 public partial class UsersPageViewModel : ViewModelBase
 {
     public ObservableCollection<User> Users { get; private set;  }
+    public PermissionRepository PermissionRepository { get; private set; }
     private UserRepository _userRepository;
     private BanUserInteractor _banUserInteractor;
     private UnbanUserInteractor _unbanUserInteractor;
@@ -24,7 +25,8 @@ public partial class UsersPageViewModel : ViewModelBase
     
     public UsersPageViewModel(
         HistoryRouter<ViewModelBase> router, 
-        UserRepository userRepository, 
+        UserRepository userRepository,
+        PermissionRepository permissionRepository,
         BanUserInteractor banUserInteractor, 
         UnbanUserInteractor unbanUserInteractor, 
         AnonymizeUserInteractor anonymizeUserInteractor,
@@ -41,6 +43,7 @@ public partial class UsersPageViewModel : ViewModelBase
         _revokeModeratorRoleInteractor = revokeModeratorRoleInteractor;
         _revokeAdministratorRoleInteractor = revokeAdministratorRoleInteractor;
         
+        PermissionRepository = permissionRepository;
         Users = [];
         RefreshUsers();
     }

@@ -2,9 +2,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="Presentation.App"
              xmlns:local="clr-namespace:Presentation"
+             xmlns:converters="clr-namespace:Presentation.Converters"
              xmlns:semi="https://irihi.tech/semi"
              xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
-             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              RequestedThemeVariant="Default">
 
     <Application.DataTemplates>
@@ -19,6 +19,13 @@
     </Application.Styles>
              
      <Application.Resources>
+         <converters:UserCanBeUnbannedConverter x:Key="UserCanBeUnbannedConverter" />
+         <converters:UserCanBeBannedConverter x:Key="UserCanBeBannedConverter" />
+         <converters:UserCanBePromotedToModeratorConverter x:Key="UserCanBePromotedToModeratorConverter" />
+         <converters:UserCanBeDemotedFromModeratorConverter x:Key="UserCanBeDemotedFromModeratorConverter" />
+         <converters:UserCanBeDemotedFromAdministratorConverter x:Key="UserCanBeDemotedFromAdministratorConverter" />
+         <converters:UserCanBeAnonymizedConverter x:Key="UserCanBeAnonymizedConverter" />
+
          <FontFamily x:Key="Jaro">avares://Presentation/Assets/Fonts/Jaro.ttf#Jaro</FontFamily>
          <ImageBrush x:Key="Background" Source="Assets/Images/background.png"></ImageBrush>
          <SolidColorBrush x:Key="BackgroundColor">#FF181719</SolidColorBrush>

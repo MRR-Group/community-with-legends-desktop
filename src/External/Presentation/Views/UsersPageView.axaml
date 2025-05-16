@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:u="https://irihi.tech/ursa"
              xmlns:vm="using:Presentation.ViewModels"
-             xmlns:v="using:Presentation.Views"
              xmlns:domain="clr-namespace:Domain.Entities;assembly=Domain"
              mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="Presentation.Views.UsersPageView"
@@ -61,8 +60,14 @@
                                                         PopupHeader="Are you sure you want to ban this user?" 
                                                         ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).BanCommand}"
                                                         ConfirmCommandParameter="{Binding .}"
-                                                        IsVisible="{Binding !IsBanned }"
                                                     >
+                                                        <u:PopConfirm.IsVisible>
+                                                            <MultiBinding Converter="{StaticResource UserCanBeBannedConverter}">
+                                                                <Binding Path="$self.DataContext" />
+                                                                <Binding Path="#List.((vm:UsersPageViewModel)DataContext).PermissionRepository"></Binding>
+                                                            </MultiBinding>
+                                                        </u:PopConfirm.IsVisible>
+                                                        
                                                         <Button Classes="text">Ban</Button>
                                                     </u:PopConfirm>
                                                     
@@ -70,8 +75,14 @@
                                                         PopupHeader="Are you sure you want to unban this user?" 
                                                         ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).UnbanCommand}"
                                                         ConfirmCommandParameter="{Binding .}"
-                                                        IsVisible="{Binding IsBanned }"
                                                     >
+                                                        <u:PopConfirm.IsVisible>
+                                                            <MultiBinding Converter="{StaticResource UserCanBeUnbannedConverter}">
+                                                                <Binding Path="$self.DataContext" />
+                                                                <Binding Path="#List.((vm:UsersPageViewModel)DataContext).PermissionRepository"></Binding>
+                                                            </MultiBinding>
+                                                        </u:PopConfirm.IsVisible>
+                                                        
                                                         <Button Classes="text">Unban</Button>
                                                     </u:PopConfirm>
                                                     
@@ -80,6 +91,13 @@
                                                         ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).AnonymizeCommand}"
                                                         ConfirmCommandParameter="{Binding .}"
                                                     >
+                                                        <u:PopConfirm.IsVisible>
+                                                            <MultiBinding Converter="{StaticResource UserCanBeAnonymizedConverter}">
+                                                                <Binding Path="$self.DataContext" />
+                                                                <Binding Path="#List.((vm:UsersPageViewModel)DataContext).PermissionRepository"></Binding>
+                                                            </MultiBinding>
+                                                        </u:PopConfirm.IsVisible>
+                                                        
                                                         <Button Classes="text">Anonymize</Button>
                                                     </u:PopConfirm>
                                                     
@@ -87,8 +105,14 @@
                                                         PopupHeader="Are you sure you want to grant the moderator role to this user?"
                                                         ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).GrantModeratorRoleCommand}"
                                                         ConfirmCommandParameter="{Binding .}"
-                                                        IsVisible="{Binding !Roles.IsModerator }"
                                                     >
+                                                        <u:PopConfirm.IsVisible>
+                                                            <MultiBinding Converter="{StaticResource UserCanBePromotedToModeratorConverter}">
+                                                                <Binding Path="$self.DataContext" />
+                                                                <Binding Path="#List.((vm:UsersPageViewModel)DataContext).PermissionRepository"></Binding>
+                                                            </MultiBinding>
+                                                        </u:PopConfirm.IsVisible>
+                                                        
                                                         <Button Classes="text">Grant Moderator Role</Button>
                                                     </u:PopConfirm>
                                                     
@@ -96,8 +120,14 @@
                                                         PopupHeader="Are you sure you want to remove this user's moderator role?"
                                                         ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).RevokeModeratorRoleCommand}"
                                                         ConfirmCommandParameter="{Binding .}"
-                                                        IsVisible="{Binding Roles.IsModerator }"
                                                     >
+                                                        <u:PopConfirm.IsVisible>
+                                                            <MultiBinding Converter="{StaticResource UserCanBeDemotedFromModeratorConverter}">
+                                                                <Binding Path="$self.DataContext" />
+                                                                <Binding Path="#List.((vm:UsersPageViewModel)DataContext).PermissionRepository"></Binding>
+                                                            </MultiBinding>
+                                                        </u:PopConfirm.IsVisible>
+                                                        
                                                         <Button Classes="text">Revoke Moderator Role</Button>
                                                     </u:PopConfirm>
                                                     
@@ -105,8 +135,14 @@
                                                         PopupHeader="Are you sure you want to remove this user's administrator role?"
                                                         ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).RevokeAdministratorRoleCommand}"
                                                         ConfirmCommandParameter="{Binding .}"
-                                                        IsVisible="{Binding Roles.IsAdministrator }"
                                                     >
+                                                        <u:PopConfirm.IsVisible>
+                                                            <MultiBinding Converter="{StaticResource UserCanBeDemotedFromAdministratorConverter}">
+                                                                <Binding Path="$self.DataContext" />
+                                                                <Binding Path="#List.((vm:UsersPageViewModel)DataContext).PermissionRepository"></Binding>
+                                                            </MultiBinding>
+                                                        </u:PopConfirm.IsVisible>
+                                                        
                                                         <Button Classes="text">Revoke Administrator Role</Button>
                                                     </u:PopConfirm>
                                                 </StackPanel>
