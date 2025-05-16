@@ -14,9 +14,7 @@ public sealed record Roles
         
     public static implicit operator Roles(Role[] value) => new Roles(value);
     
-    public bool Is(Role role) => Value.Contains(role);
-
-    public bool IsAdministrator { get => Is(Role.Administrator) || Is(Role.SuperAdministrator); }
-    public bool IsSuperAdministrator { get => Is(Role.SuperAdministrator); }
-    public bool IsModerator { get => Is(Role.Moderator); }
+    public bool Is(params Role[] roles) => roles.All(role => Value.Contains(role));    
+    
+    public bool IsNot(params Role[] roles) => roles.All(role => !Value.Contains(role));
 }

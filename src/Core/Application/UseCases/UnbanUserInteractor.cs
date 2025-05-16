@@ -15,7 +15,7 @@ public class UnbanUserInteractor
 
     public async Task<bool> Unban(User user)
     {
-        if (!user.IsBanned)
+        if (!user.Permissions.HasNone())
         {
             throw new UserNotBannedException();
         }
