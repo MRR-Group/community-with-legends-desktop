@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Presentation.Controls;
 
@@ -34,7 +35,7 @@ public partial class FormInput : UserControl
         
     public static readonly RoutedEvent<RoutedEventArgs> LinkClickEvent = 
         RoutedEvent.Register<FormInput, RoutedEventArgs>(nameof(LinkClick), RoutingStrategies.Direct);
-
+    
     public FormInput()
     { 
         this.InitializeComponent();
