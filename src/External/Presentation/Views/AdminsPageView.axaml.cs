@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace Presentation.Views;
 
-public partial class AdminsPage : ViewBase
+public partial class AdminsPageView : ViewBase
 {
-    public AdminsPage()
+    public AdminsPageView()
     {
         this.InitializeComponent();
     }

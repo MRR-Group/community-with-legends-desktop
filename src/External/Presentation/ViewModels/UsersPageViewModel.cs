@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 using Domain.Entities;
 using Infrastructure.Exceptions;
 using Infrastructure.Repositories;
+using Presentation.Controls;
 
 namespace Presentation.ViewModels;
 
@@ -46,6 +47,12 @@ public partial class UsersPageViewModel : ViewModelBase
         PermissionRepository = permissionRepository;
         Users = [];
         RefreshUsers();
+    }
+
+    [RelayCommand]
+    private void HandleMenuClick(MainMenuItem item)
+    {
+        NavigateTo(item.Link);
     }
 
     private async Task RefreshUsers()

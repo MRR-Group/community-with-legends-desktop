@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using System;
+using Avalonia.Controls;
 using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Presentation.Views;
@@ -10,6 +11,15 @@ public class ViewModelBase : ObservableObject
 {
     protected HistoryRouter<ViewModelBase> _router;
     private WindowNotificationManager? _notificationManager;
+    
+    public void NavigateTo(Type page)
+    {
+        var goTo = typeof(HistoryRouter<ViewModelBase>)
+            .GetMethod(nameof(_router.GoTo))!
+            .MakeGenericMethod(page);
+        
+        goTo.Invoke(_router, null);
+    }
 
     public ViewModelBase(HistoryRouter<ViewModelBase> router)
     {

@@ -61,6 +61,14 @@
         <Setter Property="Foreground" Value="{DynamicResource PrimaryHoverColor}"></Setter>
     </Style>
     
+    <Style Selector="TextBlock.menu">
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
+    </Style>
+    
+    <Style Selector="TextBlock.menu:pointerover">
+        <Setter Property="Foreground" Value="{DynamicResource TextHoverColor}"></Setter>
+    </Style>
+    
     <Style Selector=":is(Button)">
         <Setter Property="Background" Value="{DynamicResource PrimaryGradient}"></Setter>
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
