@@ -12,14 +12,12 @@ using Presentation.Controls;
 
 namespace Presentation.ViewModels;
 
-public partial class UsersPageViewModel : ViewModelBase
+public partial class UsersPageViewModel : DataPageViewModel<User>
 {
-    public ObservableCollection<User> Users { get; private set;  }
     public PermissionRepository PermissionRepository { get; private set; }
     private UserRepository _userRepository;
     private BanUserInteractor _banUserInteractor;
     private UnbanUserInteractor _unbanUserInteractor;
-    private LogOutInteractor _logOutInteractor;
     private AnonymizeUserInteractor _anonymizeUserInteractor;
     private GiveModeratorRoleInteractor _giveModeratorRoleInteractor;
     private RevokeModeratorRoleInteractor _revokeModeratorRoleInteractor;
@@ -36,7 +34,7 @@ public partial class UsersPageViewModel : ViewModelBase
         GiveModeratorRoleInteractor giveModeratorRoleInteractor,
         RevokeAdministratorRoleInteractor revokeAdministratorRoleInteractor,
         RevokeModeratorRoleInteractor revokeModeratorRoleInteractor
-    ) : base(router)
+    ) : base(router, logOutInteractor)
     {
         _userRepository = userRepository;
         _banUserInteractor = banUserInteractor;
@@ -48,35 +46,18 @@ public partial class UsersPageViewModel : ViewModelBase
         _revokeAdministratorRoleInteractor = revokeAdministratorRoleInteractor;
         
         PermissionRepository = permissionRepository;
-        Users = [];
-        RefreshUsers();
+        RefreshData();
     }
-
-    [RelayCommand]
-    private void HandleMenuClick(MainMenuItem item)
-    {
-        NavigateTo(item.Link);
-    }
-
-    [RelayCommand]
-    private void LogOut()
-    {
-        SendAction(true, async (_) =>
-        {
-            await _logOutInteractor.LogOut();
-            _router.GoTo<LoginPageViewModel>();
-        });
-    }
-
-    private async Task RefreshUsers()
+    
+    protected override async Task RefreshData()
     {
         var data = await _userRepository.All();
         
-        Users.Clear();
+        Data.Clear();
         
         foreach (var user in data)
         {
-            Users.Add(user);
+            Data.Add(user);
         }
     }
 
@@ -140,21 +121,11 @@ public partial class UsersPageViewModel : ViewModelBase
         });
     }
     
-    protected async Task SendAction<T>(T? target, Func<T, Task> sendAction)
+    protected async Task SendAction(User? target, Func<User, Task> sendAction)
     {
-        if (target == null)
-        {
-            return;
-        }
-
         try
         {
-            await sendAction.Invoke(target);
-            await RefreshUsers();
-        }
-        catch (UnauthorizedException e)
-        {
-            ShowNotification("Unauthorized", e.Message);
+            await base.SendAction(target, sendAction);
         }
         catch (CannotBanNonUserException e)
         {

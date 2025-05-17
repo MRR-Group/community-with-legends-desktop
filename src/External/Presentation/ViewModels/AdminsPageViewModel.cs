@@ -1,22 +1,37 @@
+using System.Threading.Tasks;
+using Application.UseCases;
 using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.Input;
+using Domain.Entities;
+using Infrastructure.Repositories;
 using Presentation.Controls;
 using Ursa.Controls;
 
 namespace Presentation.ViewModels;
 
-public partial class AdminsPageViewModel : ViewModelBase
+public partial class AdminsPageViewModel : DataPageViewModel<User>
 {
-    public string Test { get; set; } = "Admins ";
+    private UserRepository _userRepository;
 
-    public AdminsPageViewModel(HistoryRouter<ViewModelBase> router) : base(router)
+    public AdminsPageViewModel(
+        HistoryRouter<ViewModelBase> router,
+        LogOutInteractor logOutInteractor,
+        UserRepository userRepository
+    ) : base(router, logOutInteractor)
     {
-        
+        _userRepository = userRepository;
+        RefreshData();
     }
     
-    [RelayCommand]
-    private void HandleMenuClick(MainMenuItem item)
+    protected override async Task RefreshData()
     {
-        NavigateTo(item.Link);
+        var data = await _userRepository.All();
+        
+        Data.Clear();
+        
+        foreach (var user in data)
+        {
+            Data.Add(user);
+        }
     }
 }

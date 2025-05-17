@@ -1,0 +1,37 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Presentation.ViewModels"
+             xmlns:domain="clr-namespace:Domain.Entities;assembly=Domain"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Presentation.Views.SettingsPageView"
+             x:DataType="vm:SettingsPageViewModel">
+    <Grid RowDefinitions="*" ColumnDefinitions="230,*,900,*,300">
+        <MainMenu Grid.Column="0" Margin="0 0 10 0" Selected="Settings" ItemClicked="{Binding HandleMenuClickCommand}"/>
+        
+        <Panel Grid.Column="2" Background="{ DynamicResource BackgroundColor}" Grid.Row="0">
+            <StackPanel>
+                <TextBlock Classes="title" TextAlignment="Center">Settings</TextBlock>
+                
+                <StackPanel>
+                    <Border
+                        BorderBrush="{DynamicResource SecondaryColor}"
+                        BorderThickness="0 0 0 2"
+                        CornerRadius="0"
+                        Padding="0 2"
+                        Margin="0 0"
+                    >
+                        <Grid ColumnDefinitions="1*,2*,2*,3*,2*,1*">
+                            <TextBlock TextAlignment="Center"  Text="ID" Classes="md"/>
+                            <TextBlock Text="Email" TextAlignment="Center" Grid.Column="1" Classes="md" />
+                            <TextBlock Text="Name"  TextAlignment="Center"  Grid.Column="2" Classes="md" />
+                            <TextBlock Text="Creation date"  TextAlignment="Center"  Grid.Column="4" Classes="md" />
+                            <TextBlock Text="Options" Grid.Column="5" Classes="md" TextAlignment="Center" />
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </Panel>
+    </Grid>
+</UserControl>

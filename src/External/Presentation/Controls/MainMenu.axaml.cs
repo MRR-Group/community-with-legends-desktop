@@ -40,31 +40,31 @@ public partial class MainMenu : UserControl
             new MainMenuItem 
             {
                 Text = "Reports",
-                Link = typeof(AdminsPageViewModel),
+                Link = typeof(ReportsPageViewModel),
                 Icon = "/Assets/Icons/Flag.svg",
             },
             new MainMenuItem 
             {
                 Text = "Game list",
-                Link = typeof(AdminsPageViewModel),
+                Link = typeof(GamesPageViewModel),
                 Icon = "/Assets/Icons/Gamepad.svg",
             },
             new MainMenuItem 
             {
                 Text = "Statistics",
-                Link = typeof(AdminsPageViewModel),
+                Link = typeof(StatisticsPageViewModel),
                 Icon = "/Assets/Icons/Chart.svg",
             },
             new MainMenuItem 
             {
                 Text = "Logs",
-                Link = typeof(AdminsPageViewModel),
+                Link = typeof(LogsPageViewModel),
                 Icon = "/Assets/Icons/File.svg",
             },
             new MainMenuItem 
             {
                 Text = "Settings",
-                Link = typeof(AdminsPageViewModel),
+                Link = typeof(SettingsPageViewModel),
                 Icon = "/Assets/Icons/Gear.svg",
             },
         ];
