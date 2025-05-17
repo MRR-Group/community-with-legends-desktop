@@ -48,6 +48,26 @@
         <DependentUpon>UsersPageView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Views\ReportsPageView.axaml.cs">
+        <DependentUpon>ReportsPageView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\GamesPageView.axaml.cs">
+        <DependentUpon>GameListPageView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\StatisticsPageView.axaml.cs">
+        <DependentUpon>StatisticsPageView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\LogsPageView.axaml.cs">
+        <DependentUpon>LogsPageView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Views\SettingsPageView.axaml.cs">
+        <DependentUpon>SettingsPageView.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

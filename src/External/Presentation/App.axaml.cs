@@ -74,7 +74,12 @@ public partial class App : Avalonia.Application
         services.AddTransient<RegisterPageViewModel>();
         services.AddTransient<AdminsPageViewModel>();
         services.AddTransient<UsersPageViewModel>();
-        
+        services.AddTransient<ReportsPageViewModel>();
+        services.AddTransient<GamesPageViewModel>();
+        services.AddTransient<StatisticsPageViewModel>();
+        services.AddTransient<LogsPageViewModel>();
+        services.AddTransient<SettingsPageViewModel>();
+
         return services.BuildServiceProvider();
     }
 
