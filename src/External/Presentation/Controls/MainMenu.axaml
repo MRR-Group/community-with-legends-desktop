@@ -6,8 +6,9 @@
              x:Class="Presentation.Controls.MainMenu">
              
     <Panel Background="{ DynamicResource BackgroundColor}">
-        <StackPanel DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=MainMenu} }">
+        <Grid RowDefinitions="76,*,86" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=MainMenu} }">
             <Border
+                Grid.Row="0"
                 BorderBrush="{DynamicResource SecondaryColor}"
                 BorderThickness="0 0 0 2"
                 CornerRadius="0"
@@ -16,7 +17,7 @@
                 <Image Height="51" Source="/Assets/Images/logo.png"></Image>
             </Border>
             
-            <ItemsControl x:Name="List" ItemsSource="{Binding Items }">
+            <ItemsControl Grid.Row="1"  x:Name="List" ItemsSource="{Binding Items }">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="MainMenuItem">
                         <StackPanel Orientation="Horizontal" Margin="30 30 0 0">
@@ -27,7 +28,25 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </StackPanel>
+            
+            <StackPanel Grid.Row="2" >
+                <Border
+                    BorderBrush="{DynamicResource SecondaryColor}"
+                    BorderThickness="0 2 0 0"
+                    CornerRadius="0"
+                    Padding="0 15 0 10"
+                >
+                    <Button 
+                        Classes="Disabled"
+                        FontSize="25" 
+                        Padding="10"
+                        HorizontalContentAlignment="Center" 
+                        Width="150"
+                        Click="LogoutButton_Click"
+                    >Log out</Button>
+                </Border>
+            </StackPanel>
+        </Grid>
     </Panel>
     
 </UserControl>

@@ -10,15 +10,17 @@ using Infrastructure.Repositories;
 
 namespace Infrastructure.Services;
 
-public class AuthService : ILogInService, IRegisterService
+public class AuthService : ILogInService, IRegisterService, ILogOutService
 {
     private CookieSession _session;
     private UserRepository _repository;
+    private PermissionRepository _permissions;
     
-    public AuthService(CookieSession session, UserRepository repository)
+    public AuthService(CookieSession session, UserRepository repository, PermissionRepository permissions)
     {
         _session = session;
         _repository = repository;
+        _permissions = permissions;
     }
 
     public async Task Register(string name, Email email, Password password)
@@ -72,5 +74,16 @@ public class AuthService : ILogInService, IRegisterService
 
             throw;
         }
+    }
+
+    public async Task LogOut()
+    {
+        await _session.Request("auth/logout")
+            .WithAutoRedirect(true)
+            .WithHeader("Accept", "application/json")
+            .PostAsync();
+
+        _permissions.Unload();
+        _session.Cookies.Clear();
     }
 }

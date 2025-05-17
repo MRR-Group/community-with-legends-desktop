@@ -9,7 +9,13 @@
              x:Class="Presentation.Views.UsersPageView"
              x:DataType="vm:UsersPageViewModel">
     <Grid RowDefinitions="*" ColumnDefinitions="230,*,900,*,300">
-        <MainMenu Grid.Column="0" Margin="0 0 10 0" Selected="Users" ItemClicked="{Binding HandleMenuClickCommand}"/>
+        <MainMenu 
+            Grid.Column="0"
+            Margin="0 0 10 0" 
+            Selected="Users" 
+            ItemClicked="{Binding HandleMenuClickCommand}"
+            LogOut="{Binding LogOutCommand}"
+        />
         
         <Panel Grid.Column="2" Background="{ DynamicResource BackgroundColor}" Grid.Row="0">
             <StackPanel>

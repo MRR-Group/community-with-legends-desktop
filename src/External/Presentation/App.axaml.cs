@@ -54,12 +54,14 @@ public partial class App : Avalonia.Application
 
         services.AddSingleton<PermissionRepository> (s => new PermissionRepository());
         services.AddSingleton<UserRepository> (s => new UserRepository(s.GetService<CookieSession>()!));
-        services.AddSingleton<AuthService> (s => new AuthService(s.GetService<CookieSession>()!, s.GetService<UserRepository>()!));
+        services.AddSingleton<AuthService> (s => new AuthService(s.GetService<CookieSession>()!, s.GetService<UserRepository>()!, s.GetService<PermissionRepository>()!));
+        
         services.AddSingleton<BanService> (s => new BanService(s.GetService<CookieSession>()!));
         services.AddSingleton<RoleService> (s => new RoleService(s.GetService<CookieSession>()!));
         services.AddSingleton<AnonymizeService> (s => new AnonymizeService(s.GetService<CookieSession>()!));
         services.AddSingleton<RegisterInteractor>(s => new RegisterInteractor(s.GetService<AuthService>()!));
         services.AddSingleton<LogInInteractor>(s => new LogInInteractor(s.GetService<AuthService>()!));
+        services.AddSingleton<LogOutInteractor>(s => new LogOutInteractor(s.GetService<AuthService>()!));
         services.AddSingleton<BanUserInteractor>(s => new BanUserInteractor(s.GetService<BanService>()!));
         services.AddSingleton<UnbanUserInteractor>(s => new UnbanUserInteractor(s.GetService<BanService>()!));
         services.AddSingleton<AnonymizeUserInteractor>(s => new AnonymizeUserInteractor(s.GetService<AnonymizeService>()!));
