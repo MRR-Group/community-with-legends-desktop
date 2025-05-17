@@ -19,6 +19,7 @@ public partial class UsersPageViewModel : ViewModelBase
     private UserRepository _userRepository;
     private BanUserInteractor _banUserInteractor;
     private UnbanUserInteractor _unbanUserInteractor;
+    private LogOutInteractor _logOutInteractor;
     private AnonymizeUserInteractor _anonymizeUserInteractor;
     private GiveModeratorRoleInteractor _giveModeratorRoleInteractor;
     private RevokeModeratorRoleInteractor _revokeModeratorRoleInteractor;
@@ -29,7 +30,8 @@ public partial class UsersPageViewModel : ViewModelBase
         UserRepository userRepository,
         PermissionRepository permissionRepository,
         BanUserInteractor banUserInteractor, 
-        UnbanUserInteractor unbanUserInteractor, 
+        UnbanUserInteractor unbanUserInteractor,
+        LogOutInteractor logOutInteractor,
         AnonymizeUserInteractor anonymizeUserInteractor,
         GiveModeratorRoleInteractor giveModeratorRoleInteractor,
         RevokeAdministratorRoleInteractor revokeAdministratorRoleInteractor,
@@ -39,6 +41,7 @@ public partial class UsersPageViewModel : ViewModelBase
         _userRepository = userRepository;
         _banUserInteractor = banUserInteractor;
         _unbanUserInteractor = unbanUserInteractor;
+        _logOutInteractor = logOutInteractor;
         _anonymizeUserInteractor = anonymizeUserInteractor;
         _giveModeratorRoleInteractor = giveModeratorRoleInteractor;
         _revokeModeratorRoleInteractor = revokeModeratorRoleInteractor;
@@ -53,6 +56,16 @@ public partial class UsersPageViewModel : ViewModelBase
     private void HandleMenuClick(MainMenuItem item)
     {
         NavigateTo(item.Link);
+    }
+
+    [RelayCommand]
+    private void LogOut()
+    {
+        SendAction(true, async (_) =>
+        {
+            await _logOutInteractor.LogOut();
+            _router.GoTo<LoginPageViewModel>();
+        });
     }
 
     private async Task RefreshUsers()
@@ -127,7 +140,7 @@ public partial class UsersPageViewModel : ViewModelBase
         });
     }
     
-    protected async Task SendAction(User? target, Func<User, Task> sendAction)
+    protected async Task SendAction<T>(T? target, Func<T, Task> sendAction)
     {
         if (target == null)
         {
