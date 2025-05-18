@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:Presentation.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="850"
+             xmlns:echoes="clr-namespace:Echoes;assembly=Echoes"
+             xmlns:translations="clr-namespace:Presentation;assembly=Presentation"
              x:Class="Presentation.Views.RegisterPageView"
              x:DataType="vm:RegisterPageViewModel">
 
@@ -20,8 +22,8 @@
             
             <FormInput 
                 Name="Name"
-                Title="Enter your name" 
-                Watermark="Name" 
+                Title="{echoes:Translate {x:Static translations:Strings.name_form_title}}" 
+                Watermark="{echoes:Translate {x:Static translations:Strings.name_form_watermark}}" 
                 HideUnderText="True"
                 Margin="0 0 0 20"
                 Text="{Binding Name, Mode=TwoWay}"
@@ -29,10 +31,10 @@
             
             <FormInput 
                 Name="Email"
-                Title="Enter your email" 
-                Watermark="Email" 
-                UnderText="Do you have an account?" 
-                LinkText="to login" 
+                Title="{echoes:Translate {x:Static translations:Strings.email_form_title}}" 
+                Watermark="{echoes:Translate {x:Static translations:Strings.email_form_watermark}}" 
+                UnderText="{echoes:Translate {x:Static translations:Strings.register_email_form_under}}" 
+                LinkText="{echoes:Translate {x:Static translations:Strings.register_email_form_link}}" 
                 Margin="0 0 0 10"
                 LinkClick="HandleLoginLinkClick"
                 Text="{Binding Email, Mode=TwoWay}"
@@ -40,8 +42,8 @@
             
             <FormInput 
                 Name="Password"
-                Title="Enter your password" 
-                Watermark="Password" 
+                Title="{echoes:Translate {x:Static translations:Strings.password_form_title}}" 
+                Watermark="{echoes:Translate {x:Static translations:Strings.password_form_watermark}}" 
                 Password="True"
                 HideUnderText="True"
                 Margin="0 0 0 20"
@@ -49,8 +51,8 @@
             />
         
             <FormInput 
-                Title="Repeat your password" 
-                Watermark="Password"
+                Title="{echoes:Translate {x:Static translations:Strings.repeat_password_form_title}}" 
+                Watermark="{echoes:Translate {x:Static translations:Strings.repeat_password_form_watermark}}" 
                 Password="True"
                 HideUnderText="True"
                 Margin="0 0 0 20"
@@ -63,9 +65,8 @@
                     HorizontalContentAlignment="Center" 
                     Width="150"
                     Click="HandleRegisterButtonClick"
-                >
-                    Register
-                </Button>
+                    Content="{echoes:Translate {x:Static translations:Strings.register_button}}"
+                />
             </StackPanel>
         </StackPanel>
     </Panel>

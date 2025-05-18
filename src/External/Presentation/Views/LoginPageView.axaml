@@ -2,6 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:echoes="clr-namespace:Echoes;assembly=Echoes"
+             xmlns:translations="clr-namespace:Presentation;assembly=Presentation"
              xmlns:vm="using:Presentation.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Presentation.Views.LoginPageView"
@@ -19,10 +21,10 @@
             <TextBlock Classes="title" TextAlignment="Center">Log in</TextBlock>
             <FormInput 
                 Name="Email"
-                Title="Enter your email" 
-                Watermark="Email" 
-                UnderText="You don't have account?" 
-                LinkText="to register" 
+                Title="{echoes:Translate {x:Static translations:Strings.email_form_title}}" 
+                Watermark="{echoes:Translate {x:Static translations:Strings.email_form_watermark}}" 
+                UnderText="{echoes:Translate {x:Static translations:Strings.email_form_under}}" 
+                LinkText="{echoes:Translate {x:Static translations:Strings.email_form_link}}" 
                 Text="{Binding Email, Mode=TwoWay}"
                 LinkClick="HandleRegisterButtonClick"
             />
@@ -30,10 +32,10 @@
             <StackPanel Margin="0 20">
                 <FormInput 
                     Name="Password"
-                    Title="Enter your password" 
-                    Watermark="Password" 
-                    UnderText="You don't remember?" 
-                    LinkText="to reset" 
+                    Title="{echoes:Translate {x:Static translations:Strings.password_form_title}}" 
+                    Watermark="{echoes:Translate {x:Static translations:Strings.password_form_watermark}}" 
+                    UnderText="{echoes:Translate {x:Static translations:Strings.password_form_under}}" 
+                    LinkText="{echoes:Translate {x:Static translations:Strings.password_form_link}}" 
                     Password="true" 
                     Text="{Binding Password, Mode=TwoWay}"
                 />
@@ -45,9 +47,8 @@
                     HorizontalContentAlignment="Center" 
                     Width="150"
                     Click="HandleLoginButtonClick"
-                >
-                    Log in
-                </Button>
+                    Content="{echoes:Translate {x:Static translations:Strings.login_button}}"
+                />
             </StackPanel>
         </StackPanel>
     </Panel>

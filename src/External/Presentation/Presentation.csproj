@@ -25,6 +25,8 @@
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+        <PackageReference Include="Echoes" Version="0.1.4" />
+        <PackageReference Include="Echoes.Generator" Version="0.1.4" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
         <PackageReference Include="Sandreas.Avalonia.SimpleRouter" Version="0.0.5" />
         <PackageReference Include="Svg.Skia" Version="3.0.0" />
@@ -37,6 +39,11 @@
       <UpToDateCheckInput Remove="Controls\FormInput.axaml" />
     </ItemGroup>
 
+    <ItemGroup>
+        <EmbeddedResource Include="**\*.toml" />
+        <AdditionalFiles Include="Translations\Strings.toml" />
+    </ItemGroup>
+    
     <ItemGroup>
       <ProjectReference Include="..\..\Core\Application\Application.csproj" />
       <ProjectReference Include="..\..\Core\Domain\Domain.csproj" />

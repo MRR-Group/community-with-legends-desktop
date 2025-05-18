@@ -1,0 +1,69 @@
+[echoes_config]
+generated_class_name = "Strings"
+generated_namespace = "Presentation"
+
+[translations]
+# __________________Login_Page__________________
+email_form_title = "Enter your email"
+email_form_watermark = "Email"
+email_form_under = "You don't have an account?"
+email_form_link = "to register"
+
+password_form_title = "Enter your password"
+password_form_watermark = "Password"
+password_form_under = "Forgot your password?"
+password_form_link = "to reset it"
+
+login_button = "Log in"
+
+# __________________Register_Page__________________
+name_form_title = "Enter your name"
+name_form_watermark = "Name"
+
+register_email_form_under = "Do you have have an account?"
+register_email_form_link = "to log in"
+
+repeat_password_form_title = "Repeat your password"
+repeat_password_form_watermark = "Password"
+
+register_button = "Register"
+
+# __________________Admins_Page__________________
+admin_page_title = "Admins"
+table_id = "ID"
+table_email = "Email"
+table_name = "Name"
+table_creation_date = "Creation date"
+table_options = "Options"
+
+# __________________Games_Page__________________
+game_page_title = "Game List"
+
+# __________________Reports_Page__________________
+reports_page_title = "Reports"
+
+# __________________Users_Page__________________
+users_page_title = "Users"
+ban_action_message = "Are you sure you want to ban this user?"
+ban_action_name = "Ban"
+unban_action_message = "Are you sure you want to unban this user?"
+unban_action_name = "Unban"
+anonymize_action_message = "Are you sure you want to anonymize this user? This action cannot be undone."
+anonymize_action_name = "Anonymize"
+grant_moderator_action_message = "Are you sure you want to grant the moderator role to this user?"
+grant_moderator_action_name = "Grant Moderator Role"
+revoke_moderator_action_message = "Are you sure you want to remove this user's moderator role?"
+revoke_moderator_action_name = "Revoke Moderator Role"
+revoke_administrator_action_message = "Are you sure you want to remove this user's administrator role?"
+revoke_administrator_action_name = "Revoke Administrator Role"
+# __________________Settings_Page__________________
+settings_page_title = "Settings"
+
+# __________________Statistics_Page__________________
+statistics_page_title = "Statistics"
+
+# __________________Logs_Page__________________
+logs_page_title = "Logs"
+
+# __________________Main_Menu__________________
+main_menu_logout = "Log out"

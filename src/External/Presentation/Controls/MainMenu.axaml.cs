@@ -3,7 +3,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.Input;
 using Presentation.ViewModels;
 
@@ -27,43 +26,43 @@ public partial class MainMenu : UserControl
         Items = [
             new MainMenuItem
             {
-                Text = "Admins", 
+                Id = "admin", 
                 Link = typeof(AdminsPageViewModel),
                 Icon = "/Assets/Icons/Admin.svg",
             },
             new MainMenuItem 
             {
-                Text = "Users",
+                Id = "users",
                 Link = typeof(UsersPageViewModel),
                 Icon = "/Assets/Icons/User.svg",
             },
             new MainMenuItem 
             {
-                Text = "Reports",
+                Id = "reports",
                 Link = typeof(ReportsPageViewModel),
                 Icon = "/Assets/Icons/Flag.svg",
             },
             new MainMenuItem 
             {
-                Text = "Game list",
+                Id = "game",
                 Link = typeof(GamesPageViewModel),
                 Icon = "/Assets/Icons/Gamepad.svg",
             },
             new MainMenuItem 
             {
-                Text = "Statistics",
+                Id = "statistics",
                 Link = typeof(StatisticsPageViewModel),
                 Icon = "/Assets/Icons/Chart.svg",
             },
             new MainMenuItem 
             {
-                Text = "Logs",
+                Id = "logs",
                 Link = typeof(LogsPageViewModel),
                 Icon = "/Assets/Icons/File.svg",
             },
             new MainMenuItem 
             {
-                Text = "Settings",
+                Id = "settings",
                 Link = typeof(SettingsPageViewModel),
                 Icon = "/Assets/Icons/Gear.svg",
             },
@@ -92,7 +91,7 @@ public partial class MainMenu : UserControl
             
             foreach (var item in Items)
             {
-                item.IsSelected = item.Text == value;
+                item.IsSelected = item.Id == value;
             }
         }
     }
