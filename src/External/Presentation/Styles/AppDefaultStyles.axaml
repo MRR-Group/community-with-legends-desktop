@@ -13,6 +13,11 @@
                 <TextBlock Classes="xs link">Extra small link</TextBlock>
                 <TextBlock Classes="xs error">Extra small error</TextBlock>
                 <TextBox Watermark="Watermark"></TextBox>
+                
+                <ComboBox SelectedIndex="0" MaxDropDownHeight="200"> 
+                    <ComboBoxItem>English</ComboBoxItem>
+                    <ComboBoxItem>Polski</ComboBoxItem>
+                </ComboBox>
             </StackPanel>
         </Border>
     </Design.PreviewWith>
@@ -235,5 +240,11 @@
     
     <Style Selector="Button.PopCancel:pressed /template/ ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource TertiaryHoverColor}"></Setter>
+    </Style>
+
+    <Style Selector="ComboBox">
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundLightColor}"/>
+        <Setter Property="BorderThickness" Value="0" />
     </Style>
 </Styles>

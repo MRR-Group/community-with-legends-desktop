@@ -1,0 +1,49 @@
+# __________________Login_Page__________________
+email_form_title = "Wprowadź swój e-mail"
+email_form_watermark = "E-mail"
+email_form_under = "Nie masz konta?"
+email_form_link = "zarejestruj się"
+
+password_form_title = "Wprowadź swoje hasło"
+password_form_watermark = "Hasło"
+password_form_under = "Zapomniałeś hasła?"
+password_form_link = "zresetuj je"
+
+login_button = "Zaloguj się"
+
+# __________________Register_Page__________________
+name_form_title = "Wprowadź swoje imię"
+name_form_watermark = "Imię"
+
+register_email_form_under = "Masz już konto?"
+register_email_form_link = "zaloguj się"
+
+repeat_password_form_title = "Powtórz swoje hasło"
+repeat_password_form_watermark = "Hasło"
+
+register_button = "Zarejestruj się"
+
+# __________________Admins_Page__________________
+admin_page_title = "Administratorzy"
+table_id = "ID"
+table_email = "E-mail"
+table_name = "Imię"
+table_creation_date = "Data utworzenia"
+table_options = "Opcje"
+
+# __________________Games_Page__________________
+game_page_title = "Lista gier"
+
+# __________________Reports_Page__________________
+reports_page_title = "Zgłoszenia"
+
+# __________________Users_Page__________________
+users_page_title = "Użytkownicy"
+ban_action_message = "Czy na pewno chcesz zbanować tego użytkownika?"
+ban_action_name = "Zbanuj"
+unban_action_message = "Czy na pewno chcesz odbanować tego użytkownika?"
+unban_action_name = "Odbanuj"
+anonymize_action_message = "Czy na pewno chcesz zanonimizować tego użytkownika? Tej akcji nie można cofnąć."
+anonymize_action_name = "Anonimizuj"
+grant_moderator_action_message = "Czy na pewno chcesz nadać temu użytkownikowi rolę moderatora?"
+grant_moderator_action_name = "Nadaj r_

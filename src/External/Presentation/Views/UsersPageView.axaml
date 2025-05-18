@@ -7,19 +7,21 @@
              xmlns:domain="clr-namespace:Domain.Entities;assembly=Domain"
              mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="Presentation.Views.UsersPageView"
+             xmlns:echoes="clr-namespace:Echoes;assembly=Echoes"
+             xmlns:translations="clr-namespace:Presentation;assembly=Presentation"
              x:DataType="vm:UsersPageViewModel">
     <Grid RowDefinitions="*" ColumnDefinitions="230,*,900,*,300">
         <MainMenu 
             Grid.Column="0"
             Margin="0 0 10 0" 
-            Selected="Users" 
+            Selected="users" 
             ItemClicked="{Binding HandleMenuClickCommand}"
             LogOut="{Binding LogOutCommand}"
         />
         
         <Panel Grid.Column="2" Background="{ DynamicResource BackgroundColor}" Grid.Row="0">
             <StackPanel>
-                <TextBlock Classes="title" TextAlignment="Center">Users</TextBlock>
+                <TextBlock Classes="title" TextAlignment="Center" Text="{echoes:Translate {x:Static translations:Strings.users_page_title}}" />
                 
                 <StackPanel>
                     <Border
@@ -30,11 +32,11 @@
                         Margin="0 0"
                     >
                         <Grid ColumnDefinitions="1*,2*,2*,3*,2*,1*">
-                            <TextBlock TextAlignment="Center"  Text="ID" Classes="md"/>
-                            <TextBlock Text="Email" TextAlignment="Center" Grid.Column="1" Classes="md" />
-                            <TextBlock Text="Name"  TextAlignment="Center"  Grid.Column="2" Classes="md" />
-                            <TextBlock Text="Creation date"  TextAlignment="Center"  Grid.Column="4" Classes="md" />
-                            <TextBlock Text="Options" Grid.Column="5" Classes="md" TextAlignment="Center" />
+                            <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_id}}" TextAlignment="Center"  Grid.Column="0" Classes="md"/>
+                            <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_email}}" TextAlignment="Center" Grid.Column="1" Classes="md" />
+                            <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_name}}"  TextAlignment="Center"  Grid.Column="2" Classes="md" />
+                            <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_creation_date}}"  TextAlignment="Center"  Grid.Column="4" Classes="md" />
+                            <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_options}}" Grid.Column="5" Classes="md" TextAlignment="Center" />
                         </Grid>
                     </Border>
 
@@ -65,7 +67,7 @@
                                             <Flyout>
                                                 <StackPanel>
                                                     <u:PopConfirm 
-                                                        PopupHeader="Are you sure you want to ban this user?" 
+                                                        PopupHeader="{echoes:Translate {x:Static translations:Strings.ban_action_message}}" 
                                                         ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).BanCommand}"
                                                         ConfirmCommandParameter="{Binding .}"
                                                     >
@@ -76,11 +78,14 @@
                                                             </MultiBinding>
                                                         </u:PopConfirm.IsVisible>
                                                         
-                                                        <Button Classes="text">Ban</Button>
+                                                        <Button 
+                                                            Classes="text" 
+                                                            Content="{echoes:Translate {x:Static translations:Strings.ban_action_name}}" 
+                                                        />
                                                     </u:PopConfirm>
                                                     
                                                     <u:PopConfirm
-                                                        PopupHeader="Are you sure you want to unban this user?" 
+                                                        PopupHeader="{echoes:Translate {x:Static translations:Strings.unban_action_message}}"
                                                         ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).UnbanCommand}"
                                                         ConfirmCommandParameter="{Binding .}"
                                                     >
@@ -91,11 +96,14 @@
                                                             </MultiBinding>
                                                         </u:PopConfirm.IsVisible>
                                                         
-                                                        <Button Classes="text">Unban</Button>
+                                                        <Button 
+                                                            Classes="text" 
+                                                            Content="{echoes:Translate {x:Static translations:Strings.unban_action_name}}" 
+                                                        />
                                                     </u:PopConfirm>
                                                     
                                                     <u:PopConfirm 
-                                                        PopupHeader="Are you sure you want to anonymize this user? This action cannot be undone."
+                                                        PopupHeader="{echoes:Translate {x:Static translations:Strings.anonymize_action_message}}"
                                                         ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).AnonymizeCommand}"
                                                         ConfirmCommandParameter="{Binding .}"
                                                     >
@@ -106,11 +114,14 @@
                                                             </MultiBinding>
                                                         </u:PopConfirm.IsVisible>
                                                         
-                                                        <Button Classes="text">Anonymize</Button>
+                                                        <Button 
+                                                            Classes="text" 
+                                                            Content="{echoes:Translate {x:Static translations:Strings.anonymize_action_name}}" 
+                                                        />
                                                     </u:PopConfirm>
                                                     
                                                     <u:PopConfirm 
-                                                        PopupHeader="Are you sure you want to grant the moderator role to this user?"
+                                                        PopupHeader="{echoes:Translate {x:Static translations:Strings.grant_moderator_action_message}}"
                                                         ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).GrantModeratorRoleCommand}"
                                                         ConfirmCommandParameter="{Binding .}"
                                                     >
@@ -121,11 +132,14 @@
                                                             </MultiBinding>
                                                         </u:PopConfirm.IsVisible>
                                                         
-                                                        <Button Classes="text">Grant Moderator Role</Button>
+                                                        <Button 
+                                                            Classes="text" 
+                                                            Content="{echoes:Translate {x:Static translations:Strings.grant_moderator_action_name}}" 
+                                                        />
                                                     </u:PopConfirm>
                                                     
                                                     <u:PopConfirm 
-                                                        PopupHeader="Are you sure you want to remove this user's moderator role?"
+                                                        PopupHeader="{echoes:Translate {x:Static translations:Strings.revoke_moderator_action_message}}"
                                                         ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).RevokeModeratorRoleCommand}"
                                                         ConfirmCommandParameter="{Binding .}"
                                                     >
@@ -136,11 +150,14 @@
                                                             </MultiBinding>
                                                         </u:PopConfirm.IsVisible>
                                                         
-                                                        <Button Classes="text">Revoke Moderator Role</Button>
+                                                        <Button 
+                                                            Classes="text" 
+                                                            Content="{echoes:Translate {x:Static translations:Strings.revoke_moderator_action_name}}" 
+                                                        />
                                                     </u:PopConfirm>
                                                     
                                                     <u:PopConfirm 
-                                                        PopupHeader="Are you sure you want to remove this user's administrator role?"
+                                                        PopupHeader="{echoes:Translate {x:Static translations:Strings.revoke_administrator_action_message}}"
                                                         ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).RevokeAdministratorRoleCommand}"
                                                         ConfirmCommandParameter="{Binding .}"
                                                     >
@@ -151,7 +168,10 @@
                                                             </MultiBinding>
                                                         </u:PopConfirm.IsVisible>
                                                         
-                                                        <Button Classes="text">Revoke Administrator Role</Button>
+                                                        <Button 
+                                                            Classes="text" 
+                                                            Content="{echoes:Translate {x:Static translations:Strings.revoke_administrator_action_name}}" 
+                                                        />
                                                     </u:PopConfirm>
                                                 </StackPanel>
                                             </Flyout>
