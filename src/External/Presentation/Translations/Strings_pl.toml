@@ -64,3 +64,22 @@ logs_page_title = "Logi"
 
 # __________________Main_Menu__________________
 main_menu_logout = "Wyloguj się"
+
+# __________________Ursa__________________
+ursa_menu_bring_to_front = "Na wierzch"
+ursa_menu_bring_forward = "Do przodu"
+ursa_menu_send_backward = "Do tyłu"
+ursa_menu_send_to_back = "Na spód"
+ursa_menu_dialog_ok = "OK"
+ursa_menu_dialog_cancel = "Anuluj"
+ursa_menu_dialog_yes = "Tak"
+ursa_menu_dialog_no = "Nie"
+ursa_menu_dialog_close = "Zamknij"
+ursa_pagination_jump_to = "Idź do strony"
+ursa_pagination_page = " "
+ursa_theme_toggle_dark = "Ciemny"
+ursa_theme_toggle_light = "Jasny"
+ursa_theme_toggle_system = "Systemowy"
+ursa_date_time_confirm = "Zatwierdź"
+ursa_date_time_start_time = "Czas rozpoczęcia"
+ursa_date_time_end_time = "Czas zakończenia"
