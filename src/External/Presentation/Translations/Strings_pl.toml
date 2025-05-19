@@ -1,5 +1,5 @@
 # __________________Login_Page__________________
-email_form_title = "Wprowadź swój e-mail"
+email_form_title = "Wprowadź swój adres e-mail"
 email_form_watermark = "E-mail"
 email_form_under = "Nie masz konta?"
 email_form_link = "zarejestruj się"
@@ -43,7 +43,24 @@ ban_action_message = "Czy na pewno chcesz zbanować tego użytkownika?"
 ban_action_name = "Zbanuj"
 unban_action_message = "Czy na pewno chcesz odbanować tego użytkownika?"
 unban_action_name = "Odbanuj"
-anonymize_action_message = "Czy na pewno chcesz zanonimizować tego użytkownika? Tej akcji nie można cofnąć."
+anonymize_action_message = "Czy na pewno chcesz zanonimizować tego użytkownika? Tej operacji nie można cofnąć."
 anonymize_action_name = "Anonimizuj"
 grant_moderator_action_message = "Czy na pewno chcesz nadać temu użytkownikowi rolę moderatora?"
-grant_moderator_action_name = "Nadaj r_
+grant_moderator_action_name = "Nadaj rolę moderatora"
+revoke_moderator_action_message = "Czy na pewno chcesz odebrać temu użytkownikowi rolę moderatora?"
+revoke_moderator_action_name = "Odbierz rolę moderatora"
+revoke_administrator_action_message = "Czy na pewno chcesz odebrać temu użytkownikowi rolę administratora?"
+revoke_administrator_action_name = "Odbierz rolę administratora"
+
+# __________________Settings_Page__________________
+settings_page_title = "Ustawienia"
+language_switcher = "Wybierz Język"
+
+# __________________Statistics_Page__________________
+statistics_page_title = "Statystyki"
+
+# __________________Logs_Page__________________
+logs_page_title = "Logi"
+
+# __________________Main_Menu__________________
+main_menu_logout = "Wyloguj się"

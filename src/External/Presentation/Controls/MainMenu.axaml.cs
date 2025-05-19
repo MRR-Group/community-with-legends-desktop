@@ -4,6 +4,8 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using Presentation.Messages;
 using Presentation.ViewModels;
 
 namespace Presentation.Controls;
@@ -69,6 +71,11 @@ public partial class MainMenu : UserControl
         ];
         
         InitializeComponent();
+        
+        WeakReferenceMessenger.Default.Register<LanguageChangedMessage>(this, (_, msg) =>
+        {
+            RefreshTranslations();
+        });
     }
     
     public RelayCommand<MainMenuItem> ItemClicked
@@ -93,6 +100,14 @@ public partial class MainMenu : UserControl
             {
                 item.IsSelected = item.Id == value;
             }
+        }
+    }
+    
+    public void RefreshTranslations()
+    {
+        foreach (var item in Items)
+        {
+            item.RefreshText();
         }
     }
     

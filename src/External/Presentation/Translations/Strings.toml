@@ -58,6 +58,7 @@ revoke_administrator_action_message = "Are you sure you want to remove this user
 revoke_administrator_action_name = "Revoke Administrator Role"
 # __________________Settings_Page__________________
 settings_page_title = "Settings"
+language_switcher = "Select Language"
 
 # __________________Statistics_Page__________________
 statistics_page_title = "Statistics"

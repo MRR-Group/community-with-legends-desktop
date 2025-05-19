@@ -5,8 +5,10 @@ using System.Transactions;
 using Application.UseCases;
 using Avalonia.Controls;
 using Avalonia.SimpleRouter;
+using CommunityToolkit.Mvvm.Messaging;
 using Domain.Entities;
 using Echoes;
+using Presentation.Messages;
 using Ursa.Themes.Semi;
 
 namespace Presentation.ViewModels;
@@ -18,15 +20,18 @@ public partial class SettingsPageViewModel : DataPageViewModel<User>
         LogOutInteractor logOutInteractor
     ) : base(router, logOutInteractor)
     { }
-
+    
     public string[] Languages => ["English", "Polski"];
-
+    
     public string Language
     {
         get => CultureInfoName(TranslationProvider.Culture);
         set
         {
-            TranslationProvider.SetCulture(CultureInfoByName(value));
+            var culture = CultureInfoByName(value);
+            
+            TranslationProvider.SetCulture(culture);
+            WeakReferenceMessenger.Default.Send(new LanguageChangedMessage(culture));
         }
     }
 
