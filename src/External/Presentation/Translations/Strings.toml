@@ -58,6 +58,7 @@ revoke_administrator_action_message = "Are you sure you want to remove this user
 revoke_administrator_action_name = "Revoke Administrator Role"
 # __________________Settings_Page__________________
 settings_page_title = "Settings"
+language_switcher = "Select Language"
 
 # __________________Statistics_Page__________________
 statistics_page_title = "Statistics"
@@ -67,3 +68,22 @@ logs_page_title = "Logs"
 
 # __________________Main_Menu__________________
 main_menu_logout = "Log out"
+
+# __________________Ursa__________________
+ursa_menu_bring_to_front = "Bring to Front"
+ursa_menu_bring_forward = "Bring Forward"
+ursa_menu_send_backward = "Send Backward"
+ursa_menu_send_to_back = "Send to Back"
+ursa_menu_dialog_ok = "OK"
+ursa_menu_dialog_cancel = "Cancel"
+ursa_menu_dialog_yes = "Yes"
+ursa_menu_dialog_no = "No"
+ursa_menu_dialog_close = "Close"
+ursa_pagination_jump_to = "Jump to page"
+ursa_pagination_page = " "
+ursa_theme_toggle_dark = "Dark"
+ursa_theme_toggle_light = "Light"
+ursa_theme_toggle_system = "System"
+ursa_date_time_confirm = "Confirm"
+ursa_date_time_start_time = "Start Time"
+ursa_date_time_end_time = "End Time"

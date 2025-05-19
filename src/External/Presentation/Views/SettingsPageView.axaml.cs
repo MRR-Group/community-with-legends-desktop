@@ -9,5 +9,6 @@ public partial class SettingsPageView : ViewBase
     public SettingsPageView()
     {
         this.InitializeComponent();
+        InvalidateVisual();
     }
 }

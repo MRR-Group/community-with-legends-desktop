@@ -3,22 +3,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:Presentation.ViewModels"
-             xmlns:domain="clr-namespace:Domain.Entities;assembly=Domain"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Presentation.Views.SettingsPageView"
              xmlns:echoes="clr-namespace:Echoes;assembly=Echoes"
              xmlns:translations="clr-namespace:Presentation;assembly=Presentation"
              x:DataType="vm:SettingsPageViewModel">
     <Grid RowDefinitions="*" ColumnDefinitions="230,*,900,*,300">
-        <MainMenu Grid.Column="0" Margin="0 0 10 0" Selected="settings" ItemClicked="{Binding HandleMenuClickCommand}"/>
+        <MainMenu x:Name="MainMenu" Grid.Column="0" Margin="0 0 10 0" Selected="settings" ItemClicked="{Binding HandleMenuClickCommand}"/>
         
         <Panel Grid.Column="2" Background="{ DynamicResource BackgroundColor}" Grid.Row="0">
             <StackPanel>
                 <TextBlock Classes="title" TextAlignment="Center" Text="{echoes:Translate {x:Static translations:Strings.settings_page_title}}" />
                 
                 <Grid ColumnDefinitions="300, *">
-                    <StackPanel Grid.Column="0">
-                        <ComboBox SelectedValue="{Binding Language}" MaxDropDownHeight="300" MinWidth="200" ItemsSource="{Binding Languages}" /> 
+                    <StackPanel Grid.Column="0" Margin="20 0">
+                        <TextBlock Classes="md" Padding="0 0 0 10" Text="{echoes:Translate {x:Static translations:Strings.language_switcher}}" />
+                        <ComboBox SelectedValue="{Binding Language}" MaxDropDownHeight="300" MinWidth="230" ItemsSource="{Binding Languages}" /> 
                     </StackPanel>
                 </Grid>
             </StackPanel>
