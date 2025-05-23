@@ -26,6 +26,14 @@
         <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
     </Style>
     
+    <Style Selector="TextBlock">
+        <Setter Property="FontWeight" Value="Normal"></Setter>
+    </Style>
+    
+    <Style Selector="Label">
+        <Setter Property="FontWeight" Value="Normal"></Setter>
+    </Style>
+    
     <Style Selector="TextBlock.title">
         <Setter Property="FontSize" Value="50"></Setter>
         <Setter Property="Height" Value="100"></Setter>
@@ -77,6 +85,7 @@
     <Style Selector=":is(Button)">
         <Setter Property="Background" Value="{DynamicResource PrimaryGradient}"></Setter>
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
+        <Setter Property="FontWeight" Value="Normal"></Setter> 
         <Setter Property="CornerRadius" Value="8"></Setter>
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FontSize" Value="15"></Setter>
@@ -211,8 +220,40 @@
     <Style Selector="u|PopConfirm /template/ Button#PART_CancelButton">
         <Setter Property="helpers:ClassHelper.Classes" Value="PopCancel" />
     </Style>
-
+        
+    <Style Selector="u|PopConfirm /template/ Button#PART_NoButton">
+        <Setter Property="helpers:ClassHelper.Classes" Value="PopCancel" />
+    </Style>
+    
     <Style Selector="u|PopConfirm /template/ Button#PART_ConfirmButton">
+        <Setter Property="helpers:ClassHelper.Classes" Value="PopConfirm" />
+    </Style>
+    
+    <Style Selector="u|PopConfirm /template/ Button#PART_YesButton">
+        <Setter Property="helpers:ClassHelper.Classes" Value="PopConfirm" />
+    </Style>
+    
+    <Style Selector="u|PopConfirm /template/ Button#PART_OKButton">
+        <Setter Property="helpers:ClassHelper.Classes" Value="PopConfirm" />
+    </Style>
+    
+    <Style Selector="u|DefaultDrawerControl /template/ Button#PART_CancelButton">
+        <Setter Property="helpers:ClassHelper.Classes" Value="PopCancel" />
+    </Style>
+        
+    <Style Selector="u|DefaultDrawerControl /template/ Button#PART_NoButton">
+        <Setter Property="helpers:ClassHelper.Classes" Value="PopCancel" />
+    </Style>
+    
+    <Style Selector="u|DefaultDrawerControl /template/ Button#PART_ConfirmButton">
+        <Setter Property="helpers:ClassHelper.Classes" Value="PopConfirm" />
+    </Style>
+    
+    <Style Selector="u|DefaultDrawerControl /template/ Button#PART_YesButton">
+        <Setter Property="helpers:ClassHelper.Classes" Value="PopConfirm" />
+    </Style>
+    
+    <Style Selector="u|DefaultDrawerControl /template/ Button#PART_OKButton">
         <Setter Property="helpers:ClassHelper.Classes" Value="PopConfirm" />
     </Style>
 

@@ -7,20 +7,15 @@ namespace Application.UseCases;
 
 public class RevokeAdministratorRoleInteractor
 {
-    private IRoleService _roleService;
+    private IAdministratorService _administratorService;
 
-    public RevokeAdministratorRoleInteractor(IRoleService roleService)
+    public RevokeAdministratorRoleInteractor(IAdministratorService administratorService)
     {
-        _roleService = roleService;
+        _administratorService = administratorService;
     }
 
-    public async Task<bool> RevokeRole(User user)
+    public async Task<bool> RevokeRole(Administrator administrator)
     {
-        if (!user.Roles.Is(Role.Administrator))
-        {
-            throw new UserDoesNotHaveRoleException(Role.Administrator);
-        }
-
-        return await _roleService.RevokeAdministratorRole(user);
+        return await _administratorService.RevokeAdministratorRole(administrator);
     }
 }

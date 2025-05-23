@@ -58,6 +58,7 @@ public class AuthService : ILogInService, IRegisterService, ILogOutService
                 .PostJsonAsync(new { email = email.Value, password = password.Value });
 
             var json = await response.GetJsonAsync<LoginResponseDto>();
+            
             return await _repository.ById(json.UserId);
         }
         catch (FlurlHttpException e)
