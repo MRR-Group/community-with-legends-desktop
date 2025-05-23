@@ -155,24 +155,6 @@
                                                             Content="{echoes:Translate {x:Static translations:Strings.revoke_moderator_action_name}}" 
                                                         />
                                                     </u:PopConfirm>
-                                                    
-                                                    <u:PopConfirm 
-                                                        PopupHeader="{echoes:Translate {x:Static translations:Strings.revoke_administrator_action_message}}"
-                                                        ConfirmCommand="{Binding #List.((vm:UsersPageViewModel)DataContext).RevokeAdministratorRoleCommand}"
-                                                        ConfirmCommandParameter="{Binding .}"
-                                                    >
-                                                        <u:PopConfirm.IsVisible>
-                                                            <MultiBinding Converter="{StaticResource UserCanBeDemotedFromAdministratorConverter}">
-                                                                <Binding Path="$self.DataContext" />
-                                                                <Binding Path="#List.((vm:UsersPageViewModel)DataContext).PermissionRepository"></Binding>
-                                                            </MultiBinding>
-                                                        </u:PopConfirm.IsVisible>
-                                                        
-                                                        <Button 
-                                                            Classes="text" 
-                                                            Content="{echoes:Translate {x:Static translations:Strings.revoke_administrator_action_name}}" 
-                                                        />
-                                                    </u:PopConfirm>
                                                 </StackPanel>
                                             </Flyout>
                                           </Button.Flyout>

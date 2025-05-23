@@ -56,26 +56,4 @@ public class RoleService : IRoleService
             throw;
         }
     }
-    
-    public async Task<bool> RevokeAdministratorRole(User user)
-    {
-        try
-        {
-            await _session.Request($"users/{user.Id}/revoke-administrator-privileges")
-                .WithAutoRedirect(true)
-                .WithHeader("Accept", "application/json")
-                .PostAsync();
-
-            return true;
-        }
-        catch (FlurlHttpException e)
-        {
-            if (e.StatusCode == 403)
-            {
-                throw new UnauthorizedException();
-            }
-
-            throw;
-        }
-    }
 }

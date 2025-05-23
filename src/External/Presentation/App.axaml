@@ -26,6 +26,8 @@
          <converters:UserCanBeDemotedFromAdministratorConverter x:Key="UserCanBeDemotedFromAdministratorConverter" />
          <converters:UserCanBeAnonymizedConverter x:Key="UserCanBeAnonymizedConverter" />
 
+         <FontWeight x:Key="TextBlockTitleFontWeight">Normal</FontWeight>
+         
          <FontFamily x:Key="Jaro">avares://Presentation/Assets/Fonts/Jaro.ttf#Jaro</FontFamily>
          <ImageBrush x:Key="Background" Source="Assets/Images/background.png"></ImageBrush>
          <SolidColorBrush x:Key="BackgroundColor">#FF181719</SolidColorBrush>

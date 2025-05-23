@@ -111,16 +111,6 @@ public partial class UsersPageViewModel : DataPageViewModel<User>
         });
     }
     
-    [RelayCommand]
-    private void RevokeAdministratorRole(User? target)
-    {
-        SendAction(target, async (user) =>
-        {
-            await _revokeAdministratorRoleInteractor.RevokeRole(user);
-            ShowNotification("Success", $"Administrator revoke from {user.Name}");
-        });
-    }
-    
     protected async Task SendAction(User? target, Func<User, Task> sendAction)
     {
         try

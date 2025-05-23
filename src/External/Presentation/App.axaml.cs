@@ -54,7 +54,9 @@ public partial class App : Avalonia.Application
 
         services.AddSingleton<PermissionRepository> (s => new PermissionRepository());
         services.AddSingleton<UserRepository> (s => new UserRepository(s.GetService<CookieSession>()!));
+        services.AddSingleton<AdminRepository> (s => new AdminRepository(s.GetService<CookieSession>()!));
         services.AddSingleton<AuthService> (s => new AuthService(s.GetService<CookieSession>()!, s.GetService<UserRepository>()!, s.GetService<PermissionRepository>()!));
+        services.AddSingleton<AdminService> (s => new AdminService(s.GetService<CookieSession>()!));
         
         services.AddSingleton<BanService> (s => new BanService(s.GetService<CookieSession>()!));
         services.AddSingleton<RoleService> (s => new RoleService(s.GetService<CookieSession>()!));
@@ -67,7 +69,9 @@ public partial class App : Avalonia.Application
         services.AddSingleton<AnonymizeUserInteractor>(s => new AnonymizeUserInteractor(s.GetService<AnonymizeService>()!));
         services.AddSingleton<GiveModeratorRoleInteractor>(s => new GiveModeratorRoleInteractor(s.GetService<RoleService>()!));
         services.AddSingleton<RevokeModeratorRoleInteractor>(s => new RevokeModeratorRoleInteractor(s.GetService<RoleService>()!));
-        services.AddSingleton<RevokeAdministratorRoleInteractor>(s => new RevokeAdministratorRoleInteractor(s.GetService<RoleService>()!));
+        services.AddSingleton<RevokeAdministratorRoleInteractor>(s => new RevokeAdministratorRoleInteractor(s.GetService<AdminService>()!));
+        services.AddSingleton<CreateAdministratorUserInteractor>(s => new CreateAdministratorUserInteractor(s.GetService<AdminService>()!));
+        services.AddSingleton<DeleteAdministratorInteractor>(s => new DeleteAdministratorInteractor(s.GetService<AdminService>()!));
 
         services.AddSingleton<MainViewModel>();
         services.AddTransient<LoginPageViewModel>();

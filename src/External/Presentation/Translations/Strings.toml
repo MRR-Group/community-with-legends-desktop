@@ -8,24 +8,19 @@ email_form_title = "Enter your email"
 email_form_watermark = "Email"
 email_form_under = "You don't have an account?"
 email_form_link = "to register"
-
 password_form_title = "Enter your password"
 password_form_watermark = "Password"
 password_form_under = "Forgot your password?"
 password_form_link = "to reset it"
-
 login_button = "Log in"
 
 # __________________Register_Page__________________
 name_form_title = "Enter your name"
 name_form_watermark = "Name"
-
 register_email_form_under = "Do you have have an account?"
 register_email_form_link = "to log in"
-
 repeat_password_form_title = "Repeat your password"
 repeat_password_form_watermark = "Password"
-
 register_button = "Register"
 
 # __________________Admins_Page__________________
@@ -35,7 +30,11 @@ table_email = "Email"
 table_name = "Name"
 table_creation_date = "Creation date"
 table_options = "Options"
-
+revoke_administrator_action_message = "Are you sure you want to remove this user's administrator role?"
+revoke_administrator_action_name = "Revoke Administrator Role"
+delete_administrator_action_message = "Are you sure you want to delete this administrator? This action cannot be undone."
+delete_administrator_action_name = "Delete Administrator"
+create_new = "Create new"
 # __________________Games_Page__________________
 game_page_title = "Game List"
 
@@ -54,8 +53,7 @@ grant_moderator_action_message = "Are you sure you want to grant the moderator r
 grant_moderator_action_name = "Grant Moderator Role"
 revoke_moderator_action_message = "Are you sure you want to remove this user's moderator role?"
 revoke_moderator_action_name = "Revoke Moderator Role"
-revoke_administrator_action_message = "Are you sure you want to remove this user's administrator role?"
-revoke_administrator_action_name = "Revoke Administrator Role"
+
 # __________________Settings_Page__________________
 settings_page_title = "Settings"
 language_switcher = "Select Language"
