@@ -1,0 +1,50 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:echoes="clr-namespace:Echoes;assembly=Echoes"
+             xmlns:translations="clr-namespace:Presentation;assembly=Presentation"
+             xmlns:vm="using:Presentation.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Presentation.Views.TFAPageView"
+             x:DataType="vm:TFAPageViewModel">
+
+    <Panel Width="378" Height="430">
+        <Border 
+            BorderBrush="{ DynamicResource SecondaryGradient}" 
+            BorderThickness="2" 
+            Background="{ DynamicResource BackgroundColor}" 
+            CornerRadius="8"
+        />
+        <StackPanel>
+            <TextBlock Classes="title" TextAlignment="Center">Two-factor</TextBlock>
+            <TextBlock Classes="title" TextAlignment="Center" Margin="0 -40 0 0">authentication</TextBlock>
+
+            <TextBlock Classes="xs" TextAlignment="Center" TextWrapping="Wrap" Padding="20 0" Margin="0 10 0 30">
+                Two-Factor Authentication is required. Open your authenticator app on your phone, generate the code, and enter it in the field below to complete login
+            </TextBlock>
+            
+            <FormInput 
+                Name="Token"
+                Title="{echoes:Translate {x:Static translations:Strings.token_form_title}}" 
+                Watermark="{echoes:Translate {x:Static translations:Strings.token_form_watermark}}" 
+                UnderText="{echoes:Translate {x:Static translations:Strings.token_form_under}}" 
+                LinkText="{echoes:Translate {x:Static translations:Strings.token_form_link}}" 
+                Text="{Binding Token, Mode=TwoWay}"
+                LinkClick="HandleLogoutButtonClick"
+            />
+            
+            <StackPanel Margin="0 -43 0 0">
+                <Button 
+                    FontSize="25" 
+                    HorizontalContentAlignment="Center" 
+                    Width="150"
+                    Click="HandleSendButtonClick"
+                    Margin="0 50 0  0"
+                    Content="{echoes:Translate {x:Static translations:Strings.send_button}}"
+                /> 
+            </StackPanel>
+        </StackPanel>
+    </Panel>
+</UserControl>
+ 

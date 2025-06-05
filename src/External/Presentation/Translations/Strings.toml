@@ -14,6 +14,13 @@ password_form_under = "Forgot your password?"
 password_form_link = "to reset it"
 login_button = "Log in"
 
+# __________________TFA_Page__________________
+token_form_title = "Enter your authentication code"
+token_form_watermark = "Authentication code"
+token_form_under = "Having trouble?"
+token_form_link = "Log out"
+send_button = "Send"
+
 # __________________Register_Page__________________
 name_form_title = "Enter your name"
 name_form_watermark = "Name"
@@ -53,6 +60,10 @@ grant_moderator_action_message = "Are you sure you want to grant the moderator r
 grant_moderator_action_name = "Grant Moderator Role"
 revoke_moderator_action_message = "Are you sure you want to remove this user's moderator role?"
 revoke_moderator_action_name = "Revoke Moderator Role"
+change_avatar_action_message = "Are you sure you want to change this user's avatar?"
+change_avatar_action_name = "Change Avatar"
+change_username_action_message = "Are you sure you want to change this user's username?"
+change_username_action_name = "Change Username"
 
 # __________________Settings_Page__________________
 settings_page_title = "Settings"

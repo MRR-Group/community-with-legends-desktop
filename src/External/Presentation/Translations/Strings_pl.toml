@@ -10,6 +10,13 @@ password_form_under = "Zapomniałeś hasła?"
 password_form_link = "zresetuj je"
 login_button = "Zaloguj się"
 
+# __________________TFA_Page__________________
+token_form_title = "Wprowadź kod uwierzytelniający"
+token_form_watermark = "Kod uwierzytelniający"
+token_form_under = "Masz problemy?"
+token_form_link = "wyloguj się"
+send_button = "Wyślij"
+
 # __________________Register_Page__________________
 name_form_title = "Wprowadź swoje imię"
 name_form_watermark = "Imię"
@@ -48,6 +55,10 @@ anonymize_action_message = "Czy na pewno chcesz zanonimizować tego użytkownika
 anonymize_action_name = "Anonimizuj"
 grant_moderator_action_message = "Czy na pewno chcesz nadać temu użytkownikowi rolę moderatora?"
 grant_moderator_action_name = "Nadaj rolę moderatora"
+change_avatar_action_message = "Czy na pewno chcesz zmienić awatar tego użytkownika?"
+change_avatar_action_name = "Zmień Awatar"
+change_username_action_message = "Czy na pewno chcesz zmienić nazwę użytkownika?"
+change_username_action_name = "Zmień Nazwę Użytkownika"
 
 # __________________Settings_Page__________________
 settings_page_title = "Ustawienia"

@@ -5,26 +5,32 @@ using Domain.ValueObjects;
 
 namespace Infrastructure.DTOs;
 
-public sealed record AdministratorDto
+public sealed record AdministratorDto : Dto<Administrator>
 {
+    [property: JsonPropertyName("id")]
     public uint Id { get; set; }
     
+    [property: JsonPropertyName("roles")]
     public string[] Roles { get; set; }
     
+    [property: JsonPropertyName("email")]
     public string Email { get; set; }
     
+    [property: JsonPropertyName("name")]
     public string Name { get; set; }
     
+    [property: JsonPropertyName("avatar")]
     public string Avatar { get; set; }
     
+    [property: JsonPropertyName("permissions")]
     public string[] Permissions { get; set; }
     
     [property: JsonPropertyName("created_at")]
     public string CreationDate { get; set; }
-
-    public Administrator ToEntity()
+    
+    public override Administrator ToEntity()
     {
-        return new Administrator(Id, Name, Avatar, new Email(Email), ConvertRoles(), ConvertPermissions(), new Date(CreationDate));
+        return new Administrator(Id, Name, new Uri(Avatar), new Email(Email), ConvertRoles(), ConvertPermissions(), new Date(CreationDate));
     }
 
     private Roles ConvertRoles()

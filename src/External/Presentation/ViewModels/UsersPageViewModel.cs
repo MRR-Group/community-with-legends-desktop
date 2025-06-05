@@ -1,12 +1,10 @@
 using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Application.Exceptions;
 using Application.UseCases;
 using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.Input;
 using Domain.Entities;
-using Infrastructure.Exceptions;
 using Infrastructure.Repositories;
 using Presentation.Controls;
 
@@ -22,7 +20,9 @@ public partial class UsersPageViewModel : DataPageViewModel<User>
     private GiveModeratorRoleInteractor _giveModeratorRoleInteractor;
     private RevokeModeratorRoleInteractor _revokeModeratorRoleInteractor;
     private RevokeAdministratorRoleInteractor _revokeAdministratorRoleInteractor;
-    
+    private RenameUserInteractor _renameUserInteractor;
+    private DeleteAvatarInteractor _deleteAvatarInteractor;
+
     public UsersPageViewModel(
         HistoryRouter<ViewModelBase> router, 
         UserRepository userRepository,
@@ -33,7 +33,9 @@ public partial class UsersPageViewModel : DataPageViewModel<User>
         AnonymizeUserInteractor anonymizeUserInteractor,
         GiveModeratorRoleInteractor giveModeratorRoleInteractor,
         RevokeAdministratorRoleInteractor revokeAdministratorRoleInteractor,
-        RevokeModeratorRoleInteractor revokeModeratorRoleInteractor
+        RevokeModeratorRoleInteractor revokeModeratorRoleInteractor,
+        RenameUserInteractor renameUserInteractor,
+        DeleteAvatarInteractor deleteAvatarInteractor
     ) : base(router, logOutInteractor)
     {
         _userRepository = userRepository;
@@ -44,7 +46,9 @@ public partial class UsersPageViewModel : DataPageViewModel<User>
         _giveModeratorRoleInteractor = giveModeratorRoleInteractor;
         _revokeModeratorRoleInteractor = revokeModeratorRoleInteractor;
         _revokeAdministratorRoleInteractor = revokeAdministratorRoleInteractor;
-        
+        _renameUserInteractor = renameUserInteractor;
+        _deleteAvatarInteractor = deleteAvatarInteractor;
+
         PermissionRepository = permissionRepository;
         RefreshData();
     }
@@ -52,9 +56,9 @@ public partial class UsersPageViewModel : DataPageViewModel<User>
     protected override async Task RefreshData()
     {
         var data = await _userRepository.All();
-        
+
         Data.Clear();
-        
+
         foreach (var user in data)
         {
             Data.Add(user);
@@ -108,6 +112,26 @@ public partial class UsersPageViewModel : DataPageViewModel<User>
         {
             await _revokeModeratorRoleInteractor.RevokeRole(user);
             ShowNotification("Success", $"Moderator revoke from {user.Name}");
+        });
+    }
+    
+    [RelayCommand]
+    private void ChangeAvatar(User? target)
+    {
+        SendAction(target, async (user) =>
+        {
+            await _deleteAvatarInteractor.DeleteAvatar(user);
+            ShowNotification("Success", $"Avatar changed.");
+        });
+    }
+    
+    [RelayCommand]
+    private void RenameUser(User? target)
+    {
+        SendAction(target, async (user) =>
+        {
+            await _renameUserInteractor.Rename(user);
+            ShowNotification("Success", $"User name changed.");
         });
     }
     

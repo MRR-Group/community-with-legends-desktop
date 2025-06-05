@@ -55,6 +55,20 @@
         <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
     </Style>
     
+    <Style Selector="TextBlock.xs2">
+        <Setter Property="FontSize" Value="10"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
+        <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
+    </Style>
+    
+    <Style Selector="TextBlock.primary">
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"></Setter>
+    </Style>
+    
+    <Style Selector="TextBlock.darker">
+        <Setter Property="Foreground" Value="{DynamicResource TextHoverColor}"></Setter>
+    </Style>
+    
     <Style Selector="TextBlock.error">
         <Setter Property="Foreground" Value="{DynamicResource ErrorColor}"></Setter>
     </Style>

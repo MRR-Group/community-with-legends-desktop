@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:dd="clr-namespace:Presentation.Controls.DesignData"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static dd:CommentDesignData.Data}"
+             x:DataType="Comment"
+             x:Class="Presentation.Controls.Comment">
+    
+    <Border Background="{ DynamicResource BackgroundColor}" BorderBrush="{DynamicResource SecondaryGradient}" BorderThickness="2" CornerRadius="8">
+        <StackPanel DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Comment}}">
+            <PostHeader
+                Padding="10"
+                UserName="{Binding User.Name}"
+                UnderText=""
+                CreationDate="{Binding CreationDate}"
+                Avatar="{Binding Avatar}"
+            />
+            
+            <TextBlock Padding="10 0 10 10" Text="{Binding Text}" TextWrapping="Wrap" MaxWidth="380" />
+        </StackPanel>
+    </Border>
+</UserControl>

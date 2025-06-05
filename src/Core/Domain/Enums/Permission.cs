@@ -9,6 +9,12 @@ public enum Permission
     AnonymizeUsers,
     ViewUsers,
     DeletePosts,
+    DeleteUserHardware,
     ManageAdministrators,
     ManageModerators,
+    ManageReports,
+    UpdateGames,
+    RenameUsers,
+    ChangeUsersAvatar,
+    ViewLogs
 }

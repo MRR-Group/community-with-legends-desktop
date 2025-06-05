@@ -1,0 +1,48 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:dd="clr-namespace:Presentation.Controls.DesignData"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static dd:PostDesignData.Data}"
+             x:DataType="Post"
+             x:Class="Presentation.Controls.Post">
+    
+    <Border Background="{ DynamicResource BackgroundColor}" BorderBrush="{DynamicResource SecondaryGradient}" BorderThickness="2" CornerRadius="8">
+        <StackPanel DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Post}}">
+            <PostHeader
+                Padding="10"
+                UserName="{Binding User.Name}"
+                UnderText=""
+                CreationDate="{Binding CreationDate}"
+                Avatar="{Binding Avatar}"
+            />
+            
+            <ItemsControl ItemsSource="{Binding Tags}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="10 0 10 10" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate> 
+                        <Tag HorizontalAlignment="Left" Text="{Binding .}" Margin="0 0 10 0"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            
+            <TextBlock Padding="10 0 10 10" Text="{Binding Text}" TextWrapping="Wrap" MaxWidth="380" />
+            
+            <AssetViewer 
+                AssetType="{Binding Asset.Type}" 
+                Source="{Binding Asset.Link}" 
+                IsVisible="{Binding ContainsAsset}" 
+                MaxWidth="350"
+                Padding="0 0 0 10"
+            />
+            
+            <EmojiTag Emoji="👍" Text="{Binding Likes}" HorizontalAlignment="Left" Padding="10 0 10 10" />
+        </StackPanel>
+    </Border>
+</UserControl>

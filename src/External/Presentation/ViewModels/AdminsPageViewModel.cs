@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.UseCases;
@@ -45,13 +46,20 @@ public partial class AdminsPageViewModel : DataPageViewModel<Administrator>
     
     protected override async Task RefreshData()
     {
-        var data = await _adminRepository.All();
-        
-        Data.Clear();
-        
-        foreach (var user in data)
+        try
         {
-            Data.Add(user);
+            var data = await _adminRepository.All();
+
+            Data.Clear();
+
+            foreach (var user in data)
+            {
+                Data.Add(user);
+            }
+        }
+        catch (Exception e)
+        {
+            var ee = e;
         }
     }
     

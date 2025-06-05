@@ -12,6 +12,7 @@ using Flurl.Http;
 using Infrastructure.DTOs;
 using Infrastructure.Exceptions;
 using Infrastructure.Repositories;
+using Infrastructure.Services;
 using Presentation.Events;
 using Presentation.Utils;
 using Ursa.Controls;
@@ -21,16 +22,19 @@ namespace Presentation.ViewModels;
 public partial class LoginPageViewModel : AuthPageViewModel
 {
     private LogInInteractor _logInInteractor;
+    private ValidateTFAInteractor _validateTFAInteractor;
     private PermissionRepository _permissions;
+    private TFAService _tfa;
 
     public string Email { get; set; }
     public string Password { get; set; }
     
     
-    public LoginPageViewModel(HistoryRouter<ViewModelBase> router, LogInInteractor logInInteractor, PermissionRepository permissions): base(router)
+    public LoginPageViewModel(HistoryRouter<ViewModelBase> router, LogInInteractor logInInteractor, PermissionRepository permissions, TFAService tfa): base(router)
     {
         _logInInteractor = logInInteractor;
         _permissions = permissions;
+        _tfa = tfa;
         Email = "";
         Password = "";
     }
@@ -39,21 +43,27 @@ public partial class LoginPageViewModel : AuthPageViewModel
     private void LogIn()
     {
         SendForm(async () => {
-            var user = await _logInInteractor.LogIn(Email, Password);
-            _permissions.Load(user.Permissions);
-
             try
             {
+                var user = await _logInInteractor.LogIn(Email, Password);
+                _permissions.Load(user.Permissions);
                 
-                if (_permissions.Can(Permission.ViewUsers))
-                {
-                    ShowNotification("Logged in!", $"Welcome {user.Name}!");
-                    _router.GoTo<UsersPageViewModel>();
-                }
-                else
+                if (_permissions.Cannot(Permission.ViewUsers))
                 {
                     ShowNotification("Log in failed", "You need at least moderator role to login.");
+                    return;
                 }
+                
+                var tfaStatus = await _tfa.Check();
+                
+                if (!tfaStatus)
+                {
+                    _router.GoTo<TFAPageViewModel>();
+                    return;
+                }
+
+                ShowNotification("Logged in!", $"Welcome {user.Name}!");
+                _router.GoTo<UsersPageViewModel>();
             }
             catch (FlurlHttpException e)
             {

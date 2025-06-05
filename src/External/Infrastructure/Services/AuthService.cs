@@ -15,6 +15,7 @@ public class AuthService : ILogInService, IRegisterService, ILogOutService
     private CookieSession _session;
     private UserRepository _repository;
     private PermissionRepository _permissions;
+    private TFAService _tfa;
     
     public AuthService(CookieSession session, UserRepository repository, PermissionRepository permissions)
     {
