@@ -4,7 +4,7 @@ using Domain.Enums;
 
 namespace Infrastructure.DTOs;
 
-public record AssetDto : Dto<Asset>
+public record AssetDto
 {
     [property: JsonPropertyName("id")]
     public uint Id { get; set; }
@@ -15,10 +15,15 @@ public record AssetDto : Dto<Asset>
     [property: JsonPropertyName("link")]
     public string Link { get; set; }
 
-    public override Asset ToEntity()
+    public Asset? ToEntity()
     {
-        var link = Link;
-        
-        return new Asset(Id, Enum.Parse<AssetType>(Type), new Uri(Link));
+        try
+        {
+            return new Asset(Id, Enum.Parse<AssetType>(Type), new Uri(Link));
+        }
+        catch (UriFormatException _)
+        {
+            return null;
+        }
     }
 }

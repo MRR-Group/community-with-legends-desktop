@@ -5,6 +5,6 @@ namespace Application.Abstractions;
 
 public interface IReportService
 {
-    public Task<bool> Delete(Reportable reportable);
-    public Task<bool> Restore(Reportable reportable);
+    public Task<bool> Close(Report report);
+    public Task<bool> Reopen(Report report);
 }

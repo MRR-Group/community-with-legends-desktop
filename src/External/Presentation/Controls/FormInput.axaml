@@ -22,7 +22,7 @@
                 </Style>
             </UserControl.Styles>
     
-            <StackPanel DataContext="{ Binding RelativeSource={RelativeSource FindAncestor, AncestorType = FormInput} }">
+            <StackPanel DataContext="{ Binding RelativeSource={RelativeSource FindAncestor, AncestorType = FormInput }}">
                 <TextBlock
                     Classes="md"
                     Margin="20 0 0 0"
@@ -38,7 +38,14 @@
                 >
                 </TextBox>
                 
-                <DockPanel IsVisible="{Binding !HideUnderText}">
+                <DockPanel>
+                    <DockPanel.IsVisible>
+                        <MultiBinding Converter="{StaticResource MultiBooleanAndConverter}">
+                            <Binding Path="!Error" />
+                            <Binding Path="!HideUnderText" />
+                        </MultiBinding>
+                    </DockPanel.IsVisible>
+                    
                     <StackPanel DockPanel.Dock="Left">
                         <TextBlock
                             Classes="xs"
@@ -73,17 +80,7 @@
                             Classes="xs error"
                             LineHeight="40"
                             Height="40"
-                            Margin="20 -20 0 0"
-                            IsVisible="{Binding !HideUnderText}"
-                            Text="{Binding Error}"
-                        />
-                        
-                        <TextBlock
-                            Classes="xs error"
-                            LineHeight="40"
-                            Height="40"
                             Margin="20 0 0 0"
-                            IsVisible="{Binding HideUnderText}"
                             Text="{Binding Error}"
                         />
                     </StackPanel>

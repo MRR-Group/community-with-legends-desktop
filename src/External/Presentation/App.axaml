@@ -26,10 +26,10 @@
          <converters:UserCanBeDemotedFromAdministratorConverter x:Key="UserCanBeDemotedFromAdministratorConverter" />
          <converters:UserCanBeAnonymizedConverter x:Key="UserCanBeAnonymizedConverter" />
          <converters:BoolToHandCursorConverter x:Key="BoolToHandCursorConverter" />
-         <converters:ReportToResolvedDateConverted x:Key="ReportToResolvedDateConverted" />
          <converters:UserCanBeRenamedConverter x:Key="UserCanBeRenamedConverter" />
          <converters:UserCanHaveAvatarChangedConverter x:Key="UserCanHaveAvatarChangedConverter" />
-         <converters:ReportTypeToBoolConverter x:Key="ReportTypeToBoolConverter" />
+         <converters:MultiBooleanAndConverter x:Key="MultiBooleanAndConverter" />
+         <converters:StatusListToStringConverter x:Key="StatusListToStringConverter" />
          
          <FontWeight x:Key="TextBlockTitleFontWeight">Normal</FontWeight>
          

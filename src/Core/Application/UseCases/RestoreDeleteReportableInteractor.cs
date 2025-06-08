@@ -5,27 +5,27 @@ using Domain.Primitives;
 
 namespace Application.UseCases;
 
-public class DeleteReportableInteractor
+public class RestoreDeleteReportableInteractor
 {
     private IPostService _postService;
     private ICommentService _commentService;
 
-    public DeleteReportableInteractor(IPostService postService, ICommentService commentService)
+    public RestoreDeleteReportableInteractor(IPostService postService, ICommentService commentService)
     {
         _postService = postService;
         _commentService = commentService;
     }
 
-    public async Task Delete(Reportable reportable)
+    public async Task Restore(Reportable reportable)
     {
         switch (reportable)
         {
             case Comment comment:
-                await _commentService.Delete(comment);
+                await _commentService.Restore(comment);
                 return;
             
             case Post post:
-                await _postService.Delete(post);
+                await _postService.Restore(post);
                 return;
             
             default:

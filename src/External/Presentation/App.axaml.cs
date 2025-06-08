@@ -63,6 +63,8 @@ public partial class App : Avalonia.Application
         services.AddSingleton<ReportService> (s => new ReportService(s.GetService<CookieSession>()!));
         services.AddSingleton<ProfileService> (s => new ProfileService(s.GetService<CookieSession>()!));
         services.AddSingleton<TFAService> (s => new TFAService(s.GetService<CookieSession>()!));
+        services.AddSingleton<PostService> (s => new PostService(s.GetService<CookieSession>()!));
+        services.AddSingleton<CommentService> (s => new CommentService(s.GetService<CookieSession>()!));
 
         services.AddSingleton<BanService> (s => new BanService(s.GetService<CookieSession>()!));
         services.AddSingleton<RoleService> (s => new RoleService(s.GetService<CookieSession>()!));
@@ -78,8 +80,10 @@ public partial class App : Avalonia.Application
         services.AddSingleton<RevokeAdministratorRoleInteractor>(s => new RevokeAdministratorRoleInteractor(s.GetService<AdminService>()!));
         services.AddSingleton<CreateAdministratorUserInteractor>(s => new CreateAdministratorUserInteractor(s.GetService<AdminService>()!));
         services.AddSingleton<DeleteAdministratorInteractor>(s => new DeleteAdministratorInteractor(s.GetService<AdminService>()!));
-        services.AddSingleton<DeleteReportableInteractor>(s => new DeleteReportableInteractor(s.GetService<ReportService>()!));
-        services.AddSingleton<RestoreReportableInteractor>(s => new RestoreReportableInteractor(s.GetService<ReportService>()!));
+        services.AddSingleton<DeleteReportableInteractor>(s => new DeleteReportableInteractor(s.GetService<PostService>()!, s.GetService<CommentService>()!));
+        services.AddSingleton<RestoreDeleteReportableInteractor>(s => new RestoreDeleteReportableInteractor(s.GetService<PostService>()!, s.GetService<CommentService>()!));
+        services.AddSingleton<CloseReportInteractor>(s => new CloseReportInteractor(s.GetService<ReportService>()!));
+        services.AddSingleton<ReopenReportInteractor>(s => new ReopenReportInteractor(s.GetService<ReportService>()!));
         services.AddSingleton<DeleteAvatarInteractor>(s => new DeleteAvatarInteractor(s.GetService<ProfileService>()!));
         services.AddSingleton<RenameUserInteractor>(s => new RenameUserInteractor(s.GetService<ProfileService>()!));
         services.AddSingleton<ValidateTFAInteractor>(s => new ValidateTFAInteractor(s.GetService<TFAService>()!));

@@ -10,25 +10,23 @@ using Infrastructure.Repositories;
 
 namespace Infrastructure.Services;
 
-public class ReportService : IReportService
+public class PostService : IPostService
 {
     private CookieSession _session;
     
-    public ReportService(CookieSession session)
+    public PostService(CookieSession session)
     {
         _session = session;
     }
     
-    public async Task<bool> Close(Report report)
+    public override async Task Delete(Post post)
     {
         try
         {
-            await _session.Request($"reports/{report.Id}/close")
+            await _session.Request($"posts/{post.Id}")
                 .WithAutoRedirect(true)
                 .WithHeader("Accept", "application/json")
-                .PostAsync();
-
-            return true;
+                .DeleteAsync();
         }
         catch (FlurlHttpException e)
         {
@@ -40,17 +38,15 @@ public class ReportService : IReportService
             throw;
         }
     }
-    
-    public async Task<bool> Reopen(Report report)
+
+    public override async Task Restore(Post post)
     {
         try
         {
-            await _session.Request($"reports/{report.Id}/reopen")
+            await _session.Request($"posts/{post.Id}/restore")
                 .WithAutoRedirect(true)
                 .WithHeader("Accept", "application/json")
                 .PostAsync();
-            
-            return true;
         }
         catch (FlurlHttpException e)
         {

@@ -1,13 +1,10 @@
-    using System;
-    using System.Diagnostics;
-    using System.Threading.Tasks;
+using System;
+using System.Threading.Tasks;
 using Application.UseCases;
 using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.Input;
 using Domain.Entities;
 using Infrastructure.Repositories;
-using Presentation.Controls;
-using Ursa.Controls;
 
 namespace Presentation.ViewModels;
 
@@ -19,15 +16,19 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
     private BanUserInteractor _banUserInteractor;
     private UnbanUserInteractor _unbanUserInteractor;
     private DeleteReportableInteractor _deleteReportableInteractor;
-    private RestoreReportableInteractor _restoreReportableInteractor;
-    
+    private RestoreDeleteReportableInteractor _restoreDeleteReportableInteractor;
+    private ReopenReportInteractor _reopenReportInteractor;
+    private CloseReportInteractor _closeReportInteractor;
+
     public ReportsPageViewModel(
         HistoryRouter<ViewModelBase> router,
         LogOutInteractor logOutInteractor,
         BanUserInteractor banUserInteractor, 
         UnbanUserInteractor unbanUserInteractor,
         DeleteReportableInteractor deleteReportableInteractor,
-        RestoreReportableInteractor restoreReportableInteractor,
+        RestoreDeleteReportableInteractor restoreDeleteReportableInteractor,
+        ReopenReportInteractor reopenReportInteractor,
+        CloseReportInteractor closeReportInteractor,
         ReportRepository reportRepository,
         PermissionRepository permissionRepository
     ) : base(router, logOutInteractor)
@@ -37,7 +38,9 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
         _banUserInteractor = banUserInteractor;
         _unbanUserInteractor = unbanUserInteractor;
         _deleteReportableInteractor = deleteReportableInteractor;
-        _restoreReportableInteractor = restoreReportableInteractor;
+        _restoreDeleteReportableInteractor = restoreDeleteReportableInteractor;
+        _closeReportInteractor = closeReportInteractor;
+        _reopenReportInteractor = reopenReportInteractor;
         
         RefreshData();
     }
@@ -77,11 +80,30 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
     {
         SendAction(target, async (report) =>
         {
-            await _banUserInteractor.Ban(report.Reportable.User);
-            ShowNotification("Success", $"{report.Reportable.User.Name} banned successfully");
+            await _restoreDeleteReportableInteractor.Restore(report.Reportable);
+            ShowNotification("Success", "Item restored successfully");
+        });
+    }
+    
+    [RelayCommand]
+    private void Close(Report? target)
+    {
+        SendAction(target, async (report) =>
+        {
+            await _closeReportInteractor.Close(report);
+            ShowNotification("Success", "Report closed successfully");
         });
     }
 
+    [RelayCommand]
+    private void Reopen(Report? target)
+    {
+        SendAction(target, async (report) =>
+        {
+            await _reopenReportInteractor.Reopen(report);
+            ShowNotification("Success", "Report reopened successfully");
+        });
+    }
     
     protected override async Task RefreshData()
     {

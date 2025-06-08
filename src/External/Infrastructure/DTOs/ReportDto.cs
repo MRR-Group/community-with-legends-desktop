@@ -42,14 +42,10 @@ public record ReportDto
             return null;
         }
 
-        if (ResolvedAt != null)
-        {
-            var status = Status.Select(Enum.Parse<ReportStatus>).ToArray();
-            
-            return new ResolvedReport(Id, Reason, reportable, new Date(ReportedAt), new Date(ResolvedAt), status, ReportedBy.ToEntity());
-        }
-
-        return new Report(Id, Reason, reportable, new Date(ReportedAt), ReportedBy.ToEntity());
+        var status = ConvertStatus();
+        var resolvedAt = ResolvedAt != null ? new Date(ResolvedAt) : null;
+        
+        return new Report(Id, Reason, reportable, new Date(ReportedAt), ReportedBy.ToEntity(), status, resolvedAt);
     }
 
     private Reportable? ConvertReportable()
@@ -58,11 +54,22 @@ public record ReportDto
         {
             return Reportable.Deserialize<CommentDto>()!.ToEntity();
         }
-        else if (ReportableType == "Post")
+        
+        if (ReportableType == "Post")
         {
             return Reportable.Deserialize<PostDto>()!.ToEntity();
         }
 
         return null;
+    }
+    
+    private ReportStatus[] ConvertStatus()
+    {
+        return Status.Select(FirstCharToUpper).Select(Enum.Parse<ReportStatus>).ToArray();
+    }
+    
+    private string FirstCharToUpper(string input)
+    {
+        return string.IsNullOrEmpty(input) ? string.Empty : $"{char.ToUpper(input[0])}{input[1..]}";
     }
 }

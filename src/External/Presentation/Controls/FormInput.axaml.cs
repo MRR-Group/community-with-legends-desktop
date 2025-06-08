@@ -100,4 +100,9 @@ public partial class FormInput : UserControl
         RoutedEventArgs args = new RoutedEventArgs(LinkClickEvent);
         this.RaiseEvent(args);
     }
+    
+    public bool ShouldDisplayUnderText
+    {
+        get => Error is null && !HideUnderText;
+    }
 }
