@@ -15,6 +15,6 @@ public class UserCanBeUnbannedConverter : UserConverter
 
     protected override bool Convert(User user)
     {
-        return user.Permissions.HasNone();
+        return user.IsBanned;
     }
 }

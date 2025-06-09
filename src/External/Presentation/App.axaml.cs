@@ -65,6 +65,7 @@ public partial class App : Avalonia.Application
         services.AddSingleton<TFAService> (s => new TFAService(s.GetService<CookieSession>()!));
         services.AddSingleton<PostService> (s => new PostService(s.GetService<CookieSession>()!));
         services.AddSingleton<CommentService> (s => new CommentService(s.GetService<CookieSession>()!));
+        services.AddSingleton<HardwareService> (s => new HardwareService(s.GetService<CookieSession>()!));
 
         services.AddSingleton<BanService> (s => new BanService(s.GetService<CookieSession>()!));
         services.AddSingleton<RoleService> (s => new RoleService(s.GetService<CookieSession>()!));
@@ -87,6 +88,7 @@ public partial class App : Avalonia.Application
         services.AddSingleton<DeleteAvatarInteractor>(s => new DeleteAvatarInteractor(s.GetService<ProfileService>()!));
         services.AddSingleton<RenameUserInteractor>(s => new RenameUserInteractor(s.GetService<ProfileService>()!));
         services.AddSingleton<ValidateTFAInteractor>(s => new ValidateTFAInteractor(s.GetService<TFAService>()!));
+        services.AddSingleton<DeleteUserHardwareInteractor>(s => new DeleteUserHardwareInteractor(s.GetService<HardwareService>()!));
 
         services.AddSingleton<MainViewModel>();
         services.AddTransient<LoginPageViewModel>();

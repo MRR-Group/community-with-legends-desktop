@@ -31,4 +31,9 @@ public class Report : Entity
     {
         get => !Status.Contains(ReportStatus.Pending);
     }
+    
+    public bool ContainsUserProfile
+    {
+        get => Reportable is UserProfile;
+    }
 }

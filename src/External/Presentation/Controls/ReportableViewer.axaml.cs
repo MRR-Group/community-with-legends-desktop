@@ -32,9 +32,19 @@ public partial class ReportableViewer : UserControl
         get => Reportable is Domain.Entities.Comment;
     }
     
+    public bool IsUserProfile
+    {
+        get => Reportable is Domain.Entities.UserProfile;
+    }
+    
     public Domain.Entities.Post Post
     {
         get => Reportable as Domain.Entities.Post;
+    }
+    
+    public Domain.Entities.UserProfile UserProfile
+    {
+        get => Reportable as Domain.Entities.UserProfile;
     }
     
     public string[] Tags

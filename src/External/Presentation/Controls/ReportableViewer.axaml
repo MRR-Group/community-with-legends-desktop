@@ -23,5 +23,12 @@
             Asset="{Binding Post.Asset}"
             Likes="{Binding Post.Reactions}"
         />
+        
+        <UserProfileViewer
+            IsVisible="{Binding IsUserProfile}"
+            User="{Binding Reportable.User}"
+            HardwareList="{Binding UserProfile.HardwareList}"
+            CreationDate="{Binding Reportable.CreationDate}"
+        />
     </StackPanel>
 </UserControl>

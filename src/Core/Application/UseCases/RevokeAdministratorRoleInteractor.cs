@@ -13,8 +13,8 @@ public class RevokeAdministratorRoleInteractor
     {
         _administratorService = administratorService;
     }
-
-    public async Task<bool> RevokeRole(Administrator administrator)
+    
+    public async Task<bool> RevokeRole(User administrator)
     {
         return await _administratorService.RevokeAdministratorRole(administrator);
     }

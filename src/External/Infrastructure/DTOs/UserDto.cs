@@ -25,12 +25,18 @@ public sealed record UserDto
     [property: JsonPropertyName("permissions")]
     public string[] Permissions { get; set; }
     
+    [property: JsonPropertyName("isBanned")]
+    public bool IsBanned { get; set; }
+    
     [property: JsonPropertyName("created_at")]
     public string CreationDate { get; set; }
 
+    [property: JsonPropertyName("hardware")]
+    public HardwareDto[]? HardwareList { get; set; }
+
     public User ToEntity()
     { 
-        return new User(Id, Name, new Uri(Avatar), new Email(Email), ConvertRoles(), ConvertPermissions(), new Date(CreationDate));
+        return new User(Id, Name, new Uri(Avatar), new Email(Email), IsBanned, ConvertRoles(), ConvertPermissions(), new Date(CreationDate));
     }
 
     private Roles ConvertRoles()

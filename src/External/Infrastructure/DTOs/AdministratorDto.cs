@@ -25,12 +25,15 @@ public sealed record AdministratorDto : Dto<Administrator>
     [property: JsonPropertyName("permissions")]
     public string[] Permissions { get; set; }
     
+    [property: JsonPropertyName("isBanned")]
+    public bool IsBanned { get; set; }
+    
     [property: JsonPropertyName("created_at")]
     public string CreationDate { get; set; }
     
     public override Administrator ToEntity()
     {
-        return new Administrator(Id, Name, new Uri(Avatar), new Email(Email), ConvertRoles(), ConvertPermissions(), new Date(CreationDate));
+        return new Administrator(Id, Name, new Uri(Avatar), new Email(Email), IsBanned, ConvertRoles(), ConvertPermissions(), new Date(CreationDate));
     }
 
     private Roles ConvertRoles()

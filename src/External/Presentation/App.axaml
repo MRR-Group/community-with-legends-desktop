@@ -30,6 +30,13 @@
          <converters:UserCanHaveAvatarChangedConverter x:Key="UserCanHaveAvatarChangedConverter" />
          <converters:MultiBooleanAndConverter x:Key="MultiBooleanAndConverter" />
          <converters:StatusListToStringConverter x:Key="StatusListToStringConverter" />
+         <converters:CombinedBanVisibilityConverter x:Key="CombinedBanVisibilityConverter" />
+         <converters:CombinedDeleteAvatarVisibilityConverter x:Key="CombinedDeleteAvatarVisibilityConverter" />
+         <converters:CombinedDeleteHardwareVisibilityConverter x:Key="CombinedDeleteHardwareVisibilityConverter" />
+         <converters:CombinedRenameUserVisibilityConverter x:Key="CombinedRenameUserVisibilityConverter" />
+         <converters:CombinedCanBeDemotedFromAdministratorVisibilityConverter x:Key="CombinedCanBeDemotedFromAdministratorVisibilityConverter" />
+         <converters:CombinedCanBeDemotedFromModeratorVisibilityConverter x:Key="CombinedCanBeDemotedFromModeratorVisibilityConverter" />
+         <converters:CombinedUnbanVisibilityConverter x:Key="CombinedUnbanVisibilityConverter" />
          
          <FontWeight x:Key="TextBlockTitleFontWeight">Normal</FontWeight>
          

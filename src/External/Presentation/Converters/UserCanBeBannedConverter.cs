@@ -15,6 +15,6 @@ public class UserCanBeBannedConverter : UserConverter
 
     protected override bool Convert(User user)
     {
-        return !user.Permissions.HasNone() && user.Roles.IsNot(Role.Moderator, Role.Administrator, Role.SuperAdministrator);
+        return !user.IsBanned && user.Roles.IsNot(Role.Moderator, Role.Administrator, Role.SuperAdministrator);
     }
 }

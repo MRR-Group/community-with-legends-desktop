@@ -59,6 +59,15 @@ public record ReportDto
         {
             return Reportable.Deserialize<PostDto>()!.ToEntity();
         }
+        
+        if (ReportableType == "User")
+        {
+            var userDto = Reportable.Deserialize<UserDto>()!;
+            var user = userDto.ToEntity();
+            var hardwareList = userDto.HardwareList?.Select(x => x.ToEntity()).ToArray() ?? [];
+
+            return new UserProfile(user.Id, user.CreationDate, user, hardwareList);
+        }
 
         return null;
     }

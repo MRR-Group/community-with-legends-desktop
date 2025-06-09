@@ -8,15 +8,17 @@ public class User : Entity
     public string Name { get; private set; }
     public Uri Avatar { get; private set; }
     public Email Email { get; private set; }
+    public bool IsBanned { get; private set; }
     public Roles Roles { get; private set; }
     public Permissions Permissions { get; private set; }
     public Date CreationDate { get; private set; }
     
-    public User(uint id, string name, Uri avatar, Email email, Roles roles, Permissions permissions, Date creationDate) : base(id)
+    public User(uint id, string name, Uri avatar, Email email, bool isBanned, Roles roles, Permissions permissions, Date creationDate) : base(id)
     {
         Name = name;
         Avatar = avatar;
         Email = email;
+        IsBanned = isBanned;
         Roles = roles;
         Permissions = permissions;
         CreationDate = creationDate;

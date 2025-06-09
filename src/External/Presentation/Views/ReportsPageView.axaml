@@ -21,10 +21,10 @@
                     <ItemsControl x:Name="List" ItemsSource="{Binding Data}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate x:DataType="domain:Report">
-                                <Grid ColumnDefinitions="*,*" Margin="5 10">
+                                <Grid ColumnDefinitions="*,*" Margin="10 10">
                                     <ReportableViewer
                                         Grid.Column="0"
-                                        Padding="0 0 5 0"
+                                        Padding="0 0 10 0"
                                         Reportable="{Binding Reportable}"    
                                     />
                                     
@@ -50,66 +50,34 @@
                                             </Grid>
                                         </Border>
                                         
-                                        <TextBlock Margin="0 10 0 0" Text="Reason" />
-
-                                        <Border
-                                            BorderBrush="{DynamicResource SecondaryColor}"
-                                            Background="{DynamicResource BackgroundLightColor}"
-                                            BorderThickness="0 2 0 2"
-                                            CornerRadius="0"
-                                            Padding="0 2"
-                                            Margin="0 0"
-                                            MinHeight="100"
-                                        >
-                                            <Grid ColumnDefinitions="Auto, *, Auto, Auto">
-                                                <TextBlock 
-                                                    Grid.Column="0" 
-                                                    Text="{Binding Reason}" 
-                                                />
+                                        <Grid ColumnDefinitions="Auto, *, Auto" Margin="0 10 0 0">
+                                            <TextBlock 
+                                                Grid.Column="0" 
+                                                IsVisible="{Binding IsResolved}" 
+                                                Text="Resolved at:"
+                                            />
                                                 
-                                                <TextBlock 
-                                                    Grid.Column="2" 
-                                                    IsVisible="{Binding IsResolved}" 
-                                                    Text="Resolved at"
-                                                />
-                                                
-                                                <TextBlock 
-                                                    Grid.Column="3" 
-                                                    IsVisible="{Binding IsResolved}" 
-                                                    Text="{Binding ResolvedAt}" 
-                                                />
-                                            </Grid>
-                                        </Border>
+                                            <TextBlock 
+                                                Grid.Column="2" 
+                                                IsVisible="{Binding IsResolved}" 
+                                                Text="{Binding ResolvedAt}" 
+                                            />
+                                        </Grid>
                                         
-                                        <StackPanel Margin="0 5 0 0">
-                                            <TextBlock Classes="primary" Text="{Binding Status, Converter={StaticResource StatusListToStringConverter}}" />
-                                        </StackPanel>
+                                        <Grid ColumnDefinitions="Auto, *, Auto" Margin="0 5 0 0">
+                                            <TextBlock 
+                                                Grid.Column="0" 
+                                                Text="Status:"
+                                            />
+                                            <TextBlock
+                                                Grid.Column="2"
+                                                Classes="primary"
+                                                Text="{Binding Status, Converter={StaticResource StatusListToStringConverter}}" 
+                                            />
+                                        </Grid>
                                         
-                                        <Grid ColumnDefinitions="Auto, Auto, *, Auto" Margin="0 5 0 0">
+                                        <StackPanel Orientation="Horizontal" Margin="0 5 0 0" Spacing="5">
                                             <u:PopConfirm
-                                                x:Name="BanButton"
-                                                Grid.Column="0"
-                                                PopupHeader="{echoes:Translate {x:Static translations:Strings.ban_action_message}}" 
-                                                ConfirmCommand="{Binding #List.((vm:ReportsPageViewModel)DataContext).BanCommand}"
-                                                ConfirmCommandParameter="{Binding .}"
-                                            >
-                                                <u:PopConfirm.IsVisible>
-                                                    <MultiBinding Converter="{StaticResource MultiBooleanAndConverter}">
-                                                        <Binding Path="!$self.((domain:Report)DataContext).IsResolved" />
-                                                        <MultiBinding Converter="{StaticResource UserCanBeBannedConverter}">
-                                                            <Binding Path="#BanButton.((domain:Report)DataContext).Reportable.User" />
-                                                            <Binding Path="#List.((vm:ReportsPageViewModel)DataContext).PermissionRepository"></Binding>
-                                                        </MultiBinding>
-                                                    </MultiBinding>
-                                                </u:PopConfirm.IsVisible>
-                                                            
-                                                <Button 
-                                                    Content="{echoes:Translate {x:Static translations:Strings.ban_action_name}}"
-                                                />
-                                            </u:PopConfirm>
-                                            
-                                            <u:PopConfirm
-                                                Grid.Column="1"
                                                 PopupHeader="Are you sure you want to close this report?" 
                                                 ConfirmCommand="{Binding #List.((vm:ReportsPageViewModel)DataContext).CloseCommand}"
                                                 ConfirmCommandParameter="{Binding .}"
@@ -124,7 +92,6 @@
                                             </u:PopConfirm>
                                             
                                             <u:PopConfirm
-                                                Grid.Column="1"
                                                 PopupHeader="Are you sure you want to open this report?" 
                                                 ConfirmCommand="{Binding #List.((vm:ReportsPageViewModel)DataContext).ReopenCommand}"
                                                 ConfirmCommandParameter="{Binding .}"
@@ -138,8 +105,136 @@
                                                 <Button Content="Open" />
                                             </u:PopConfirm>
                                             
+                                            
                                             <u:PopConfirm
-                                                Grid.Column="3"
+                                                PopupHeader="{echoes:Translate {x:Static translations:Strings.ban_action_message}}" 
+                                                ConfirmCommand="{Binding #List.((vm:ReportsPageViewModel)DataContext).BanCommand}"
+                                                ConfirmCommandParameter="{Binding .}"
+                                            >
+                                                <u:PopConfirm.IsVisible>
+                                                    <MultiBinding Converter="{StaticResource CombinedBanVisibilityConverter}">
+                                                        <Binding Path="$self.((domain:Report)DataContext).IsResolved" />
+                                                        <Binding Path="$self.((domain:Report)DataContext).Reportable.User" />
+                                                        <Binding Path="#List.((vm:ReportsPageViewModel)DataContext).PermissionRepository" />
+                                                    </MultiBinding>
+                                                </u:PopConfirm.IsVisible>
+                                                            
+                                                <Button 
+                                                    Content="{echoes:Translate {x:Static translations:Strings.ban_action_name}}"
+                                                />
+                                            </u:PopConfirm>
+                                            
+                                            <u:PopConfirm
+                                                PopupHeader="Are you sure you want to unban this user?" 
+                                                ConfirmCommand="{Binding #List.((vm:ReportsPageViewModel)DataContext).UnbanCommand}"
+                                                ConfirmCommandParameter="{Binding .}"
+                                            >
+                                                <u:PopConfirm.IsVisible>
+                                                    <MultiBinding Converter="{StaticResource CombinedUnbanVisibilityConverter}">
+                                                        <Binding Path="$self.((domain:Report)DataContext).IsResolved" />
+                                                        <Binding Path="$self.((domain:Report)DataContext).Reportable.User" />
+                                                        <Binding Path="#List.((vm:ReportsPageViewModel)DataContext).PermissionRepository" />
+                                                    </MultiBinding>
+                                                </u:PopConfirm.IsVisible>
+                                                            
+                                                <Button 
+                                                    Content="Unban"
+                                                />
+                                            </u:PopConfirm>
+                                            
+                                            <u:PopConfirm
+                                                PopupHeader="Are you sure you want to revoke this user's admin role?" 
+                                                ConfirmCommand="{Binding #List.((vm:ReportsPageViewModel)DataContext).RevokeAdminCommand}"
+                                                ConfirmCommandParameter="{Binding .}"
+                                            >
+                                                <u:PopConfirm.IsVisible>
+                                                    <MultiBinding Converter="{StaticResource CombinedCanBeDemotedFromAdministratorVisibilityConverter}">
+                                                        <Binding Path="$self.((domain:Report)DataContext).IsResolved" />
+                                                        <Binding Path="$self.((domain:Report)DataContext).Reportable.User" />
+                                                        <Binding Path="#List.((vm:ReportsPageViewModel)DataContext).PermissionRepository" />
+                                                    </MultiBinding>
+                                                </u:PopConfirm.IsVisible>
+                                                            
+                                                <Button 
+                                                    Content="Revoke Admin"
+                                                />
+                                            </u:PopConfirm>
+                                            
+                                            <u:PopConfirm
+                                                Grid.Column="2"
+                                                PopupHeader="Are you sure you want to revoke this user's moderator role?" 
+                                                ConfirmCommand="{Binding #List.((vm:ReportsPageViewModel)DataContext).RevokeModeratorCommand}"
+                                                ConfirmCommandParameter="{Binding .}"
+                                            >
+                                                <u:PopConfirm.IsVisible>
+                                                    <MultiBinding Converter="{StaticResource CombinedCanBeDemotedFromModeratorVisibilityConverter}">
+                                                        <Binding Path="$self.((domain:Report)DataContext).IsResolved" />
+                                                        <Binding Path="$self.((domain:Report)DataContext).Reportable.User" />
+                                                        <Binding Path="#List.((vm:ReportsPageViewModel)DataContext).PermissionRepository" />
+                                                    </MultiBinding>
+                                                </u:PopConfirm.IsVisible>
+                                                            
+                                                <Button 
+                                                    Content="Revoke Mod"
+                                                />
+                                            </u:PopConfirm>
+                                            
+                                            <u:PopConfirm
+                                                Grid.Column="4"
+                                                PopupHeader="Are you sure you want to remove this user's hardware?" 
+                                                ConfirmCommand="{Binding #List.((vm:ReportsPageViewModel)DataContext).DeleteHardwareCommand}"
+                                                ConfirmCommandParameter="{Binding .}"
+                                            >
+                                                <u:PopConfirm.IsVisible>
+                                                    <MultiBinding Converter="{StaticResource CombinedDeleteHardwareVisibilityConverter}">
+                                                        <Binding Path="$self.((domain:Report)DataContext).IsResolved" />
+                                                        <Binding Path="$self.((domain:Report)DataContext).Reportable" />
+                                                        <Binding Path="#List.((vm:ReportsPageViewModel)DataContext).PermissionRepository" />
+                                                    </MultiBinding>
+                                                </u:PopConfirm.IsVisible>
+                                                            
+                                                <Button 
+                                                    Content="Delete Hardware"
+                                                />
+                                            </u:PopConfirm>
+                                            
+                                            <u:PopConfirm
+                                                PopupHeader="Are you sure you want to change this user's name?" 
+                                                ConfirmCommand="{Binding #List.((vm:ReportsPageViewModel)DataContext).RenameCommand}"
+                                                ConfirmCommandParameter="{Binding .}"
+                                            >
+                                                <u:PopConfirm.IsVisible>
+                                                    <MultiBinding Converter="{StaticResource CombinedRenameUserVisibilityConverter}">
+                                                        <Binding Path="$self.((domain:Report)DataContext).IsResolved" />
+                                                        <Binding Path="$self.((domain:Report)DataContext).Reportable" />
+                                                        <Binding Path="#List.((vm:ReportsPageViewModel)DataContext).PermissionRepository" />
+                                                    </MultiBinding>
+                                                </u:PopConfirm.IsVisible>
+                                                            
+                                                <Button 
+                                                    Content="Rename"
+                                                />
+                                            </u:PopConfirm>
+                                            
+                                            <u:PopConfirm
+                                                PopupHeader="Are you sure you want to remove this user's avatar?" 
+                                                ConfirmCommand="{Binding #List.((vm:ReportsPageViewModel)DataContext).DeleteAvatarCommand}"
+                                                ConfirmCommandParameter="{Binding .}"
+                                            >
+                                                <u:PopConfirm.IsVisible>
+                                                    <MultiBinding Converter="{StaticResource CombinedDeleteAvatarVisibilityConverter}">
+                                                        <Binding Path="$self.((domain:Report)DataContext).IsResolved" />
+                                                        <Binding Path="$self.((domain:Report)DataContext).Reportable" />
+                                                        <Binding Path="#List.((vm:ReportsPageViewModel)DataContext).PermissionRepository" />
+                                                    </MultiBinding>
+                                                </u:PopConfirm.IsVisible>
+                                                            
+                                                <Button 
+                                                    Content="Delete Avatar"
+                                                />
+                                            </u:PopConfirm>
+                                            
+                                            <u:PopConfirm
                                                 PopupHeader="Are you sure you want to remove this reported content?" 
                                                 ConfirmCommand="{Binding #List.((vm:ReportsPageViewModel)DataContext).DeleteCommand}"
                                                 ConfirmCommandParameter="{Binding .}"
@@ -148,6 +243,7 @@
                                                     <MultiBinding Converter="{StaticResource MultiBooleanAndConverter}">
                                                         <Binding Path="!$self.((domain:Report)DataContext).IsDeleted" />
                                                         <Binding Path="!$self.((domain:Report)DataContext).IsResolved" />
+                                                        <Binding Path="!$self.((domain:Report)DataContext).ContainsUserProfile" />
                                                     </MultiBinding>
                                                 </u:PopConfirm.IsVisible>
                                                         
@@ -155,7 +251,6 @@
                                             </u:PopConfirm>
                                             
                                             <u:PopConfirm
-                                                Grid.Column="3"
                                                 PopupHeader="Are you sure you want to restore this reported content?" 
                                                 ConfirmCommand="{Binding #List.((vm:ReportsPageViewModel)DataContext).RestoreCommand}"
                                                 ConfirmCommandParameter="{Binding .}"
@@ -164,12 +259,13 @@
                                                     <MultiBinding Converter="{StaticResource MultiBooleanAndConverter}">
                                                         <Binding Path="$self.((domain:Report)DataContext).IsDeleted" />
                                                         <Binding Path="!$self.((domain:Report)DataContext).IsResolved" />
+                                                        <Binding Path="!$self.((domain:Report)DataContext).ContainsUserProfile" />
                                                     </MultiBinding>
                                                 </u:PopConfirm.IsVisible>
                                                         
                                                 <Button Content="Restore" />
                                             </u:PopConfirm>
-                                        </Grid>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>

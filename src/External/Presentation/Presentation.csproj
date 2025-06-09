@@ -99,6 +99,10 @@
         <DependentUpon>TFAPageView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Controls\UserProfileViewer.axaml.cs">
+        <DependentUpon>UserProfile.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

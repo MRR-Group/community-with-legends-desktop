@@ -19,13 +19,13 @@ namespace Presentation.ViewModels;
 public partial class AdminsPageViewModel : DataPageViewModel<Administrator>
 {
     private AdminRepository _adminRepository;
-    RevokeAdministratorRoleInteractor _revokeAdministratorRoleInteractor;
-    CreateAdministratorUserInteractor _createAdministratorUserInteractor;
-    DeleteAdministratorInteractor _deleteAdministratorInteractor;
+    private RevokeAdministratorRoleInteractor _revokeAdministratorRoleInteractor;
+    private CreateAdministratorUserInteractor _createAdministratorUserInteractor;
+    private DeleteAdministratorInteractor _deleteAdministratorInteractor;
 
-    string? _email;
-    string? _name;
-    string? _password;
+    private string? _email;
+    private string? _name;
+    private string? _password;
     
     public AdminsPageViewModel(
         HistoryRouter<ViewModelBase> router,
