@@ -18,23 +18,35 @@
                     <StackPanel>
                         <TextBlock Classes="title" TextAlignment="Center" Text="{echoes:Translate {x:Static translations:Strings.game_page_title}}" />
                         
-                        <StackPanel>
-                            <Border
-                                BorderBrush="{DynamicResource SecondaryColor}"
-                                BorderThickness="0 0 0 2"
-                                CornerRadius="0"
-                                Padding="0 2"
-                                Margin="0 0"
-                            >
-                                <Grid ColumnDefinitions="1*,2*,2*,3*,2*,1*">
-                                    <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_id}}" TextAlignment="Center"  Grid.Column="0" Classes="md"/>
-                                    <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_email}}" TextAlignment="Center" Grid.Column="1" Classes="md" />
-                                    <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_name}}"  TextAlignment="Center"  Grid.Column="2" Classes="md" />
-                                    <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_creation_date}}"  TextAlignment="Center"  Grid.Column="4" Classes="md" />
-                                    <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_options}}" Grid.Column="5" Classes="md" TextAlignment="Center" />
-                                </Grid>
-                            </Border>
+                        <StackPanel HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Spacing="5" IsVisible="{Binding IsFetching}">
+                                <TextBlock Classes="md" Text="Progress: " />
+                                <TextBlock Classes="md" Text="{Binding Progress}" />
+                            </StackPanel>
+                        
+                            <Button 
+                                Content="Fetch games" 
+                                Command="{Binding FetchGamesCommand}" 
+                                IsVisible="{Binding !IsFetching}"
+                            />
                         </StackPanel>
+                        
+                        <ItemsControl x:Name="List" ItemsSource="{Binding Data}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" ItemSpacing="10" Margin="10" LineSpacing="10" HorizontalAlignment="Center" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="domain:Game">
+                                    <StackPanel>
+                                        <AssetViewer Source="{Binding Cover}" Width="100" />
+                                        <TextBlock Classes="md" Text="{Binding Name}" TextAlignment="Center" Width="150" TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </StackPanel>
                 </ScrollViewer>
             </Grid>
