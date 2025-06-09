@@ -58,6 +58,7 @@ public partial class App : Avalonia.Application
         services.AddSingleton<UserRepository> (s => new UserRepository(s.GetService<CookieSession>()!));
         services.AddSingleton<AdminRepository> (s => new AdminRepository(s.GetService<CookieSession>()!));
         services.AddSingleton<ReportRepository> (s => new ReportRepository(s.GetService<CookieSession>()!));
+        services.AddSingleton<GameRepository> (s => new GameRepository(s.GetService<CookieSession>()!));
         services.AddSingleton<AuthService> (s => new AuthService(s.GetService<CookieSession>()!, s.GetService<UserRepository>()!, s.GetService<PermissionRepository>()!));
         services.AddSingleton<AdminService> (s => new AdminService(s.GetService<CookieSession>()!));
         services.AddSingleton<ReportService> (s => new ReportService(s.GetService<CookieSession>()!));
@@ -66,7 +67,8 @@ public partial class App : Avalonia.Application
         services.AddSingleton<PostService> (s => new PostService(s.GetService<CookieSession>()!));
         services.AddSingleton<CommentService> (s => new CommentService(s.GetService<CookieSession>()!));
         services.AddSingleton<HardwareService> (s => new HardwareService(s.GetService<CookieSession>()!));
-
+        services.AddSingleton<GameService> (s => new GameService(s.GetService<CookieSession>()!));
+        
         services.AddSingleton<BanService> (s => new BanService(s.GetService<CookieSession>()!));
         services.AddSingleton<RoleService> (s => new RoleService(s.GetService<CookieSession>()!));
         services.AddSingleton<AnonymizeService> (s => new AnonymizeService(s.GetService<CookieSession>()!));
@@ -89,6 +91,7 @@ public partial class App : Avalonia.Application
         services.AddSingleton<RenameUserInteractor>(s => new RenameUserInteractor(s.GetService<ProfileService>()!));
         services.AddSingleton<ValidateTFAInteractor>(s => new ValidateTFAInteractor(s.GetService<TFAService>()!));
         services.AddSingleton<DeleteUserHardwareInteractor>(s => new DeleteUserHardwareInteractor(s.GetService<HardwareService>()!));
+        services.AddSingleton<FetchGamesInteractor>(s => new FetchGamesInteractor(s.GetService<GameService>()!));
 
         services.AddSingleton<MainViewModel>();
         services.AddTransient<LoginPageViewModel>();
