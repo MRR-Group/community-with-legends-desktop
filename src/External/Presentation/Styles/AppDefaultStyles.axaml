@@ -8,6 +8,8 @@
             <StackPanel>
                 <Button Content="Hello World"></Button>
                 <TextBlock Classes="title">Title</TextBlock>
+                <TextBlock Classes="xl">Extra Large</TextBlock>
+                <TextBlock Classes="lg">Large</TextBlock>
                 <TextBlock Classes="md">Medium</TextBlock>
                 <TextBlock Classes="xs">Extra small</TextBlock>
                 <TextBlock Classes="xs link">Extra small link</TextBlock>
@@ -42,6 +44,22 @@
         <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
     </Style>
     
+    <Style Selector="TextBlock.xl">
+        <Setter Property="FontSize" Value="30"></Setter>
+        <Setter Property="Height" Value="35"></Setter>
+        <Setter Property="LineHeight" Value="30"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
+        <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
+    </Style>
+    
+    <Style Selector="TextBlock.lg">
+        <Setter Property="FontSize" Value="25"></Setter>
+        <Setter Property="Height" Value="30"></Setter>
+        <Setter Property="LineHeight" Value="30"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
+        <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
+    </Style>
+    
     <Style Selector="TextBlock.md">
         <Setter Property="FontSize" Value="20"></Setter>
         <Setter Property="LineHeight" Value="25"></Setter>
@@ -53,6 +71,20 @@
         <Setter Property="FontSize" Value="14"></Setter>
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
         <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
+    </Style>
+    
+    <Style Selector="TextBlock.xs2">
+        <Setter Property="FontSize" Value="10"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"></Setter>
+        <Setter Property="FontFamily" Value="{DynamicResource Jaro}"></Setter>
+    </Style>
+    
+    <Style Selector="TextBlock.primary">
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryColor}"></Setter>
+    </Style>
+    
+    <Style Selector="TextBlock.darker">
+        <Setter Property="Foreground" Value="{DynamicResource TextHoverColor}"></Setter>
     </Style>
     
     <Style Selector="TextBlock.error">

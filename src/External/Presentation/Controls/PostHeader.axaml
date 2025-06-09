@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="PostHeader"
+             x:Class="Presentation.Controls.PostHeader">
+    
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=PostHeader}}">
+        <Border ClipToBounds="True" CornerRadius="1000" Margin="0 0 15 0" Height="50" Width="50" >
+            <Panel Background="{DynamicResource TextColor }" Width="60" Height="60">
+                <Image Source="{Binding Avatar^}" Width="40" Height="40" />
+            </Panel>
+        </Border>
+        
+        <StackPanel>
+            <TextBlock Classes="md" Text="{Binding UserName}" IsVisible="{Binding HasUserName}" />
+            <TextBlock Classes="primary" Margin="0 0 0 2" Text="{Binding UnderText}" IsVisible="{Binding HasUnderText}" />
+            <TextBlock Classes="xs2 darker" Text="{Binding CreationDate}" IsVisible="{Binding HasCreationDate}" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

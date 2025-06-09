@@ -12,17 +12,17 @@ namespace Infrastructure.Services;
 public class AdminService : IAdministratorService
 {
     private CookieSession _session;
-    
+
     public AdminService(CookieSession session)
     {
         _session = session;
     }
     
-    public async Task<bool> RevokeAdministratorRole(Administrator administrator)
+    public async Task<bool> RevokeAdministratorRole(User user)
     {
         try
         {
-            await _session.Request($"admins/{administrator.Id}/revoke-administrator-privileges")
+            await _session.Request($"admins/{user.Id}/revoke-administrator-privileges")
                 .WithAutoRedirect(true)
                 .WithHeader("Accept", "application/json")
                 .PostAsync();

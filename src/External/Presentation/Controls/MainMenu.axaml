@@ -19,7 +19,7 @@
                 <Image Height="51" Source="/Assets/Images/logo.png"></Image>
             </Border>
             
-            <ItemsControl Grid.Row="1"  x:Name="List" ItemsSource="{Binding Items }">
+            <ItemsControl Grid.Row="1"  x:Name="List" ItemsSource="{ Binding Items }">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="MainMenuItem">
                         <StackPanel Orientation="Horizontal" Margin="30 30 0 0">

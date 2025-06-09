@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="ReportableViewer"
+             x:Class="Presentation.Controls.ReportableViewer">
+    
+    <StackPanel DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ReportableViewer}}">
+        <Comment
+            IsVisible="{Binding IsComment}"
+            User="{Binding Reportable.User}"
+            Text="{Binding Reportable.Content}"
+            CreationDate="{Binding Reportable.CreationDate}"
+        />
+        
+        <Post
+            IsVisible="{Binding IsPost}"
+            User="{Binding Reportable.User}"
+            Text="{Binding Reportable.Content}"
+            CreationDate="{Binding Reportable.CreationDate}"
+            Tags="{Binding Tags}"
+            Asset="{Binding Post.Asset}"
+            Likes="{Binding Post.Reactions}"
+        />
+        
+        <UserProfileViewer
+            IsVisible="{Binding IsUserProfile}"
+            User="{Binding Reportable.User}"
+            HardwareList="{Binding UserProfile.HardwareList}"
+            CreationDate="{Binding Reportable.CreationDate}"
+        />
+    </StackPanel>
+</UserControl>

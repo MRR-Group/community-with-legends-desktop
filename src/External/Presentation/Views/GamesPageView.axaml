@@ -13,27 +13,31 @@
         <MainMenu Grid.Column="0" Margin="0 0 10 0" Selected="game" ItemClicked="{Binding HandleMenuClickCommand}"/>
         
         <Panel Grid.Column="2" Background="{ DynamicResource BackgroundColor}" Grid.Row="0">
-            <StackPanel>
-                <TextBlock Classes="title" TextAlignment="Center" Text="{echoes:Translate {x:Static translations:Strings.game_page_title}}" />
-                
-                <StackPanel>
-                    <Border
-                        BorderBrush="{DynamicResource SecondaryColor}"
-                        BorderThickness="0 0 0 2"
-                        CornerRadius="0"
-                        Padding="0 2"
-                        Margin="0 0"
-                    >
-                        <Grid ColumnDefinitions="1*,2*,2*,3*,2*,1*">
-                            <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_id}}" TextAlignment="Center"  Grid.Column="0" Classes="md"/>
-                            <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_email}}" TextAlignment="Center" Grid.Column="1" Classes="md" />
-                            <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_name}}"  TextAlignment="Center"  Grid.Column="2" Classes="md" />
-                            <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_creation_date}}"  TextAlignment="Center"  Grid.Column="4" Classes="md" />
-                            <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_options}}" Grid.Column="5" Classes="md" TextAlignment="Center" />
-                        </Grid>
-                    </Border>
-                </StackPanel>
-            </StackPanel>
+            <Grid RowDefinitions="*">
+                <ScrollViewer Grid.Row="0">
+                    <StackPanel>
+                        <TextBlock Classes="title" TextAlignment="Center" Text="{echoes:Translate {x:Static translations:Strings.game_page_title}}" />
+                        
+                        <StackPanel>
+                            <Border
+                                BorderBrush="{DynamicResource SecondaryColor}"
+                                BorderThickness="0 0 0 2"
+                                CornerRadius="0"
+                                Padding="0 2"
+                                Margin="0 0"
+                            >
+                                <Grid ColumnDefinitions="1*,2*,2*,3*,2*,1*">
+                                    <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_id}}" TextAlignment="Center"  Grid.Column="0" Classes="md"/>
+                                    <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_email}}" TextAlignment="Center" Grid.Column="1" Classes="md" />
+                                    <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_name}}"  TextAlignment="Center"  Grid.Column="2" Classes="md" />
+                                    <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_creation_date}}"  TextAlignment="Center"  Grid.Column="4" Classes="md" />
+                                    <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_options}}" Grid.Column="5" Classes="md" TextAlignment="Center" />
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
         </Panel>
     </Grid>
 </UserControl>

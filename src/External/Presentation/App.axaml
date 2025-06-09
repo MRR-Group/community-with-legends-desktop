@@ -25,7 +25,19 @@
          <converters:UserCanBeDemotedFromModeratorConverter x:Key="UserCanBeDemotedFromModeratorConverter" />
          <converters:UserCanBeDemotedFromAdministratorConverter x:Key="UserCanBeDemotedFromAdministratorConverter" />
          <converters:UserCanBeAnonymizedConverter x:Key="UserCanBeAnonymizedConverter" />
-
+         <converters:BoolToHandCursorConverter x:Key="BoolToHandCursorConverter" />
+         <converters:UserCanBeRenamedConverter x:Key="UserCanBeRenamedConverter" />
+         <converters:UserCanHaveAvatarChangedConverter x:Key="UserCanHaveAvatarChangedConverter" />
+         <converters:MultiBooleanAndConverter x:Key="MultiBooleanAndConverter" />
+         <converters:StatusListToStringConverter x:Key="StatusListToStringConverter" />
+         <converters:CombinedBanVisibilityConverter x:Key="CombinedBanVisibilityConverter" />
+         <converters:CombinedDeleteAvatarVisibilityConverter x:Key="CombinedDeleteAvatarVisibilityConverter" />
+         <converters:CombinedDeleteHardwareVisibilityConverter x:Key="CombinedDeleteHardwareVisibilityConverter" />
+         <converters:CombinedRenameUserVisibilityConverter x:Key="CombinedRenameUserVisibilityConverter" />
+         <converters:CombinedCanBeDemotedFromAdministratorVisibilityConverter x:Key="CombinedCanBeDemotedFromAdministratorVisibilityConverter" />
+         <converters:CombinedCanBeDemotedFromModeratorVisibilityConverter x:Key="CombinedCanBeDemotedFromModeratorVisibilityConverter" />
+         <converters:CombinedUnbanVisibilityConverter x:Key="CombinedUnbanVisibilityConverter" />
+         
          <FontWeight x:Key="TextBlockTitleFontWeight">Normal</FontWeight>
          
          <FontFamily x:Key="Jaro">avares://Presentation/Assets/Fonts/Jaro.ttf#Jaro</FontFamily>
@@ -33,8 +45,8 @@
          <SolidColorBrush x:Key="BackgroundColor">#FF181719</SolidColorBrush>
          <SolidColorBrush x:Key="BackgroundLightColor">#FF212023</SolidColorBrush>
          <SolidColorBrush x:Key="TextColor">#FFFDFEFE</SolidColorBrush>
-         <SolidColorBrush x:Key="TextHoverColor">#FFE6E6FA</SolidColorBrush>
-         <SolidColorBrush x:Key="TextDisabledColor">#FFB9B9BA</SolidColorBrush>
+         <SolidColorBrush x:Key="TextHoverColor">#FFB9B9BA</SolidColorBrush>
+         <SolidColorBrush x:Key="TextDisabledColor">#FF999999</SolidColorBrush>
          <SolidColorBrush x:Key="PrimaryColor">#FF8E2CFE</SolidColorBrush>
          <SolidColorBrush x:Key="ErrorColor">#FFFF0000</SolidColorBrush>
          <SolidColorBrush x:Key="PrimaryHoverColor">#FF5300B0</SolidColorBrush>

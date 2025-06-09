@@ -6,10 +6,12 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Avalonia.Metadata;
 using Avalonia.SimpleRouter;
+using Domain.Entities;
 using Flurl;
 using Flurl.Http;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
+using Microsoft.Extensions.Configuration;
 using Presentation.ViewModels;
 using Presentation.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,7 +49,7 @@ public partial class App : Avalonia.Application
     private static IServiceProvider ConfigureServices()
     {
         var services = new ServiceCollection();
-        var session = new CookieSession("https://cwl.purgal.xyz/api/");
+        var session = new CookieSession("https://cwl.legnica.pl/api");
         
         services.AddSingleton<HistoryRouter<ViewModelBase>>(s => new HistoryRouter<ViewModelBase>(t => (ViewModelBase)s.GetRequiredService(t)));
         services.AddSingleton<CookieSession> (s => session);
@@ -55,9 +57,16 @@ public partial class App : Avalonia.Application
         services.AddSingleton<PermissionRepository> (s => new PermissionRepository());
         services.AddSingleton<UserRepository> (s => new UserRepository(s.GetService<CookieSession>()!));
         services.AddSingleton<AdminRepository> (s => new AdminRepository(s.GetService<CookieSession>()!));
+        services.AddSingleton<ReportRepository> (s => new ReportRepository(s.GetService<CookieSession>()!));
         services.AddSingleton<AuthService> (s => new AuthService(s.GetService<CookieSession>()!, s.GetService<UserRepository>()!, s.GetService<PermissionRepository>()!));
         services.AddSingleton<AdminService> (s => new AdminService(s.GetService<CookieSession>()!));
-        
+        services.AddSingleton<ReportService> (s => new ReportService(s.GetService<CookieSession>()!));
+        services.AddSingleton<ProfileService> (s => new ProfileService(s.GetService<CookieSession>()!));
+        services.AddSingleton<TFAService> (s => new TFAService(s.GetService<CookieSession>()!));
+        services.AddSingleton<PostService> (s => new PostService(s.GetService<CookieSession>()!));
+        services.AddSingleton<CommentService> (s => new CommentService(s.GetService<CookieSession>()!));
+        services.AddSingleton<HardwareService> (s => new HardwareService(s.GetService<CookieSession>()!));
+
         services.AddSingleton<BanService> (s => new BanService(s.GetService<CookieSession>()!));
         services.AddSingleton<RoleService> (s => new RoleService(s.GetService<CookieSession>()!));
         services.AddSingleton<AnonymizeService> (s => new AnonymizeService(s.GetService<CookieSession>()!));
@@ -72,9 +81,18 @@ public partial class App : Avalonia.Application
         services.AddSingleton<RevokeAdministratorRoleInteractor>(s => new RevokeAdministratorRoleInteractor(s.GetService<AdminService>()!));
         services.AddSingleton<CreateAdministratorUserInteractor>(s => new CreateAdministratorUserInteractor(s.GetService<AdminService>()!));
         services.AddSingleton<DeleteAdministratorInteractor>(s => new DeleteAdministratorInteractor(s.GetService<AdminService>()!));
+        services.AddSingleton<DeleteReportableInteractor>(s => new DeleteReportableInteractor(s.GetService<PostService>()!, s.GetService<CommentService>()!));
+        services.AddSingleton<RestoreDeleteReportableInteractor>(s => new RestoreDeleteReportableInteractor(s.GetService<PostService>()!, s.GetService<CommentService>()!));
+        services.AddSingleton<CloseReportInteractor>(s => new CloseReportInteractor(s.GetService<ReportService>()!));
+        services.AddSingleton<ReopenReportInteractor>(s => new ReopenReportInteractor(s.GetService<ReportService>()!));
+        services.AddSingleton<DeleteAvatarInteractor>(s => new DeleteAvatarInteractor(s.GetService<ProfileService>()!));
+        services.AddSingleton<RenameUserInteractor>(s => new RenameUserInteractor(s.GetService<ProfileService>()!));
+        services.AddSingleton<ValidateTFAInteractor>(s => new ValidateTFAInteractor(s.GetService<TFAService>()!));
+        services.AddSingleton<DeleteUserHardwareInteractor>(s => new DeleteUserHardwareInteractor(s.GetService<HardwareService>()!));
 
         services.AddSingleton<MainViewModel>();
         services.AddTransient<LoginPageViewModel>();
+        services.AddTransient<TFAPageViewModel>();
         services.AddTransient<RegisterPageViewModel>();
         services.AddTransient<AdminsPageViewModel>();
         services.AddTransient<UsersPageViewModel>();

@@ -21,7 +21,7 @@
                     Text="{echoes:Translate {x:Static translations:Strings.admin_page_title}}"
                 />
                 
-                <StackPanel>
+                <Grid RowDefinitions="Auto, *">
                     <Border
                         BorderBrush="{DynamicResource SecondaryColor}"
                         BorderThickness="0 0 0 2"
@@ -37,64 +37,66 @@
                             <TextBlock Text="{echoes:Translate {x:Static translations:Strings.table_options}}" Grid.Column="5" Classes="md" TextAlignment="Center" />
                         </Grid>
                     </Border>
-
-                    <ItemsControl x:Name="List" ItemsSource="{Binding Data}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate x:DataType="domain:User">
-                                <Border
-                                    BorderBrush="{DynamicResource SecondaryColor}"
-                                    BorderThickness="0 0 0 2"
-                                    CornerRadius="0"
-                                    Padding="0 2"
-                                    Margin="0 0"
-                                >
-                                    <Border.Styles>
-                                        <Style Selector="ContentPresenter:nth-child(odd) Border">
-                                            <Setter Property="Background" Value="{DynamicResource BackgroundLightColor}"/>
-                                        </Style>
-                                    </Border.Styles>
-                                    
-                                    <Grid ColumnDefinitions="1*,2*,2*, 3*, 2*,1*" Margin="0,2" VerticalAlignment="Center">
-                                        <TextBlock  TextAlignment="Center"  Text="{Binding Id, Mode=OneWay}" VerticalAlignment="Center" />
-                                        <TextBlock TextAlignment="Center"  Text="{Binding Email.Value, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="1" />
-                                        <TextBlock TextAlignment="Center"  Text="{Binding Name, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="2" />
-                                        <TextBlock TextAlignment="Center"  Text="{Binding CreationDate, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="4" />
-                                        <Button Grid.Column="5" Classes="icon" HorizontalAlignment="Center">
-                                            <Svg Path="/Assets/Icons/Gear.svg" />
-                                          <Button.Flyout >
-                                            <Flyout>
-                                                <StackPanel>
-                                                    <u:PopConfirm 
-                                                        PopupHeader="{echoes:Translate {x:Static translations:Strings.delete_administrator_action_message}}" 
-                                                        ConfirmCommand="{Binding #List.((vm:AdminsPageViewModel)DataContext).DeleteAdministratorCommand}"
-                                                        ConfirmCommandParameter="{Binding .}"
-                                                    >
-                                                        <Button 
-                                                            Classes="text" 
-                                                            Content="{echoes:Translate {x:Static translations:Strings.delete_administrator_action_name}}" 
-                                                        />
-                                                    </u:PopConfirm>
-                                                    
-                                                    <u:PopConfirm 
-                                                        PopupHeader="{echoes:Translate {x:Static translations:Strings.revoke_administrator_action_message}}"
-                                                        ConfirmCommand="{Binding #List.((vm:AdminsPageViewModel)DataContext).RevokeAdministratorRoleCommand}"
-                                                        ConfirmCommandParameter="{Binding .}"
-                                                    >
-                                                        <Button 
-                                                            Classes="text" 
-                                                            Content="{echoes:Translate {x:Static translations:Strings.revoke_administrator_action_name}}" 
-                                                        />
-                                                    </u:PopConfirm>
-                                                </StackPanel>
-                                            </Flyout>
-                                          </Button.Flyout>
-                                        </Button>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
+                    
+                    <ScrollViewer Grid.Row="1">
+                        <ItemsControl x:Name="List" ItemsSource="{Binding Data}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="domain:User">
+                                    <Border
+                                        BorderBrush="{DynamicResource SecondaryColor}"
+                                        BorderThickness="0 0 0 2"
+                                        CornerRadius="0"
+                                        Padding="0 2"
+                                        Margin="0 0"
+                                    >
+                                        <Border.Styles>
+                                            <Style Selector="ContentPresenter:nth-child(odd) Border">
+                                                <Setter Property="Background" Value="{DynamicResource BackgroundLightColor}"/>
+                                            </Style>
+                                        </Border.Styles>
+                                        
+                                        <Grid ColumnDefinitions="1*,2*,2*, 3*, 2*,1*" Margin="0,2" VerticalAlignment="Center">
+                                            <TextBlock  TextAlignment="Center"  Text="{Binding Id, Mode=OneWay}" VerticalAlignment="Center" />
+                                            <TextBlock TextAlignment="Center"  Text="{Binding Email.Value, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="1" />
+                                            <TextBlock TextAlignment="Center"  Text="{Binding Name, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="2" />
+                                            <TextBlock TextAlignment="Center"  Text="{Binding CreationDate, Mode=OneWay}" VerticalAlignment="Center" Grid.Column="4" />
+                                            <Button Grid.Column="5" Classes="icon" HorizontalAlignment="Center">
+                                                <Svg Path="/Assets/Icons/Gear.svg" />
+                                              <Button.Flyout >
+                                                <Flyout>
+                                                    <StackPanel>
+                                                        <u:PopConfirm 
+                                                            PopupHeader="{echoes:Translate {x:Static translations:Strings.delete_administrator_action_message}}" 
+                                                            ConfirmCommand="{Binding #List.((vm:AdminsPageViewModel)DataContext).DeleteAdministratorCommand}"
+                                                            ConfirmCommandParameter="{Binding .}"
+                                                        >
+                                                            <Button 
+                                                                Classes="text" 
+                                                                Content="{echoes:Translate {x:Static translations:Strings.delete_administrator_action_name}}" 
+                                                            />
+                                                        </u:PopConfirm>
+                                                        
+                                                        <u:PopConfirm 
+                                                            PopupHeader="{echoes:Translate {x:Static translations:Strings.revoke_administrator_action_message}}"
+                                                            ConfirmCommand="{Binding #List.((vm:AdminsPageViewModel)DataContext).RevokeAdministratorRoleCommand}"
+                                                            ConfirmCommandParameter="{Binding .}"
+                                                        >
+                                                            <Button 
+                                                                Classes="text" 
+                                                                Content="{echoes:Translate {x:Static translations:Strings.revoke_administrator_action_name}}" 
+                                                            />
+                                                        </u:PopConfirm>
+                                                    </StackPanel>
+                                                </Flyout>
+                                              </Button.Flyout>
+                                            </Button>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
                 
                 <Button 
                     Margin="0 10 0 0" 
