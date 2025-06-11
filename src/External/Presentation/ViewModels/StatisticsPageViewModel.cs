@@ -20,23 +20,31 @@ public partial class StatisticsPageViewModel : AuthenticatedPageViewModel
 
     [ObservableProperty] 
     private int _posts;
+    
     [ObservableProperty] 
     private int _comments;
+    
     [ObservableProperty] 
     private int _users;
+    
     [ObservableProperty] 
     private int _bannedUsers;
+    
     [ObservableProperty] 
     private int _logs;
 
     [ObservableProperty] 
     private ISeries[] _usersGrowth;
+    
     [ObservableProperty] 
     private ISeries[] _postsGrowth;
+    
     [ObservableProperty] 
     private ISeries[] _commentsGrowth;
+    
     [ObservableProperty] 
     private ISeries[] _diskUsage;
+    
     [ObservableProperty] 
     private ISeries[] _bannedUsersPercent;
 
