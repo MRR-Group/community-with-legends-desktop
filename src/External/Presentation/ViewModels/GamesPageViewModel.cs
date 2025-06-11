@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Abstractions;
 using Application.UseCases;
 using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -12,7 +13,7 @@ using Infrastructure.Services;
 
 namespace Presentation.ViewModels;
 
-public partial class GamesPageViewModel : DataPageViewModel<Game, GameDto>
+public partial class GamesPageViewModel : DataPageViewModel<Game>
 {
     protected GameService _gameService;
     protected FetchGamesInteractor _getFetchGamesInteractor;

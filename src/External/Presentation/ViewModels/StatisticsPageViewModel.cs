@@ -7,10 +7,7 @@ namespace Presentation.ViewModels;
 
 public partial class StatisticsPageViewModel : AuthenticatedPageViewModel
 {
-    public StatisticsPageViewModel(
-        HistoryRouter<ViewModelBase> router,
-        LogOutInteractor logOutInteractor
-    ) : base(router, logOutInteractor)
+    public StatisticsPageViewModel(HistoryRouter<ViewModelBase> router, LogOutInteractor logOutInteractor) : base(router, logOutInteractor)
     {
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Abstractions;
 using Application.UseCases;
 using Avalonia.SimpleRouter;
 using Domain.Primitives;
@@ -10,14 +11,14 @@ using Infrastructure.Repositories;
 
 namespace Presentation.ViewModels;
 
-public abstract class DataPageViewModel<T, D> : AuthenticatedPageViewModel where T : Entity where D : Dto<T>
+public abstract class DataPageViewModel<T> : AuthenticatedPageViewModel where T : Entity
 {
     public ObservableCollection<T> Data { get; protected set;  }
-    protected Repository<T, D> _repository;
+    protected IRepository<T> _repository;
     
     public DataPageViewModel(
         HistoryRouter<ViewModelBase> router, 
-        Repository<T, D> repository,
+        IRepository<T> repository,
         LogOutInteractor logOutInteractor
     ) : base(router, logOutInteractor)
     {

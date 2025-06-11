@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Application.Abstractions;
 using Application.Exceptions;
 using Application.UseCases;
 using Avalonia.SimpleRouter;
@@ -11,7 +12,7 @@ using Presentation.Controls;
 
 namespace Presentation.ViewModels;
 
-public partial class UsersPageViewModel : DataPageViewModel<User, UserDto>
+public partial class UsersPageViewModel : DataPageViewModel<User>
 {
     public PermissionRepository PermissionRepository { get; private set; }
     private BanUserInteractor _banUserInteractor;

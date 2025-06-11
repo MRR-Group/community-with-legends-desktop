@@ -12,7 +12,7 @@ namespace Infrastructure.Services;
 public class AdminService : IAdministratorService
 {
     private CookieSession _session;
-    private AdminRepository _adminRepository;
+    private IRepository<Administrator> _adminRepository;
 
     public AdminService(CookieSession session, AdminRepository adminRepository)
     {

@@ -1,9 +1,10 @@
+using Application.Abstractions;
 using Domain.Primitives;
 using Flurl.Http;
 using Infrastructure.DTOs;
 namespace Infrastructure.Repositories;
 
-public class Repository<T, D> where T : Entity where D : Dto<T>
+public class Repository<T, D> : IRepository<T> where T : Entity where D : Dto<T>
 {
     protected CookieSession _session;
     protected string _endpoint;

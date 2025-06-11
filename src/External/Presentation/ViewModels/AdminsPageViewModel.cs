@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.Abstractions;
 using Application.UseCases;
 using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.Input;
@@ -17,9 +18,8 @@ using Ursa.Controls.Options;
 
 namespace Presentation.ViewModels;
 
-public partial class AdminsPageViewModel : DataPageViewModel<Administrator, AdministratorDto>
+public partial class AdminsPageViewModel : DataPageViewModel<Administrator>
 {
-    private AdminRepository _adminRepository;
     private RevokeAdministratorRoleInteractor _revokeAdministratorRoleInteractor;
     private CreateAdministratorUserInteractor _createAdministratorUserInteractor;
     private DeleteAdministratorInteractor _deleteAdministratorInteractor;

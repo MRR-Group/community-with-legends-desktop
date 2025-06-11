@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Application.Abstractions;
 using Application.UseCases;
 using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.Input;
@@ -9,7 +10,7 @@ using Infrastructure.Repositories;
 
 namespace Presentation.ViewModels;
 
-public partial class ReportsPageViewModel : DataPageViewModel<Report, ReportDto>
+public partial class ReportsPageViewModel : DataPageViewModel<Report>
 {
     public PermissionRepository PermissionRepository { get; private set; }
     private BanUserInteractor _banUserInteractor;
