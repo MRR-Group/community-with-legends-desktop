@@ -23,7 +23,7 @@ public record Statistics
     public Dictionary<string, int> CommentsGrowth { get; set; }
 
     [property: JsonPropertyName("disk_usage_percentage")]
-    public int DiskUsage { get; set; }
+    public float DiskUsage { get; set; }
     
     [property: JsonPropertyName("banned_users")]
     public int BannedUsers { get; set; }

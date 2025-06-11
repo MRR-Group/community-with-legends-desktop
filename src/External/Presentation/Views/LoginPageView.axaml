@@ -34,8 +34,7 @@
                     Name="Password"
                     Title="{echoes:Translate {x:Static translations:Strings.password_form_title}}" 
                     Watermark="{echoes:Translate {x:Static translations:Strings.password_form_watermark}}" 
-                    UnderText="{echoes:Translate {x:Static translations:Strings.password_form_under}}" 
-                    LinkText="{echoes:Translate {x:Static translations:Strings.password_form_link}}" 
+                    HideUnderText="True"
                     Password="true" 
                     Text="{Binding Password, Mode=TwoWay}"
                 />

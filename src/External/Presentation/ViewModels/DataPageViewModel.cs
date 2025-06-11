@@ -51,7 +51,7 @@ public abstract class DataPageViewModel<T> : AuthenticatedPageViewModel where T 
         {
             if (!existingIds.Contains(item.Id))
             {
-                Data.Add(item);
+                AddItem(item);
             }
         }
     }
