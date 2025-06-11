@@ -48,8 +48,15 @@ public partial class App : Avalonia.Application
     
     private static IServiceProvider ConfigureServices()
     {
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(AppContext.BaseDirectory)
+            .AddJsonFile("appsettings.json", optional: true)
+            .AddEnvironmentVariables()
+            .Build();
+
+        var apiBaseUrl = configuration["ApiBaseUrl"];
+        var session = new CookieSession(apiBaseUrl ?? "https://cwl.legnica.pl/api");
         var services = new ServiceCollection();
-        var session = new CookieSession("https://cwl.legnica.pl/api");
         
         services.AddSingleton<HistoryRouter<ViewModelBase>>(s => new HistoryRouter<ViewModelBase>(t => (ViewModelBase)s.GetRequiredService(t)));
         services.AddSingleton<CookieSession> (s => session);
