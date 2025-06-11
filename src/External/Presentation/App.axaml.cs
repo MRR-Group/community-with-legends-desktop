@@ -59,8 +59,10 @@ public partial class App : Avalonia.Application
         services.AddSingleton<AdminRepository> (s => new AdminRepository(s.GetService<CookieSession>()!));
         services.AddSingleton<ReportRepository> (s => new ReportRepository(s.GetService<CookieSession>()!));
         services.AddSingleton<GameRepository> (s => new GameRepository(s.GetService<CookieSession>()!));
+        services.AddSingleton<LogsRepository> (s => new LogsRepository(s.GetService<CookieSession>()!));
+        services.AddSingleton<StatisticsRepository> (s => new StatisticsRepository(s.GetService<CookieSession>()!));
         services.AddSingleton<AuthService> (s => new AuthService(s.GetService<CookieSession>()!, s.GetService<UserRepository>()!, s.GetService<PermissionRepository>()!));
-        services.AddSingleton<AdminService> (s => new AdminService(s.GetService<CookieSession>()!));
+        services.AddSingleton<AdminService> (s => new AdminService(s.GetService<CookieSession>()!, s.GetService<AdminRepository>()!));
         services.AddSingleton<ReportService> (s => new ReportService(s.GetService<CookieSession>()!));
         services.AddSingleton<ProfileService> (s => new ProfileService(s.GetService<CookieSession>()!));
         services.AddSingleton<TFAService> (s => new TFAService(s.GetService<CookieSession>()!));

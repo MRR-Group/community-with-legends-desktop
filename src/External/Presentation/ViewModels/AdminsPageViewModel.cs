@@ -6,6 +6,7 @@ using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.Input;
 using Domain.Entities;
 using Domain.Exceptions;
+using Infrastructure.DTOs;
 using Infrastructure.Exceptions;
 using Infrastructure.Repositories;
 using Presentation.Dialogs;
@@ -16,7 +17,7 @@ using Ursa.Controls.Options;
 
 namespace Presentation.ViewModels;
 
-public partial class AdminsPageViewModel : DataPageViewModel<Administrator>
+public partial class AdminsPageViewModel : DataPageViewModel<Administrator, AdministratorDto>
 {
     private AdminRepository _adminRepository;
     private RevokeAdministratorRoleInteractor _revokeAdministratorRoleInteractor;
@@ -34,33 +35,11 @@ public partial class AdminsPageViewModel : DataPageViewModel<Administrator>
         RevokeAdministratorRoleInteractor revokeAdministratorRoleInteractor,
         CreateAdministratorUserInteractor createAdministratorUserInteractor,
         DeleteAdministratorInteractor deleteAdministratorInteractor
-    ) : base(router, logOutInteractor)
+    ) : base(router, adminRepository, logOutInteractor)
     {
-        _adminRepository = adminRepository;
         _revokeAdministratorRoleInteractor = revokeAdministratorRoleInteractor;
         _createAdministratorUserInteractor = createAdministratorUserInteractor;
         _deleteAdministratorInteractor = deleteAdministratorInteractor;
-    
-        RefreshData();
-    }
-    
-    protected override async Task RefreshData()
-    {
-        try
-        {
-            var data = await _adminRepository.All();
-
-            Data.Clear();
-
-            foreach (var user in data)
-            {
-                Data.Add(user);
-            }
-        }
-        catch (Exception e)
-        {
-            var ee = e;
-        }
     }
     
     [RelayCommand]
@@ -69,6 +48,8 @@ public partial class AdminsPageViewModel : DataPageViewModel<Administrator>
         SendAction(target, async (admin) =>
         {
             await _revokeAdministratorRoleInteractor.RevokeRole(admin);
+            RemoveItem(admin);
+            
             ShowNotification("Success", $"Administrator revoke from {admin.Name}.");
         });
     }
@@ -144,7 +125,9 @@ public partial class AdminsPageViewModel : DataPageViewModel<Administrator>
         {
             try
             {
-                await _createAdministratorUserInteractor.CreateAdministrator(name, email, password);
+                var admin = await _createAdministratorUserInteractor.CreateAdministrator(name, email, password);
+                AddItem(admin);
+
                 ShowNotification("Success", $"Administrator {name} created.");
                 ClearForm();
             }
@@ -180,6 +163,8 @@ public partial class AdminsPageViewModel : DataPageViewModel<Administrator>
         SendAction(target, async (admin) =>
         {
             await _deleteAdministratorInteractor.DeleteAdministrator(admin);
+            RemoveItem(admin);
+            
             ShowNotification("Success", $"Administrator {admin.Name} deleted.");
         });
     }

@@ -13,7 +13,6 @@ public partial class TFAPageViewModel : AuthPageViewModel
     
     public string Token { get; set; }
     
-    
     public TFAPageViewModel(HistoryRouter<ViewModelBase> router, LogOutInteractor logOutInteractor, ValidateTFAInteractor validateTfaInteractor, PermissionRepository permissions): base(router)
     {
         _logOutInteractor = logOutInteractor;

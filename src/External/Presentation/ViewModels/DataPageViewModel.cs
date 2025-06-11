@@ -1,76 +1,75 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Application.UseCases;
 using Avalonia.SimpleRouter;
-using CommunityToolkit.Mvvm.Input;
-using Infrastructure.Exceptions;
-using Presentation.Controls;
+using Domain.Primitives;
+using Infrastructure.DTOs;
+using Infrastructure.Repositories;
 
 namespace Presentation.ViewModels;
 
-public abstract partial class DataPageViewModel<T> : ViewModelBase
+public abstract class DataPageViewModel<T, D> : AuthenticatedPageViewModel where T : Entity where D : Dto<T>
 {
     public ObservableCollection<T> Data { get; protected set;  }
-    protected LogOutInteractor _logOutInteractor;
+    protected Repository<T, D> _repository;
     
     public DataPageViewModel(
         HistoryRouter<ViewModelBase> router, 
+        Repository<T, D> repository,
         LogOutInteractor logOutInteractor
-    ) : base(router)
+    ) : base(router, logOutInteractor)
     {
-        _logOutInteractor = logOutInteractor;
+        _repository = repository;
         Data = [];
-    }
 
-    [RelayCommand]
-    protected void HandleMenuClick(MainMenuItem item)
-    {
-        NavigateTo(item.Link);
+        RefreshData();
     }
-
-    [RelayCommand]
-    protected void LogOut()
+    
+    protected Task RefreshData()
+    { 
+        return SendAction(async () => ReloadData(await _repository.All()));
+    }
+    
+    protected Task RefreshItem(T item)
     {
-        SendAction(async () =>
+        return SendAction(async () =>
         {
-            await _logOutInteractor.LogOut();
-            _router.GoTo<LoginPageViewModel>();
+            var data = await _repository.ById(item.Id);
+            RemoveItem(item);
+            AddItem(data);
         });
     }
 
-    protected abstract Task RefreshData();
-    
-    protected async Task SendAction(Func<Task> sendAction)
+    protected void ReloadData(T[] data)
     {
-        try
+        var existingIds = Data.Select(item => item.Id).ToHashSet();
+
+        foreach (var item in data)
         {
-            await sendAction.Invoke();
-            await RefreshData();
+            if (!existingIds.Contains(item.Id))
+            {
+                Data.Add(item);
+            }
         }
-        catch (UnauthorizedException e)
-        {
-            ShowNotification("Unauthorized", e.Message);
-            _router.GoTo<LoginPageViewModel>();
-        }
+    }
+    
+    protected void AddItem(T item)
+    { 
+        Data.Add(item);
+    }
+    
+    protected void RemoveItem(T item)
+    {
+        Data.Remove(item);
     }
     
     protected async Task SendAction(T? target, Func<T, Task> sendAction)
     {
-        if (target == null)
+        if (target != null)
         {
-            return;
-        }
-
-        try
-        {
-            await sendAction.Invoke(target);
-            await RefreshData();
-        }
-        catch (UnauthorizedException e)
-        {
-            ShowNotification("Unauthorized", e.Message);
-            _router.GoTo<LoginPageViewModel>();
+            await SendAction(async () => await sendAction.Invoke(target));
         }
     }
 }

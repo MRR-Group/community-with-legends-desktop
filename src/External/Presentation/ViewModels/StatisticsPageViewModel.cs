@@ -5,17 +5,12 @@ using Domain.Entities;
 
 namespace Presentation.ViewModels;
 
-public partial class StatisticsPageViewModel : DataPageViewModel<User>
+public partial class StatisticsPageViewModel : AuthenticatedPageViewModel
 {
     public StatisticsPageViewModel(
         HistoryRouter<ViewModelBase> router,
         LogOutInteractor logOutInteractor
     ) : base(router, logOutInteractor)
-    {
-        RefreshData();
-    }
-    
-    protected override async Task RefreshData()
     {
     }
 }

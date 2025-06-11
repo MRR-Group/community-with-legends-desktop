@@ -4,10 +4,11 @@ using Domain.Entities;
 using Domain.Enums;
 using Domain.Primitives;
 using Domain.ValueObjects;
+using Infrastructure.Exceptions;
 
 namespace Infrastructure.DTOs;
 
-public record ReportDto
+public record ReportDto : Dto<Report>
 {
     [property: JsonPropertyName("id")]
     public uint Id { get; set; }
@@ -33,13 +34,13 @@ public record ReportDto
     [property: JsonPropertyName("reportable")]
     public JsonElement Reportable { get; set; }
 
-    public Report? ToEntity()
+    public override Report ToEntity()
     {
         var reportable = ConvertReportable();
 
         if (reportable == null)
         {
-            return null;
+            throw new EmptyReportException();
         }
 
         var status = ConvertStatus();

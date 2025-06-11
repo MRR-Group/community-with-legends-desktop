@@ -12,9 +12,11 @@ namespace Infrastructure.Services;
 public class AdminService : IAdministratorService
 {
     private CookieSession _session;
+    private AdminRepository _adminRepository;
 
-    public AdminService(CookieSession session)
+    public AdminService(CookieSession session, AdminRepository adminRepository)
     {
+        _adminRepository = adminRepository;
         _session = session;
     }
     
@@ -40,14 +42,18 @@ public class AdminService : IAdministratorService
         }
     }
     
-    public async Task CreateAdministrator(string name, Email email, Password password)
+    public async Task<Administrator> CreateAdministrator(string name, Email email, Password password)
     {
         try
         {
-            await _session.Request("admins")
+            var response = await _session.Request("admins")
                 .WithAutoRedirect(true)
                 .WithHeader("Accept", "application/json")
                 .PostJsonAsync(new { name, email = email.Value, password = password.Value });
+
+            var json = await response.GetJsonAsync<CreateResponse>();
+
+            return await _adminRepository.ById(json.Id);
         }
         catch (FlurlHttpException e)
         {

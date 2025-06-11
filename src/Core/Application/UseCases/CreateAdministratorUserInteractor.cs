@@ -13,8 +13,8 @@ public class CreateAdministratorUserInteractor
         _administratorService = administratorService;
     }
 
-    public async Task CreateAdministrator(string name, Email email, Password password)
+    public async Task<Administrator> CreateAdministrator(string name, Email email, Password password)
     { 
-        await _administratorService.CreateAdministrator(name, email, password);
+        return await _administratorService.CreateAdministrator(name, email, password);
     }
 }
