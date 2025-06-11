@@ -2,6 +2,7 @@ using Application.UseCases;
 using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.Input;
 using Flurl.Http;
+using Infrastructure.Exceptions;
 using Infrastructure.Repositories;
 
 namespace Presentation.ViewModels;
@@ -29,6 +30,10 @@ public partial class TFAPageViewModel : AuthPageViewModel
             {
                 await _validateTfaInteractor.Validate(Token);
                 _router.GoTo<UsersPageViewModel>();
+            }
+            catch (UnauthorizedException e)
+            {
+                _exceptions.Add("token", "Invalid 2FA code.");
             }
             catch (FlurlHttpException e)
             {

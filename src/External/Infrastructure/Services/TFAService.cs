@@ -20,22 +20,10 @@ public class TFAService : ITFAService
     
     public async Task Validate(string token)
     {
-        try
-        {
-            await _session.Request("auth/tfa/validate")
-                .WithAutoRedirect(true)
-                .WithHeader("Accept", "application/json")
-                .PostJsonAsync(new { token });
-        }
-        catch (FlurlHttpException e)
-        {
-            if (e.StatusCode == 403)
-            {
-                throw new UnauthorizedException();
-            }
-
-            throw;
-        }
+        await _session.Request("auth/tfa/validate")
+            .WithAutoRedirect(true)
+            .WithHeader("Accept", "application/json")
+            .PostJsonAsync(new { token });
     }
     
     public async Task<bool> Check()
