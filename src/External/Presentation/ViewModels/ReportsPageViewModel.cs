@@ -1,9 +1,11 @@
 using System;
 using System.Threading.Tasks;
+using Application.Abstractions;
 using Application.UseCases;
 using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.Input;
 using Domain.Entities;
+using Infrastructure.DTOs;
 using Infrastructure.Repositories;
 
 namespace Presentation.ViewModels;
@@ -11,7 +13,6 @@ namespace Presentation.ViewModels;
 public partial class ReportsPageViewModel : DataPageViewModel<Report>
 {
     public PermissionRepository PermissionRepository { get; private set; }
-    private ReportRepository _reportRepository;
     private BanUserInteractor _banUserInteractor;
     private UnbanUserInteractor _unbanUserInteractor;
     private DeleteReportableInteractor _deleteReportableInteractor;
@@ -40,10 +41,9 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
         RevokeModeratorRoleInteractor revokeModeratorRoleInteractor,
         ReportRepository reportRepository,
         PermissionRepository permissionRepository
-    ) : base(router, logOutInteractor)
+    ) : base(router, reportRepository, logOutInteractor)
     {
         PermissionRepository = permissionRepository;
-        _reportRepository = reportRepository;
         _banUserInteractor = banUserInteractor;
         _unbanUserInteractor = unbanUserInteractor;
         _deleteReportableInteractor = deleteReportableInteractor;
@@ -55,8 +55,6 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
         _deleteUserHardwareInteractor = deleteUserHardwareInteractor;
         _revokeAdministratorRoleInteractor = revokeAdministratorRoleInteractor;
         _revokeModeratorRoleInteractor = revokeModeratorRoleInteractor;
-        
-        RefreshData();
     }
     
     [RelayCommand]
@@ -65,6 +63,8 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
         SendAction(target, async (report) =>
         {
             await _unbanUserInteractor.Unban(report.Reportable.User);
+            await RefreshItem(report);
+
             ShowNotification("Success", $"{report.Reportable.User.Name} has been unbanned.");
         });
     }
@@ -75,6 +75,8 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
         SendAction(target, async (report) =>
         {
             await _banUserInteractor.Ban(report.Reportable.User);
+            await RefreshItem(report);
+
             ShowNotification("Success", $"{report.Reportable.User.Name} has been banned.");
         });
     }
@@ -85,6 +87,8 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
         SendAction(target, async (report) =>
         {
             await _deleteReportableInteractor.Delete(report.Reportable);
+            await RefreshItem(report);
+            
             ShowNotification("Success", "Item deleted successfully.");
         });
     }
@@ -95,6 +99,8 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
         SendAction(target, async (report) =>
         {
             await _restoreDeleteReportableInteractor.Restore(report.Reportable);
+            await RefreshItem(report);
+
             ShowNotification("Success", "Item restored successfully.");
         });
     }
@@ -105,6 +111,8 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
         SendAction(target, async (report) =>
         {
             await _closeReportInteractor.Close(report);
+            await RefreshItem(report);
+
             ShowNotification("Success", "Report closed successfully.");
         });
     }
@@ -115,6 +123,8 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
         SendAction(target, async (report) =>
         {
             await _reopenReportInteractor.Reopen(report);
+            await RefreshItem(report);
+
             ShowNotification("Success", "Report reopened successfully.");
         });
     }
@@ -125,6 +135,8 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
         SendAction(target, async (report) =>
         {
             await _renameUserInteractor.Rename(report.Reportable.User);
+            await RefreshItem(report);
+
             ShowNotification("Success", $"{report.Reportable.User.Name} has been renamed.");
         });
     }
@@ -135,6 +147,8 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
         SendAction(target, async (report) =>
         {
             await _deleteAvatarInteractor.DeleteAvatar(report.Reportable.User);
+            await RefreshItem(report);
+
             ShowNotification("Success", $"{report.Reportable.User.Name}'s avatar has been deleted.");
         });
     }
@@ -145,6 +159,8 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
         SendAction(target, async (report) =>
         {
             await _deleteUserHardwareInteractor.DeleteHardware(report.Reportable.User);
+            await RefreshItem(report);
+
             ShowNotification("Success", $"{report.Reportable.User.Name}'s hardware info has been deleted.");
         });
     }
@@ -155,6 +171,8 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
         SendAction(target, async (report) =>
         {
             await _revokeAdministratorRoleInteractor.RevokeRole(report.Reportable.User);
+            await RefreshItem(report);
+
             ShowNotification("Success", $"{report.Reportable.User.Name} is no longer an administrator.");
         });
     }
@@ -165,31 +183,9 @@ public partial class ReportsPageViewModel : DataPageViewModel<Report>
         SendAction(target, async (report) =>
         {
             await _revokeModeratorRoleInteractor.RevokeRole(report.Reportable.User);
+            await RefreshItem(report);
+
             ShowNotification("Success", $"{report.Reportable.User.Name} is no longer a moderator.");
         });
-    }
-    
-    protected override async Task RefreshData()
-    {
-        try
-        {
-            var reports = await _reportRepository.All();
-
-            Data.Clear();
-
-            foreach (var report in reports)
-            {
-                if (report is null)
-                {
-                    continue;
-                }
-
-                Data.Add(report);
-            }
-        }
-        catch (Exception e)
-        {
-            var ee = e;
-        }
     }
 }

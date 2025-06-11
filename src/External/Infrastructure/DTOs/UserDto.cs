@@ -5,7 +5,7 @@ using Domain.ValueObjects;
 
 namespace Infrastructure.DTOs;
 
-public sealed record UserDto
+public sealed record UserDto : Dto<User>
 {
     [property: JsonPropertyName("id")]
     public uint Id { get; set; }
@@ -34,7 +34,7 @@ public sealed record UserDto
     [property: JsonPropertyName("hardware")]
     public HardwareDto[]? HardwareList { get; set; }
 
-    public User ToEntity()
+    public override User ToEntity()
     { 
         return new User(Id, Name, new Uri(Avatar), new Email(Email), IsBanned, ConvertRoles(), ConvertPermissions(), new Date(CreationDate));
     }

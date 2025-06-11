@@ -67,7 +67,8 @@ statistics_page_title = "Statystyki"
 
 # __________________Logs_Page__________________
 logs_page_title = "Logi"
-
+table_user = "Użytkownik"
+table_description = "Opis"
 # __________________Main_Menu__________________
 main_menu_logout = "Wyloguj się"
 

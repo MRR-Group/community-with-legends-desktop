@@ -74,6 +74,8 @@ statistics_page_title = "Statistics"
 
 # __________________Logs_Page__________________
 logs_page_title = "Logs"
+table_user = "User"
+table_description = "Description"
 
 # __________________Main_Menu__________________
 main_menu_logout = "Log out"

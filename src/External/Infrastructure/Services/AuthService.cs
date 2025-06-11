@@ -13,7 +13,7 @@ namespace Infrastructure.Services;
 public class AuthService : ILogInService, IRegisterService, ILogOutService
 {
     private CookieSession _session;
-    private UserRepository _repository;
+    private IRepository<User> _repository;
     private PermissionRepository _permissions;
     private TFAService _tfa;
     

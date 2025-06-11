@@ -1,25 +1,17 @@
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Transactions;
 using Application.UseCases;
-using Avalonia.Controls;
 using Avalonia.SimpleRouter;
 using CommunityToolkit.Mvvm.Messaging;
-using Domain.Entities;
 using Echoes;
 using Presentation.Messages;
-using Ursa.Themes.Semi;
 
 namespace Presentation.ViewModels;
 
-public partial class SettingsPageViewModel : DataPageViewModel<User>
+public class SettingsPageViewModel : AuthenticatedPageViewModel
 {
-    public SettingsPageViewModel(
-        HistoryRouter<ViewModelBase> router,
-        LogOutInteractor logOutInteractor
-    ) : base(router, logOutInteractor)
-    { }
+    public SettingsPageViewModel(HistoryRouter<ViewModelBase> router, LogOutInteractor logOutInteractor) : base(router, logOutInteractor)
+    {
+    }
     
     public string[] Languages => ["English", "Polski"];
     
@@ -83,9 +75,5 @@ public partial class SettingsPageViewModel : DataPageViewModel<User>
             "pl-PL" => "Polski",
             _ => "English",
         };
-    }
-
-    protected override async Task RefreshData()
-    {
     }
 }
