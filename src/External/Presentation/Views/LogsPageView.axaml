@@ -16,7 +16,7 @@
             <Grid RowDefinitions="Auto, *">
                 <TextBlock Classes="title" TextAlignment="Center" Text="{echoes:Translate {x:Static translations:Strings.logs_page_title}}" />
 
-                <ScrollViewer Grid.Row="1">
+                <ScrollViewer x:Name="ScrollHost" Grid.Row="1">
                     <StackPanel>
                         <Border
                             BorderBrush="{DynamicResource SecondaryColor}"

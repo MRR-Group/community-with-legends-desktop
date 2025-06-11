@@ -1,13 +1,16 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Domain.Entities;
+using Presentation.ViewModels;
 
 namespace Presentation.Views;
 
-public partial class LogsPageView : ViewBase
+public partial class LogsPageView  : ScrollablePageView<LogsPageViewModel, Log>
 {
     public LogsPageView()
     {
-        this.InitializeComponent();
+        InitializeComponent();
+        InitScroll(ScrollHost);
     }
 }

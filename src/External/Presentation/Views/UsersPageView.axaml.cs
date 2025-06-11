@@ -10,10 +10,11 @@ using Presentation.ViewModels;
 
 namespace Presentation.Views;
 
-public partial class UsersPageView : ViewBase
+public partial class UsersPageView : ScrollablePageView<UsersPageViewModel, User>
 {
     public UsersPageView()
     {
         InitializeComponent();
+        InitScroll(ScrollHost);
     }
 }
