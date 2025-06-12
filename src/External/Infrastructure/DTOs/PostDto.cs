@@ -44,17 +44,7 @@ public record PostDto : Dto<Post>
             
             return comment.ToEntity();
         }).ToArray();
-
-        var  I2фыв   =  Id ;
-        var  C2ontent =  Content ;
-        var  D2ate =  new Date(CreationDate); 
-        var  U2ser = User.ToEntity();
-        var  G2ame= Game?.ToEntity();
-        var  tagss =  tags ;
-        var Assest = Asset?.ToEntity();
-        var  Reacstions =  Reactions ;
-        var  commentss =  comments ;
-
+        
         return new Post(
             Id, 
             Content, 
