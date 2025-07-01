@@ -14,10 +14,10 @@
     <ItemGroup>
       <PackageReference Include="Flurl" Version="4.0.0" />
       <PackageReference Include="Flurl.Http" Version="4.0.2" />
-      <PackageReference Include="Irihi.Ursa" Version="1.11.0" />
-      <PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.11.0" />
-      <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.4" />
-      <PackageReference Include="Semi.Avalonia" Version="11.2.1.7" />
+      <PackageReference Include="Irihi.Ursa" Version="1.11.1" />
+      <PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.11.1" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.6" />
+      <PackageReference Include="Semi.Avalonia" Version="11.2.1.8" />
     </ItemGroup>
 
 </Project>
